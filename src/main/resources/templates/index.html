@@ -32,8 +32,10 @@
                 <li class="nav-item"><a class="nav-link" href="/member/hit_ai">Hit</a></li>
                 <li class="nav-item"><a class="nav-link" href="/member/leader_board">Leader Board</a></li>
                 <li class="nav-item"><a class="nav-link" href="/board/community">Community</a></li>
-                <li class="nav-item"><a class="nav-link" href="/member/save">Sign Up</a></li>
-                <li class="nav-item"><a class="nav-link" href="/member/login">Log In</a></li>
+                <li class="nav-item"><a class="nav-link" href="/member/mypage" th:if="${session.loginEmail != null}"><p th:text="${session.loginEmail}"></p></a></li>
+                <li class="nav-item"><a class="nav-link" href="/member/logout" th:if="${session.loginEmail != null}">로그아웃</a></li>
+                <li class="nav-item"><a class="nav-link" href="/member/save" th:if="${session.loginEmail == null}">Sign Up</a></li>
+                <li class="nav-item"><a class="nav-link" href="/member/login" th:if="${session.loginEmail == null}">Log In</a></li>
             </ul>
         </div>
     </div>
@@ -59,7 +61,7 @@
     <div class="container px-5">
         <div class="row gx-5 align-items-center">
             <div class="col-lg-6 order-lg-2">
-                <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/01.jpg" alt="..." /></div>
+                <div class="p-5"><img class="img-fluid rounded-circle" src="/assets/img/01.jpg" alt="..." /></div>
             </div>
             <div class="col-lg-6 order-lg-1">
                 <div class="p-5">
@@ -77,7 +79,7 @@
     <div class="container px-5">
         <div class="row gx-5 align-items-center">
             <div class="col-lg-6">
-                <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/02.jpg" alt="..." /></div>
+                <div class="p-5"><img class="img-fluid rounded-circle" src="/assets/img/02.jpg" alt="..." /></div>
             </div>
             <div class="col-lg-6">
                 <div class="p-5">
@@ -95,7 +97,7 @@
     <div class="container px-5">
         <div class="row gx-5 align-items-center">
             <div class="col-lg-6 order-lg-2">
-                <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/03.jpg" alt="..." /></div>
+                <div class="p-5"><img class="img-fluid rounded-circle" src="/assets/img/03.jpg" alt="..." /></div>
             </div>
             <div class="col-lg-6 order-lg-1">
                 <div class="p-5">
