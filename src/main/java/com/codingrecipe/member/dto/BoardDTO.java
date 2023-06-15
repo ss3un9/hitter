@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class BoardDTO {
     private Long id;
     private String boardWriter;
+    private String boardWriterId;
     private String boardTitle;
     private String boardContents;
     private int boardHits;
@@ -25,6 +26,7 @@ public class BoardDTO {
         BoardDTO boardDTO = new BoardDTO();
         boardDTO.setId(boardEntity.getId());
         boardDTO.setBoardWriter(boardEntity.getBoardWriter());
+        boardDTO.setBoardWriterId(boardEntity.getBoardWriterId());
         boardDTO.setBoardTitle(boardEntity.getBoardTitle());
         boardDTO.setBoardContents(boardEntity.getBoardContents());
         boardDTO.setBoardHits(boardEntity.getBoardHits());

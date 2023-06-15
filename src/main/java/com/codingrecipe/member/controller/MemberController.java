@@ -45,7 +45,9 @@ public class MemberController {
             // login 성공
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
             session.setAttribute("loginId", loginResult.getId());
-            return "main";
+            session.setAttribute("loginNickName", loginResult.getMemberNickName());
+            session.setAttribute("loginName", loginResult.getMemberName());
+            return "index";
         } else {
             // login 실패
             return "login";

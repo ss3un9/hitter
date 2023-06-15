@@ -17,8 +17,11 @@ public class BoardEntity extends BaseEntity {
     @Column(name = "board_id")
     private Long id;
 
-    @Column(name = "user_id")
+    @Column(name = "user_nickname")
     private String boardWriter;
+
+    @Column(name = "user_id")
+    private String boardWriterId;
 
     @Column(name="board_title")
     private String boardTitle;
@@ -35,6 +38,7 @@ public class BoardEntity extends BaseEntity {
     public static BoardEntity toSaveEntity(BoardDTO boardDTO){
         BoardEntity boardEntity = new BoardEntity();
         boardEntity.setBoardWriter(boardDTO.getBoardWriter());
+        boardEntity.setBoardWriterId(boardDTO.getBoardWriterId());
         boardEntity.setBoardTitle(boardDTO.getBoardTitle());
         boardEntity.setBoardContents(boardDTO.getBoardContents());
         boardEntity.setBoardHits(0);

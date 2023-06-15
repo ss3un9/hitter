@@ -25,11 +25,15 @@ public class MemberEntity {
     @Column(name = "user_name")
     private String memberName;
 
+    @Column(name = "user_nickname")
+    private String memberNickName;
+
     public static MemberEntity toMemberEntity(MemberDTO memberDTO) {
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setMemberEmail(memberDTO.getMemberEmail());
         memberEntity.setMemberPassword(memberDTO.getMemberPassword());
         memberEntity.setMemberName(memberDTO.getMemberName());
+        memberEntity.setMemberNickName(memberDTO.getMemberNickName());
         return memberEntity;
     }
 
@@ -39,6 +43,7 @@ public class MemberEntity {
         memberEntity.setMemberEmail(memberDTO.getMemberEmail());
         memberEntity.setMemberPassword(memberDTO.getMemberPassword());
         memberEntity.setMemberName(memberDTO.getMemberName());
+        memberEntity.setMemberNickName(memberDTO.getMemberNickName());
         return memberEntity;
     }
 
