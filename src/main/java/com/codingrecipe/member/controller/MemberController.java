@@ -2,7 +2,6 @@ package com.codingrecipe.member.controller;
 
 import com.codingrecipe.member.dto.BoardDTO;
 import com.codingrecipe.member.dto.MemberDTO;
-import com.codingrecipe.member.entity.BoardEntity;
 import com.codingrecipe.member.service.BoardService;
 import com.codingrecipe.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -61,12 +60,12 @@ public class MemberController {
         return "list";
     }
 
-    @GetMapping("/member/{id}")
-    public String findById(@PathVariable Long id, Model model) {
-        MemberDTO memberDTO = memberService.findById(id);
-        model.addAttribute("member", memberDTO);
-        return "detail";
-    }
+//    @GetMapping("/member/{id}")
+//    public String findById(@PathVariable Long id, Model model) {
+//        MemberDTO memberDTO = memberService.findById(id);
+//        model.addAttribute("member", memberDTO);
+//        return "detail";
+//    }
 
     @GetMapping("/member/update")
     public String updateForm(HttpSession session, Model model) {
@@ -124,8 +123,15 @@ public class MemberController {
     public String findAll(Model model, HttpSession session) {
         List<BoardDTO> boardDTOList = boardService.findAll();
         model.addAttribute("boardList", boardDTOList);
-        System.out.println("commu");
         return "community";
+    }
+
+    @GetMapping("/board/{id}")
+    public String findById(@PathVariable Long id, Model model) {
+        boardService.updateHits(id);
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("board", boardDTO);
+        return "board_detail";
     }
     @GetMapping("/member/hit_ai")
     public String hitai() {
