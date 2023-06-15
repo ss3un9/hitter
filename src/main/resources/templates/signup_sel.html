@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Sign Up</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+        rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../../../../../../../AI_6_22-main/AI_6_22-main/front/css/styles.css" rel="stylesheet" />
+
+    <style>
+        .container-sel {
+            border: 2px solid #000000;
+            width: 200px;
+            height: 300px;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            text-align: center;
+
+        }
+
+        .container-select {
+            display: flex;
+            justify-content: center;
+        }
+
+        .container-sel img {
+            width: 100px;
+            /* 이미지 너비를 100px로 설정 */
+            height: auto;
+            /* 이미지 높이를 자동으로 설정 (비율 유지) */
+            display: block;
+            /* 이미지를 블록 요소로 설정 (새 줄에서 시작) */
+            margin: auto;
+            /* 이미지를 가운데로 정렬 */
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            document.getElementById('individual').addEventListener('click', function () {
+                window.location.href = 'signup_individual.html';
+            });
+            document.getElementById('corporate').addEventListener('click', function () {
+                window.location.href = 'signup_corporate.html';
+            });
+        }
+    </script>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container px-5">
+        <a class="navbar-brand" href="../../../../../../../AI_6_22-main/AI_6_22-main/front/index.html">HIT SIGNAL</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="../../../../../../../AI_6_22-main/AI_6_22-main/front/hit_ai.html">Hit</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../../../../../../AI_6_22-main/AI_6_22-main/front/leader_board.html">Leader Board</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../../../../../../AI_6_22-main/AI_6_22-main/front/community.html">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="signup_sel.html">Sign Up</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../../../../../../AI_6_22-main/AI_6_22-main/front/login.html">Log In</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container-select">
+    <div class="container-sel">
+
+        <img src="assets/img/per.png" alt="개인 회원 이미지">
+        <label for="individual">개인 회원</label>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <button type="button" id="individual" name="member_type" value="individual">개인 회원 선택</button>
+
+    </div>
+    <div class="container-sel">
+
+        <img src="assets/img/com.png" alt="기업 회원 이미지">
+        <label for="corporate">기업 회원</label>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <button type="button" id="corporate" name="member_type" value="corporate">기업 회원 선택</button>
+
+    </div>
+</div>
+
+
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="../../../../../../../AI_6_22-main/AI_6_22-main/front/js/scripts.js"></script>
+
+</html>

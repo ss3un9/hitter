@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Sign Up Corporate</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Font Awesome icons (free version)-->
+  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+    rel="stylesheet" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="../../../../../../../AI_6_22-main/AI_6_22-main/front/css/styles.css" rel="stylesheet" />
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+  <div class="container px-5">
+    <a class="navbar-brand" href="../../../../../../../AI_6_22-main/AI_6_22-main/front/index.html">HIT SIGNAL</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
+        class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/member/hit_ai">Hit</a></li>
+        <li class="nav-item"><a class="nav-link" href="/member/leader_board">Leader Board</a></li>
+        <li class="nav-item"><a class="nav-link" href="/member/community">Community</a></li>
+        <li class="nav-item"><a class="nav-link" href="/member/save">Sign Up</a></li>
+        <li class="nav-item"><a class="nav-link" href="/member/login">Log In</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<br>
+<br>
+<br>
+<br>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+
+<div class="jumbotron">
+  <div class="container text-center">
+    <form method="post" action="/signup/">
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" class="form-control" id="email" name="email" oninput='checkemail()'>
+        <button type='button' id='emailcheck' onclick='run()'>아이디확인</button>
+        <div id=emailstate> </div>
+      </div>
+
+      <script>
+        function run() {
+          const email = document.querySelector('#email').value;
+          $.ajax({
+            url: '/check_email/',
+            data: { 'email': email },
+            success: function (res) {
+              if (res.result == true) {
+                alert('사용가능합니다!')
+              } else {
+                alert('중복된 이메일 입니다..')
+                btnDisabled()
+              }
+            }
+          });
+        }
+
+
+
+      </script>
+
+
+      <div class="form-group">
+        <label for="pwd">비밀번호:</label>
+        <input type="password" class="form-control" id="pwd" name="pwd" oninput='checkpwd()'>
+        <div id=pwdstate> </div>
+      </div>
+
+
+
+      <div class="form-group">
+        <label for="re_pwd">비밀번호 재확인:</label>
+        <input type="password" class="form-control" id="re_pwd" name="re_pwd" oninput='checkrepwd()'>
+        <div id=repwdstate> </div>
+      </div>
+
+
+
+      <div class="form-group">
+        <label for="name">이름:</label>
+        <input type="text" class="form-control" id="name" name="name">
+      </div>
+
+      <div class="form-group">
+        <label for="name">기업명:</label>
+        <input type="text" class="form-control" id="corporate_name" name="corporate_name">
+      </div>
+
+
+      <button class="btn btn-primary btn-block" id="signup" onclick='checksingup()'>Sign Up</button>
+    </form>
+  </div>
+</div>
+
+
+<script>
+
+  btnDisabled();
+
+  const target = document.getElementById('emailcheck');
+  target.disabled = true;
+
+  $('#email').on('input', checkInput);
+  $('#pwd').on('input', checkInput);
+  $('#re_pwd').on('input', checkInput);
+  $('#name').on('input', checkInput);
+
+  function checkInput() {
+    var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    var email = $('#email').val();
+    var pwd = $('#pwd').val();
+    var re_pwd = $('#re_pwd').val();
+    var name = $('#name').val();
+
+    if (email === '' || pwd === '' || re_pwd === '' || name === '') {
+      btnDisabled();
+    } else {
+      btnEnabled();
+    }
+  }
+
+  /* function checkemail() {
+    var email = $('#email').val();
+    var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+    if (email.match(regExp) != null){
+    document.getElementById("emailstate").innerHTML = '이메일확인!';
+    const target = document.getElementById('emailcheck');
+    target.disabled = false;
+  } else {
+    document.getElementById("emailstate").innerHTML = '이메일 형식이 아닙니다!';
+    const target = document.getElementById('emailcheck');
+    target.disabled = true;
+  }
+  } */
+
+  function checkemail() {
+    var email = $('#email').val();
+    var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+    if (email.match(regExp) != null) {
+      document.getElementById("emailstate").innerHTML = '올바른 이메일 형식입니다!';
+      const target = document.getElementById('emailcheck');
+      target.disabled = false;
+    } else {
+      document.getElementById("emailstate").innerHTML = '이메일 형식이 올바르지 않습니다!';
+      const target = document.getElementById('emailcheck');
+      target.disabled = true;
+    }
+  }
+
+  /* function checkpwd() {
+    var pwd = $('#pwd').val();
+
+    if (pwd.length < 7) {
+      document.getElementById("pwdstate").innerHTML = '너무 짧습니다!';
+    } else {
+      document.getElementById("pwdstate").innerHTML = '';
+    }
+  } */
+
+
+  function checkpwd() {
+    var pwd = $('#pwd').val();
+    var regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
+
+    if (regExp.test(pwd)) {
+      document.getElementById("pwdstate").innerHTML = '';
+    } else {
+      document.getElementById("pwdstate").innerHTML = '비밀번호는 영문자, 숫자, 특수문자를 포함한 8~16자리여야 합니다!';
+    }
+  }
+
+  function checkrepwd() {
+    var pwd = $('#pwd').val();
+    var repwd = $('#re_pwd').val();
+    if (repwd !== pwd) {
+      document.getElementById("repwdstate").innerHTML = '비밀번호가 다릅니다';
+    } else {
+      document.getElementById("repwdstate").innerHTML = '';
+    }
+
+  }
+
+  function btnDisabled() {
+    const target = document.getElementById('signup');
+    target.disabled = true;
+  }
+
+  function btnEnabled() {
+    const target = document.getElementById('signup');
+    target.disabled = false;
+  }
+
+
+
+
+
+
+</script>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="../../../../../../../AI_6_22-main/AI_6_22-main/front/js/scripts.js"></script>
+
+</html>

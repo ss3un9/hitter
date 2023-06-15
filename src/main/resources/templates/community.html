@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>Community</title>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>login</title>
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+  <!-- Font Awesome icons (free version)-->
+  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+    rel="stylesheet" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="/css/style.css" rel="stylesheet" />
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+  <div class="container px-5">
+    <a class="navbar-brand" href="/">HIT SIGNAL</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
+        class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/member/hit_ai">Hit</a></li>
+        <li class="nav-item"><a class="nav-link" href="/member/leader_board">Leader Board</a></li>
+        <li class="nav-item"><a class="nav-link" href="/board/community">Community</a></li>
+        <li class="nav-item"><a class="nav-link" href="/member/mypage"><p th:text="${session.loginEmail}"></p></a></li>
+        <li class="nav-item"><a class="nav-link" href="/member/logout">로그아웃</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<body>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<table>
+  <tr>
+    <th>순번</th>
+    <th>제목</th>
+    <th>작성자</th>
+    <th>등록일</th>
+    <th>조회수</th>
+  </tr>
+  <tr th:each="board: ${boardList}">
+    <td th:text="${board.id}"></td>
+    <td><a th:href="@{|/board/${board.id}|}" th:text="${board.boardTitle}"></a></td>
+    <td th:text="${board.boardWriter}"></td>
+    <td th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+    <td th:text="${board.boardHits}"></td>
+  </tr>
+</table>
+  <button onclick ='saveReq()'>글작성</button>
+
+
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Core theme JS-->
+
+</body>
+<script>
+  const saveReq = () => {
+    location.href = "/board/write";
+  }
+
+
+</script>
+</html>
