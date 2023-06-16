@@ -45,7 +45,6 @@
 </nav>
 
 <body>
-<body>
 
 <br>
 
@@ -64,8 +63,8 @@
 
     title: <input type="text" name="boardTitle"> <br>
 
-    <input type="text" name="boardWriterId" th:value="${session.loginId}" />
-    <input type="text" name="boardWriter" th:value="${session.loginNickName}" />
+    <input type="hidden" name="boardWriterId" th:value="${session.loginId}" />
+    <input type="hidden" name="boardWriter" th:value="${session.loginNickName}" />
     contents: <textarea name="boardContents" cols="30" rows="10"></textarea> <br>
 
     file: <input type="file" name="boardFile"> <br>
@@ -77,8 +76,6 @@
 <div style="text-align: center; margin-top: 50px;">
 
     <button onclick="listReq()" class="btn-list">글목록</button>
-
-    <a href="/board/community">글목록(링크)</a>
 
 </div>
 

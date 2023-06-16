@@ -135,6 +135,30 @@ public class MemberController {
         model.addAttribute("board", boardDTO);
         return "board_detail";
     }
+
+    @GetMapping("/board/update/{id}")
+    public String board_updateForm(@PathVariable Long id, Model model) {
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("boardUpdate", boardDTO);
+        return "board_update";
+
+    }
+
+    @PostMapping("board/update")
+    public String board_update(@ModelAttribute BoardDTO boardDTO, Model model){
+        BoardDTO board = boardService.update(boardDTO);
+        model.addAttribute("board", board);
+        return "board_detail";
+//        return "redirect:/board/" + boardDTO.getId();
+
+    }
+
+    @GetMapping("board/delete/{id}")
+    public String board_delete(@PathVariable Long id){
+        boardService.delete(id);
+        return "redirect:/board/community";
+    }
+
     @GetMapping("/member/hit_ai")
     public String hitai() {
         return "hit_ai";

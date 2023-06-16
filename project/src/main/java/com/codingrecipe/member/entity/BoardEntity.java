@@ -47,5 +47,16 @@ public class BoardEntity extends BaseEntity {
     }
 
 
+    public static BoardEntity toUpdateEntity(BoardDTO boardDTO) {
+        BoardEntity boardEntity = new BoardEntity();
+        boardEntity.setId(boardDTO.getId());
+        boardEntity.setBoardWriter(boardDTO.getBoardWriter());
+        boardEntity.setBoardWriterId(boardDTO.getBoardWriterId());
+        boardEntity.setBoardTitle(boardDTO.getBoardTitle());
+        boardEntity.setBoardContents(boardDTO.getBoardContents());
+        boardEntity.setBoardHits(boardEntity.getBoardHits());
+        boardEntity.setBoardLikes(boardEntity.getBoardLikes());
+        return boardEntity;
+    }
 }
 
