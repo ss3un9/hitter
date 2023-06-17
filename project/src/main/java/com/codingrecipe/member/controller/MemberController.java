@@ -5,6 +5,9 @@ import com.codingrecipe.member.dto.MemberDTO;
 import com.codingrecipe.member.service.BoardService;
 import com.codingrecipe.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -62,12 +65,12 @@ public class MemberController {
         return "list";
     }
 
-//    @GetMapping("/member/{id}")
-//    public String findById(@PathVariable Long id, Model model) {
-//        MemberDTO memberDTO = memberService.findById(id);
-//        model.addAttribute("member", memberDTO);
-//        return "detail";
-//    }
+    @GetMapping("/member/{id}")
+    public String findById(@PathVariable Long id, Model model) {
+        MemberDTO memberDTO = memberService.findById(id);
+        model.addAttribute("member", memberDTO);
+        return "detail";
+    }
 
     @GetMapping("/member/update")
     public String updateForm(HttpSession session, Model model) {
@@ -100,63 +103,6 @@ public class MemberController {
         System.out.println("memberEmail = " + memberEmail);
         String checkResult = memberService.emailCheck(memberEmail);
         return checkResult;
-    }
-
-    private  final BoardService boardService;
-
-    @GetMapping("/board/write")
-    public String saveForm2() {
-        System.out.println("write");
-        return "write";
-
-    }
-
-    @PostMapping("/board/write")
-    public String write(@ModelAttribute BoardDTO boardDTO, Model model, HttpSession session) {
-        boardService.write(boardDTO);
-        System.out.println("write");
-        List<BoardDTO> boardDTOList = boardService.findAll();
-        model.addAttribute("boardList", boardDTOList);
-        return "community";
-
-    }
-
-    @GetMapping("/board/community")
-    public String findAll(Model model, HttpSession session) {
-        List<BoardDTO> boardDTOList = boardService.findAll();
-        model.addAttribute("boardList", boardDTOList);
-        return "community";
-    }
-
-    @GetMapping("/board/{id}")
-    public String findById(@PathVariable Long id, Model model) {
-        boardService.updateHits(id);
-        BoardDTO boardDTO = boardService.findById(id);
-        model.addAttribute("board", boardDTO);
-        return "board_detail";
-    }
-
-    @GetMapping("/board/update/{id}")
-    public String board_updateForm(@PathVariable Long id, Model model) {
-        BoardDTO boardDTO = boardService.findById(id);
-        model.addAttribute("boardUpdate", boardDTO);
-        return "board_update";
-
-    }
-
-    @PostMapping("board/update")
-    public String board_update(@ModelAttribute BoardDTO boardDTO, Model model){
-        BoardDTO board = boardService.update(boardDTO);
-        model.addAttribute("board", board);
-        return "board_detail";
-//        return "redirect:/board/" + boardDTO.getId();
-
-    }
-
-    @GetMapping("board/delete/{id}")
-    public String board_delete(@PathVariable Long id){
-        boardService.delete(id);
-        return "redirect:/board/community";
     }
 
     @GetMapping("/member/hit_ai")
