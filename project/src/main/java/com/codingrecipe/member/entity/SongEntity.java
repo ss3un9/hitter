@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Setter
 @Getter
-@Table(name = "song_ttt")
+@Table(name = "song")
 public class SongEntity {
     @Id // pk 지정
     @Column(name = "song_id")
