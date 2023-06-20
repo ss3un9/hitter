@@ -6,10 +6,10 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     #    각자 PC에 만들어놓은 Database이름을 써야 합니다.
-    url: jdbc:mysql://localhost:3306/BP?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://3.36.204.155:3306/BP?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     #    mysql에 생성한 사용자 계정 정보를 써야 합니다.
-    username: root
-    password: root
+    username: aivle
+    password: aivle
   thymeleaf:
     cache: false
   servlet:

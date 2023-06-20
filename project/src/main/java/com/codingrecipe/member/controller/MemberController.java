@@ -1,13 +1,10 @@
 package com.codingrecipe.member.controller;
 
-import com.codingrecipe.member.dto.BoardDTO;
 import com.codingrecipe.member.dto.MemberDTO;
-import com.codingrecipe.member.service.BoardService;
+
 import com.codingrecipe.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +27,7 @@ public class MemberController {
 
     @PostMapping("/member/save")
     public String save(@ModelAttribute MemberDTO memberDTO) {
-        System.out.println("MemberController.save");
-        System.out.println("memberDTO = " + memberDTO);
+
         memberService.save(memberDTO);
         return "login";
     }
@@ -58,7 +54,7 @@ public class MemberController {
     }
 
     @GetMapping("/member/")
-    public String findAll2(Model model) {
+    public String findAll(Model model) {
         List<MemberDTO> memberDTOList = memberService.findAll();
         // 어떠한 html로 가져갈 데이터가 있다면 model사용
         model.addAttribute("memberList", memberDTOList);
