@@ -78,7 +78,7 @@ public class SongFileController {
         songDTO.setFileOriginalName(fileName);
         songDTO.setFileSysName(sysFileName);
         songService.save(songDTO);
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("index2");
         return modelAndView;
 
     }
