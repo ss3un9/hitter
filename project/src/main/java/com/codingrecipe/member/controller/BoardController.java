@@ -102,4 +102,16 @@ public class BoardController {
         return "community";
 
     }
+
+    @GetMapping("/board/my-posts")
+    public String getMyPosts(Model model, HttpSession session) {
+        // Retrieve user information from session
+        Long loggedInUserId = (Long) session.getAttribute("loginId"); // Get the logged-in user's ID from the session
+
+        List<BoardDTO> boardDTOList = boardService.findBoardListByUserId(loggedInUserId);
+        model.addAttribute("boardList", boardDTOList);
+        System.out.println(boardDTOList);
+        return "my_posts";
+    }
+
 }

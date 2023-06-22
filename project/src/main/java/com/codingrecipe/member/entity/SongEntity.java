@@ -10,14 +10,15 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Table(name = "song")
-public class SongEntity {
+public class SongEntity extends BaseEntity{
     @Id // pk 지정
     @Column(name = "song_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
     private Long id;
 
-    @Column(name = "user_id" )
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private MemberEntity member;
 
     @Column(name = "prediction")
     private Float prediction;
@@ -30,7 +31,11 @@ public class SongEntity {
     private String fileSysName;
     public static SongEntity toSongEntity(SongDTO songDTO) {
         SongEntity songEntity = new SongEntity();
-        songEntity.setUserId(songDTO.getUserId());
+
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setId(songDTO.getMemberId());
+
+        songEntity.setMember(memberEntity);
         songEntity.setPrediction(songDTO.getPrediction());
         songEntity.setFileOriginalName(songDTO.getFileOriginalName());
         songEntity.setFileSysName(songDTO.getFileSysName());

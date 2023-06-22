@@ -7,6 +7,7 @@ import Logout from "./page/login/Logout";
 import HitAi from "./page/hit/HitAi";
 import BoardDetail from './page/board/BoardDetail';
 import BoardUpdate from "./page/board/BoardUpdate";
+import HitAiDetail from "./page/hit/HitAiDetail";
 
 
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/member/hit_ai" element={<HitAi/>}/>
           <Route path="/board/detail" element={<BoardDetail/>}/>
           <Route path="/board/update" element={<BoardUpdate/>}/>
+          <Route path="/hit_ai_detail" element={<HitAiDetail/>}/>
         </Routes>
       </Router>
     </div>

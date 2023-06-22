@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Setter
@@ -16,7 +18,7 @@ public class MemberEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
     private Long id;
 
-    @Column(unique = true, name = "user_email") // unique 제약조건 추가
+    @Column(unique = true, name = "user_email")
     private String memberEmail;
 
     @Column(name = "user_password")

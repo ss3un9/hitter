@@ -1,63 +1,29 @@
 import React, {useEffect, useState} from "react";
+import { useLocation } from 'react-router-dom';
 import './HitAi.css'
-import {useNavigate} from "react-router-dom";
 
-const HitAi = ({session}) => {
+const HitAiDetail = ({session}) => {
 
 
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
 
-    const [uploadResponse, setUploadResponse] = useState(null);
-
-    const navigate = useNavigate();
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            const formData = new FormData(event.target);
-            const response = await fetch('/api/upload', {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data);
-                setUploadResponse(data)
-                alert("히트 분석 성공 ");
-
-                } else {
-                    // 로그인 실패
-                    console.error('failed');
-                }
-
-        } catch (error) {
-            // 오류 처리
-            console.error('Error occurred');
-            alert("히트 분석 실패");
-        }
-    };
-
-    useEffect(() => {
-        if (uploadResponse && uploadResponse.songDTO) {
-            navigate("/hit_ai_detail", {
-                state: {
-                    UserNickName: uploadResponse.userNickName,
-                    Title: uploadResponse.songDTO.fileOriginalName,
-                    Prediction: uploadResponse.songDTO.prediction,
-                }
-            });
-        }
-    }, [uploadResponse, navigate]);
+    const location = useLocation();
+    const UserNickName = location.state.UserNickName;
+    const Title = location.state.Title;
+    const Prediction = location.state.Prediction;
+    console.log(UserNickName);
+    console.log(Title);
+    console.log( Prediction);
 
     return (
-            <>
+        <>
             {/* <!-- Navigation--> */}
             <nav className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
                 <div className="container px-5">
                     <a className="navbar-brand" href="/">HITTABLE</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
-                            className="navbar-toggler-icon"></span></button>
+                            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
+                        className="navbar-toggler-icon"></span></button>
                     <div className="collapse navbar-collapse" id="navbarResponsive">
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item"><a className="nav-link" href="/member/hit_ai">Hit</a></li>
@@ -85,19 +51,15 @@ const HitAi = ({session}) => {
                 </div>
             </nav>
 
+            <div>
+                <p>Member ID: {UserNickName}</p>
+                <p>Prediction: {Title}</p>
+                <p>Title: {Prediction}</p>
+            </div>
 
-                <h2>이 곡이 히트할 확률은 얼마나 될까요?<br></br>
-                    AI 기반 예측 모델로 측정해보세요!
-                </h2>
-
-                <form action="/api/upload" method="post" onSubmit={handleFormSubmit}>
-                    <label htmlFor="music">Choose a music file:</label>
-                    <input type="file" id="music" name="file" accept="audio/*"/>
-                        <input type="submit" value="Upload"/>
-                </form>
-            </>
-                )
+        </>
+    )
 }
 
 
-                export default HitAi;
+export default HitAiDetail;

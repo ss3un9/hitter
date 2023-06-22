@@ -40,7 +40,15 @@ public class MemberController {
     public String loginForm() {
         return "login";
     }
-
+    @GetMapping("/songs")
+    public ResponseEntity<String> printMembersAndSongs() {
+        try {
+            memberService.printMembersAndSongs();
+            return ResponseEntity.ok("Printed members and songs successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to print members and songs.");
+        }
+    }
     @PostMapping("/member/login")
     public ResponseEntity<Map<String, Object>> login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
         MemberDTO loginResult = memberService.login(memberDTO);

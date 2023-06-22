@@ -18,7 +18,6 @@ public class BoardDTO {
     private String boardTitle;
     private String boardContents;
     private int boardHits;
-    private int boardLikes;
     private LocalDateTime boardCreatedTime;
 
 
@@ -27,9 +26,9 @@ public class BoardDTO {
         this.boardWriter = boardWriter;
         this.boardTitle = boardTitle;
         this.boardHits = boardHits;
-        this.boardLikes = boardLikes;
         this.boardCreatedTime = boardCreatedTime;
     }
+
 
     public static BoardDTO toBoardDTO(BoardEntity boardEntity) {
         BoardDTO boardDTO = new BoardDTO();
@@ -39,7 +38,6 @@ public class BoardDTO {
         boardDTO.setBoardTitle(boardEntity.getBoardTitle());
         boardDTO.setBoardContents(boardEntity.getBoardContents());
         boardDTO.setBoardHits(boardEntity.getBoardHits());
-        boardDTO.setBoardLikes(boardEntity.getBoardLikes());
         boardDTO.setBoardCreatedTime(boardEntity.getCreatedTime());
         return boardDTO;
     }

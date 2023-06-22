@@ -8,6 +8,7 @@ const Login = () => {
 
     useEffect(() => {
         const storedSession = JSON.parse(localStorage.getItem('session'));
+
         if (storedSession && storedSession.loginName) {
             setSession(storedSession);
         }

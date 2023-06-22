@@ -83,18 +83,21 @@ public class BoardService{
         // page 위치에 있는 값은 0부터 시작
         Page<BoardEntity> boardEntities =
                 boardRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
-
-        System.out.println("boardEntities.getContent() = " + boardEntities.getContent()); // 요청 페이지에 해당하는 글
-        System.out.println("boardEntities.getTotalElements() = " + boardEntities.getTotalElements()); // 전체 글갯수
-        System.out.println("boardEntities.getNumber() = " + boardEntities.getNumber()); // DB로 요청한 페이지 번호
-        System.out.println("boardEntities.getTotalPages() = " + boardEntities.getTotalPages()); // 전체 페이지 갯수
-        System.out.println("boardEntities.getSize() = " + boardEntities.getSize()); // 한 페이지에 보여지는 글 갯수
-        System.out.println("boardEntities.hasPrevious() = " + boardEntities.hasPrevious()); // 이전 페이지 존재 여부
-        System.out.println("boardEntities.isFirst() = " + boardEntities.isFirst()); // 첫 페이지 여부
-        System.out.println("boardEntities.isLast() = " + boardEntities.isLast()); // 마지막 페이지 여부
-
         // 목록: id, writer, title, hits, createdTime
         Page<BoardDTO> boardDTOS = boardEntities.map(board -> new BoardDTO(board.getId(), board.getBoardWriter(), board.getBoardTitle(), board.getBoardHits(), board.getBoardLikes(), board.getCreatedTime()));
         return boardDTOS;
     }
+
+    public List<BoardDTO> findBoardListByUserId(Long boardWriterId) {
+        List<BoardEntity> boardEntities = boardRepository.findByBoardWriterId(boardWriterId);
+        List<BoardDTO> boardDTOList = new ArrayList<>();
+
+        for (BoardEntity boardEntity : boardEntities) {
+            BoardDTO boardDTO = BoardDTO.toBoardDTO(boardEntity);
+            boardDTOList.add(boardDTO);
+        }
+
+        return boardDTOList;
+    }
+
 }
