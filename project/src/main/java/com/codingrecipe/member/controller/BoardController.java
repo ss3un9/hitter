@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigInteger;
 import java.util.List;
 @Controller
 @RequiredArgsConstructor
@@ -23,7 +24,7 @@ public class BoardController {
     private  final BoardService boardService;
 
     @GetMapping("/board/write")
-    public String saveForm2() {
+    public String saveForm() {
         System.out.println("write");
         return "write";
 

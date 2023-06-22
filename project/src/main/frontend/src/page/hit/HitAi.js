@@ -7,6 +7,7 @@ const HitAi = ({session}) => {
 
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
 
+<<<<<<< HEAD
     const [uploadResponse, setUploadResponse] = useState(null);
 
     const navigate = useNavigate();
@@ -48,6 +49,8 @@ const HitAi = ({session}) => {
             });
         }
     }, [uploadResponse, navigate]);
+=======
+>>>>>>> fd27721484f1fec739676541cb9759f9bb7f6601
 
     return (
             <>
@@ -85,16 +88,28 @@ const HitAi = ({session}) => {
                 </div>
             </nav>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fd27721484f1fec739676541cb9759f9bb7f6601
 
                 <h2>이 곡이 히트할 확률은 얼마나 될까요?<br></br>
                     AI 기반 예측 모델로 측정해보세요!
                 </h2>
 
+<<<<<<< HEAD
                 <form action="/api/upload" method="post" onSubmit={handleFormSubmit}>
+=======
+                <form action="/api/upload" method="post" encType="multipart/form-data">
+>>>>>>> fd27721484f1fec739676541cb9759f9bb7f6601
                     <label htmlFor="music">Choose a music file:</label>
                     <input type="file" id="music" name="file" accept="audio/*"/>
                         <input type="submit" value="Upload"/>
                 </form>
+<<<<<<< HEAD
+=======
+
+>>>>>>> fd27721484f1fec739676541cb9759f9bb7f6601
             </>
                 )
 }
