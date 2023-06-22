@@ -15,8 +15,6 @@ public class MemberDTO {
     private String memberName;
     private String memberNickName;
 
-    private String token;
-
     public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setId(memberEntity.getId());

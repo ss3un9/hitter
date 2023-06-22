@@ -5,14 +5,11 @@ import com.codingrecipe.member.service.SongService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,9 +19,12 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -32,7 +32,7 @@ import java.nio.file.Paths;
 public class SongFileController {
     private  final SongService songService;
     @PostMapping("/api/upload")
-    public ModelAndView uploadFile(@RequestParam("file") MultipartFile file, @ModelAttribute SongDTO songDTO, Model model, HttpSession session) throws Exception {
+    public ResponseEntity<Map<String, Object>> uploadFile(@RequestParam("file") MultipartFile file, @ModelAttribute SongDTO songDTO, Model model, HttpSession session) throws Exception {
         Long loginId = (Long) session.getAttribute("loginId");
         RestTemplate restTemplate = new RestTemplate();
 
@@ -78,8 +78,18 @@ public class SongFileController {
         songDTO.setFileOriginalName(fileName);
         songDTO.setFileSysName(sysFileName);
         songService.save(songDTO);
-        ModelAndView modelAndView = new ModelAndView("index2");
-        return modelAndView;
+
+
+
+        Map<String, Object> responsedata = new HashMap<>();
+        responsedata.put("success", true);
+        responsedata.put("message", "File uploaded successfully!");
+
+        return ResponseEntity.status(HttpStatus.OK).body(responsedata);
+
+
+
+
 
     }
 }

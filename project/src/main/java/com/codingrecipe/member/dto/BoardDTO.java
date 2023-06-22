@@ -4,6 +4,7 @@ import com.codingrecipe.member.entity.BaseEntity;
 import com.codingrecipe.member.entity.BoardEntity;
 import lombok.*;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 @Getter
@@ -22,14 +23,14 @@ public class BoardDTO {
     private LocalDateTime boardCreatedTime;
 
 
-    public BoardDTO(Long id, String boardWriter, String boardTitle, int boardHits, int boardLikes, LocalDateTime boardCreatedTime) {
+    public BoardDTO(Long id, String boardWriter, String boardTitle, int boardHits, LocalDateTime boardCreatedTime) {
         this.id = id;
         this.boardWriter = boardWriter;
         this.boardTitle = boardTitle;
         this.boardHits = boardHits;
-        this.boardLikes = boardLikes;
         this.boardCreatedTime = boardCreatedTime;
     }
+
 
     public static BoardDTO toBoardDTO(BoardEntity boardEntity) {
         BoardDTO boardDTO = new BoardDTO();
@@ -39,7 +40,6 @@ public class BoardDTO {
         boardDTO.setBoardTitle(boardEntity.getBoardTitle());
         boardDTO.setBoardContents(boardEntity.getBoardContents());
         boardDTO.setBoardHits(boardEntity.getBoardHits());
-        boardDTO.setBoardLikes(boardEntity.getBoardLikes());
         boardDTO.setBoardCreatedTime(boardEntity.getCreatedTime());
         return boardDTO;
     }
