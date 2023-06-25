@@ -8,30 +8,46 @@ const BoardDetail = ({session}) => {
 
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
 
+    //
     const navigate = useNavigate();
     const location = useLocation();
+    console.log(location)
+
+
     let id;
+    let page;
 
     if (location.state && location.state.postResponse) {
         id = parseInt(location.state.postResponse);
+        page = parseInt(location.state.page)
+
+        console.log(page)
     } else {
         const searchParams = new URLSearchParams(location.search);
+
         id = parseInt(searchParams.get('id'));
+        page = parseInt(searchParams.get('page'));
+
+        console.log("page2")
+        console.log(page)
     }
 
+    console.log(id)
     const [boardTitle, setBoardTitle] = useState('');
     const [boardWrite, setBoardWrite] = useState('');
     const [boardHits, setBoardHits] = useState('');
     const [boardContents, setBoardContents] = useState('');
     const [boardCreatedTIme, setBoardCreatedTime] = useState('');
-
-    const reqList = () => {
-        // navigate("/board/paging?page="+page)
-        navigate("/board");
+    //
+    function reqList() {
+        navigate(`/board/paging?page=${page}`, { state: { page: page } });
     }
     const fetchData = async () => {
+
         try {
             const response = await axios.get('/board/detail/' + id);
+
+
             const { data } = response;
 
 
@@ -53,19 +69,17 @@ const BoardDetail = ({session}) => {
                 const board_created = data.board.boardCreatedTime;
                 setBoardCreatedTime(board_created)
 
-            }else{
+            }  else{
                 console.error('failed');
             }
         } catch (error) {
             alert("게시글 정보를 불러오는데 실패하였습니다 ");
         }
-
     };
-
     useEffect(() => {
-        fetchData();
+            fetchData();
+      
     }, []);
-
     return (
         <>
             {/* <!-- Navigation--> */}
@@ -110,7 +124,7 @@ const BoardDetail = ({session}) => {
                 <p> board_hits: { boardHits}</p>
                 <p> board_created: {boardCreatedTIme}</p>
             </div>
-            <button onClick={reqList}>목록</button>
+            <button onClick={() => reqList()}>목록</button>
         </>
     )
 }

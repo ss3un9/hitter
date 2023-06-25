@@ -26,6 +26,9 @@ function App() {
           <Route path="/board/write" element={<Write/>}/>
           <Route path="/board/detail" element={<BoardDetail/>}/>
           <Route path="/board" element={<Community/>}/>
+          {/*<Route exact path="/board" component={Community} />*/}
+          {/*<Route path={`${board}/:id`} component={BoardDetail} />*/}
+
           <Route path="/board/update" element={<BoardUpdate/>}/>
           <Route path="/board/paging" element={<Community/>}/>
           <Route path="/hit_ai_detail" element={<HitAiDetail/>}/>

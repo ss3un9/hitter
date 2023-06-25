@@ -1,11 +1,16 @@
 import axios from 'axios';
 
 import React, { useState, useEffect } from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import "./Community.css"
 const Community =  () => {
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
-    const [postResponse, setPostResponse] = useState(null);
+    const location = useLocation();
+
+    const searchParams = new URLSearchParams(location.search);
+
+    const page = parseInt(searchParams.get('page')) || 1;
+
 
     const navigate = useNavigate();
     const [boardList, setBoardList] = useState([]);
@@ -14,20 +19,17 @@ const Community =  () => {
     const [endPage, setEndPage] = useState(0);
     const [error, setError] = useState(false);
 
-    const [page, setPage] = useState(1); // 페이지 정보 상태 추가
     const Posting = () => {
         navigate("/board/write")
     }
-    const fetchData = async (page = 1) => {
+    const fetchData = async (currentPage = page) => {
             try {
 
 
-                const response = await axios.get('/board/paging?page='+page);
+                const response = await axios.get('/board/paging?page='+currentPage);
 
                 const { data } = response;
                 const { boardPageList ,startPage, endPage } = data;
-
-
 
                 setBoardList(boardPageList.content);
                 setBoardPageList(boardPageList);
@@ -42,26 +44,16 @@ const Community =  () => {
             }
         };
 
-        useEffect(() => {
-            fetchData();
-        }, []);
 
-
-    const handlePageChange = (page) => {
+    function handlePageChange(page) {
         fetchData(page);
     };
 
-    const handlePostResponse = (boardId) => {
+    useEffect(() => {
+        fetchData();
+    }, [page]);
 
-        if (boardId) {
-            navigate(`/board/detail?id=${boardId}`, {
-                state: {
-                    postResponse: boardId,
-                    page: page
-                }
-            });
-        }
-    };
+
 
     return (
         <>
@@ -119,7 +111,7 @@ const Community =  () => {
                         <tr key={board.id}>
                             <td>{board.id}</td>
                             <td>
-                                <Link to={`/board/detail/?id=` + board.id} onClick={() => handlePostResponse(board.id)}>
+                                <Link to={`/board/detail?id=` + board.id + `&page=` + page} >
                                     {board.boardTitle}
                                 </Link>
                             </td>
@@ -135,7 +127,7 @@ const Community =  () => {
 
             <div>
                 {/* First page */}
-                <Link to="/board/paging?page=1" onClick={() => handlePageChange(1)}>First</Link>
+                <Link to="" onClick={() => handlePageChange(1)}>First</Link>
 
                 {/* Previous page */}
                 {boardPageList.number > 0 ? (

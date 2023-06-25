@@ -48,20 +48,20 @@ public class BoardController {
 
     @GetMapping("/board/detail/{id}")
     public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id, @PageableDefault(page=1) Pageable pageable) {
-        BoardDTO boardDTO = boardService.findById(id);
         boardService.updateHits(id);
+        BoardDTO boardDTO = boardService.findById(id);
 
         Map<String, Object> response = new HashMap<>();
 
         if ( boardDTO != null) {
-            response.put("message", "게시글이 성공적으로 등록되었습니다");
             response.put("board", boardDTO);
             response.put("page", pageable.getPageNumber());
+
+            System.out.println(response);
             return ResponseEntity.status(HttpStatus.OK).body( response);
 
         }
         else{
-            response.put("message", "게시글 등록에 실패했습니다");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
