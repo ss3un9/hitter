@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="/songs">Hit</a></li>
-                <li class="nav-item"><a class="nav-link" href="/song/leader_board">Leader Board</a></li>
+                <li class="nav-item"><a class="nav-link" href="/{memberId}/songs">Leader Board</a></li>
                 <li class="nav-item"><a class="nav-link" href="/board/paging">Community</a></li>
                 <li class="nav-item"><a class="nav-link" href="/member/mypage" th:if="${session.loginEmail != null}"><p th:text="${session.loginName}"></p></a></li>
                 <li class="nav-item"><a class="nav-link" href="/member/logout" th:if="${session.loginEmail != null}">로그아웃</a></li>

@@ -15,10 +15,6 @@ public class MemberDTO {
     private String memberName;
     private String memberNickName;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> fd27721484f1fec739676541cb9759f9bb7f6601
     public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setId(memberEntity.getId());

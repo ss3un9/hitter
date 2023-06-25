@@ -1,16 +1,19 @@
 package com.codingrecipe.member.service;
 
 import com.codingrecipe.member.dto.MemberDTO;
+import com.codingrecipe.member.dto.SongDTO;
 import com.codingrecipe.member.entity.MemberEntity;
 import com.codingrecipe.member.entity.SongEntity;
 import com.codingrecipe.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,32 +35,24 @@ public class MemberService {
             SongEntity song = (SongEntity) result[1];
 
             System.out.println("Member: " + member.getMemberName());
-            System.out.println("Member: " + member.getMemberNickName());
+            System.out.println("NickName: " + member.getMemberNickName());
             System.out.println("Song: " + song.getFileOriginalName());
             System.out.println("Prediction: " + song.getPrediction());
             System.out.println("-------------------");
         }
     }
     public MemberDTO login(MemberDTO memberDTO) {
-        /*
-            1. 회원이 입력한 이메일로 DB에서 조회를 함
-            2. DB에서 조회한 비밀번호와 사용자가 입력한 비밀번호가 일치하는지 판단
-         */
         Optional<MemberEntity> byMemberEmail = memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
         if (byMemberEmail.isPresent()) {
-            // 조회 결과가 있다(해당 이메일을 가진 회원 정보가 있다)
             MemberEntity memberEntity = byMemberEmail.get();
-            if (BCrypt.checkpw(memberDTO.getMemberPassword(), memberEntity.getMemberPassword())) {
-                // 비밀번호 일치
-                // entity -> dto 변환 후 리턴
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            if (passwordEncoder.matches(memberDTO.getMemberPassword(), memberEntity.getMemberPassword())) {
                 MemberDTO dto = MemberDTO.toMemberDTO(memberEntity);
                 return dto;
             } else {
-                // 비밀번호 불일치(로그인실패)
                 return null;
             }
         } else {
-            // 조회 결과가 없다(해당 이메일을 가진 회원이 없다)
             return null;
         }
     }
@@ -80,6 +75,19 @@ public class MemberService {
             return null;
         }
 
+    }
+
+
+    public List<SongDTO> getSongsByMemberId(Long memberId) {
+        MemberEntity memberEntity = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found with ID: " + memberId));
+
+        List<SongEntity> songs = memberEntity.getSongs();
+        List<SongDTO> songDTOs = songs.stream()
+                .map(SongDTO::toSongDTO)
+                .collect(Collectors.toList());
+
+        return songDTOs;
     }
     public Optional<String> findNicknameById(Long id) {
         Optional<MemberEntity> memberEntityOptional = memberRepository.findById(id);

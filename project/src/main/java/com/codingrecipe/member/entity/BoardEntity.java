@@ -1,16 +1,22 @@
 package com.codingrecipe.member.entity;
 
 import com.codingrecipe.member.dto.BoardDTO;
+
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
-
+@Size
 @Entity
 @Getter
 @Setter
+@Valid
 @Table(name = "board")
 public class BoardEntity extends BaseEntity {
     @Id
@@ -24,10 +30,14 @@ public class BoardEntity extends BaseEntity {
     @Column(name = "user_id")
     private String boardWriterId;
 
-    @Column(name="board_title")
+    @Column(name="board_title" )
+    @NotBlank(message = "Board title must not be null or empty")
+    @Size(min = 1)
     private String boardTitle;
 
-    @Column(name="board_content")
+    @Column(name="board_content" )
+    @NotBlank(message = "Board contents must not be null or empty")
+    @Size(min = 1)
     private String boardContents;
 
     @Column(name = "board_count")

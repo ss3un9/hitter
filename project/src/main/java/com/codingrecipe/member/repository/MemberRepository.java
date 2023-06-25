@@ -11,7 +11,7 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
     // 이메일로 회원 정보 조회 (select * from member_table where member_email=?)
 
     Optional<MemberEntity> findByMemberEmail(String MemberEmail);
-    Optional<String> findByMemberNickName(Long id);
+    Optional<String> findByMemberNickName(String memberNickName);
     @Query("SELECT m, s FROM MemberEntity m JOIN SongEntity s ON m.id = s.member.id")
     List<Object[]> findMembersAndSongs();
 }

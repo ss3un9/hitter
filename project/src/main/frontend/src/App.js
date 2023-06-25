@@ -8,7 +8,8 @@ import HitAi from "./page/hit/HitAi";
 import BoardDetail from './page/board/BoardDetail';
 import BoardUpdate from "./page/board/BoardUpdate";
 import HitAiDetail from "./page/hit/HitAiDetail";
-
+import Community from "./page/community/Community";
+import Write from "./page/community/Write";
 
 
 function App() {
@@ -21,8 +22,12 @@ function App() {
           <Route path="/member/login" element={<Login/>}/>
           <Route path="/member/logout" element={<Logout/>}/>
           <Route path="/member/hit_ai" element={<HitAi/>}/>
+
+          <Route path="/board/write" element={<Write/>}/>
           <Route path="/board/detail" element={<BoardDetail/>}/>
+          <Route path="/board" element={<Community/>}/>
           <Route path="/board/update" element={<BoardUpdate/>}/>
+          <Route path="/board/paging" element={<Community/>}/>
           <Route path="/hit_ai_detail" element={<HitAiDetail/>}/>
         </Routes>
       </Router>

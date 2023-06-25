@@ -22,7 +22,7 @@ const Index = ({ session }) => {
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item"><a className="nav-link" href="/member/hit_ai">Hit</a></li>
                             <li className="nav-item"><a className="nav-link" href="/member/leader_board">Leader Board</a></li>
-                            <li className="nav-item"><a className="nav-link" href="/board/paging">Community</a></li>
+                            <li className="nav-item"><a className="nav-link" href="/board">Community</a></li>
                             <li className="nav-item">
                                 {storedSession.loginName != null && (
                                     <a className="nav-link" href="/member/mypage">
