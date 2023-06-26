@@ -23,12 +23,19 @@ public class SongEntity extends BaseEntity{
     @Column(name = "prediction")
     private Float prediction;
 
-    @Column(name="file_original_name")
-    private String fileOriginalName;
+    @Column(name="song_title")
+    private String songTitle;
 
 
     @Column(name="file_sys_name")
     private String fileSysName;
+
+    @Column(name="lyrics_sys_name")
+    private String lyrics;
+
+    @Column(name="genre")
+    private String genre;
+
     public static SongEntity toSongEntity(SongDTO songDTO) {
         SongEntity songEntity = new SongEntity();
 
@@ -37,8 +44,11 @@ public class SongEntity extends BaseEntity{
 
         songEntity.setMember(memberEntity);
         songEntity.setPrediction(songDTO.getPrediction());
-        songEntity.setFileOriginalName(songDTO.getFileOriginalName());
+        songEntity.setSongTitle(songDTO.getSongTitle());
         songEntity.setFileSysName(songDTO.getFileSysName());
+        songEntity.setLyrics(songDTO.getLyrics());
+        songEntity.setGenre(songDTO.getGenre());
+
         return songEntity;
     }
 }

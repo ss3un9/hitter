@@ -16,8 +16,10 @@ public class SongDTO {
     private Long id;
     private Long memberId;
     private Float prediction;
-    private String fileOriginalName;
+    private String songTitle;
     private String fileSysName;
+    private String lyrics;
+    private String genre;
 
     private LocalDateTime SongCreatedTime;
     public static SongDTO toSongDTO(SongEntity songEntity) {
@@ -25,8 +27,10 @@ public class SongDTO {
         songDTO.setId(songEntity.getId());
         songDTO.setMemberId(songEntity.getMember().getId());
         songDTO.setPrediction(songEntity.getPrediction());
-        songDTO.setFileOriginalName(songEntity.getFileOriginalName());
         songDTO.setFileSysName(songEntity.getFileSysName());
+        songDTO.setSongTitle(songEntity.getSongTitle());
+        songDTO.setLyrics(songEntity.getLyrics());
+        songDTO.setGenre(songEntity.getGenre());
         songDTO.setSongCreatedTime(songEntity.getCreatedTime());
         return songDTO;
     }

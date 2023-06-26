@@ -12,12 +12,14 @@ const HitAi = ({session}) => {
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
 
     const [uploadResponse, setUploadResponse] = useState(null);
+    const [selectedGenre, setSelectedGenre] = useState("pop");
 
     const navigate = useNavigate();
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
             const formData = new FormData(event.target);
+            formData.append("genre", selectedGenre)
             const response = await fetch('/api/upload', {
                 method: 'POST',
                 body: formData,
@@ -46,7 +48,7 @@ const HitAi = ({session}) => {
             navigate("/hit_ai_detail", {
                 state: {
                     UserNickName: uploadResponse.userNickName,
-                    Title: uploadResponse.songDTO.fileOriginalName,
+                    Title: uploadResponse.songDTO.songTitle,
                     Prediction: uploadResponse.songDTO.prediction,
                 }
             });
@@ -97,9 +99,10 @@ const HitAi = ({session}) => {
             <form method="post" onSubmit={handleFormSubmit}>
                 <label htmlFor="music">Choose a music file:</label>
                 <input type="file" id="music" name="file" accept="audio/*"/>
+                <input type="file" id="text" name="file1" />
                 <div>
                     <label htmlFor="genre">Genre</label>
-                    <select name="genres" id="genres">
+                    <select name="genres" id="genres" value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)}>
                         <option value="pop">팝</option>
                         <option value="dance">댄스</option>
                         <option value="ballad">발라드</option>

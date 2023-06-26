@@ -32,7 +32,7 @@ public class SongFileController {
         private  final SongService songService;
         private  final MemberService memberService;
         @PostMapping("/api/upload")
-        public ResponseEntity<Map<String, Object>> uploadFile(@RequestParam("file") MultipartFile file, @ModelAttribute SongDTO songDTO, HttpSession session) throws Exception {
+        public ResponseEntity<Map<String, Object>> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1, @ModelAttribute SongDTO songDTO, HttpSession session) throws Exception {
                 Long loginId = (Long) session.getAttribute("loginId");
                 RestTemplate restTemplate = new RestTemplate();
 
@@ -43,6 +43,13 @@ public class SongFileController {
                         @Override
                         public String getFilename() {
                                 return file.getOriginalFilename();
+                        }
+                });
+
+                body.add("file1", new ByteArrayResource(file1.getBytes()) {
+                        @Override
+                        public String getFilename() {
+                                return file1.getOriginalFilename();
                         }
                 });
 
@@ -65,18 +72,26 @@ public class SongFileController {
 
 
                 String fileName = file.getOriginalFilename();
-                String sysFileName = System.currentTimeMillis() + "_" + fileName;
+                String sysFileName = System.currentTimeMillis() +  "_" +  fileName;
                 System.out.println(sysFileName);
                 String filePath = "C:/bp_music/" + sysFileName;
                 byte[] fileBytes = file.getBytes();
                 Path path = Paths.get(filePath);
                 Files.write(path, fileBytes);
 
+                String fileName1 = file.getOriginalFilename();
+                String sysFileName1 = System.currentTimeMillis() +  "_" +  fileName1;
+                String filePath1 = "C:/bp_music/" + sysFileName1;
+                byte[] fileBytes1 = file1.getBytes();
+                Path path1 = Paths.get(filePath1);
+                Files.write(path1, fileBytes1);
+
 
                 songDTO.setPrediction(prediction);
                 songDTO.setMemberId(loginId);
-                songDTO.setFileOriginalName(fileName);
+                songDTO.setSongTitle(fileName);
                 songDTO.setFileSysName(sysFileName);
+                songDTO.setLyrics(sysFileName1);
                 songService.save(songDTO);
 
                 Optional<String> nicknameOptional = memberService.findNicknameById(loginId);

@@ -90,6 +90,7 @@ const BoardUpdate = () => {
             if(response.status === 200) {
                 setRepostResponse(response.data.post);
                 alert("게시글이 성공적으로 수정되었습니다");
+                navigate(`/board/detail?id=${id}&page=${page}`);
 
 
             }else{

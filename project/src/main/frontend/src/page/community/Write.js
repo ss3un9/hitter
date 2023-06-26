@@ -8,6 +8,7 @@ const Write =  () => {
     const navigate = useNavigate();
 
     const [postResponse, setPostResponse] = useState(null);
+    const page = 1;
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
@@ -29,9 +30,10 @@ const Write =  () => {
     };
     useEffect(() => {
         if (postResponse && postResponse.id) {
-            navigate(`/board/detail?id=${postResponse.id}`, {
+            navigate(`/board/detail?id=${postResponse.id}&page=${page}`, {
                 state: {
-                    postResponse: postResponse.id
+                    postResponse: postResponse.id,
+                    page: page
                 }
             });
         }

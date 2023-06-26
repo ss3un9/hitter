@@ -24,6 +24,8 @@ const BoardDetail = () => {
         page = parseInt(searchParams.get('page'));
     }
 
+    console.log(page);
+
     const [boardTitle, setBoardTitle] = useState('');
     const [boardWrite, setBoardWrite] = useState('');
     const [boardHits, setBoardHits] = useState('');

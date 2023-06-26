@@ -23,7 +23,6 @@ const Logout = () => {
         handleLogout();
     }, [navigate]);
 
-    return null;
 };
 
 export default Logout;

@@ -34,11 +34,11 @@ public class MemberService {
             MemberEntity member = (MemberEntity) result[0];
             SongEntity song = (SongEntity) result[1];
 
-            System.out.println("Member: " + member.getMemberName());
-            System.out.println("NickName: " + member.getMemberNickName());
-            System.out.println("Song: " + song.getFileOriginalName());
-            System.out.println("Prediction: " + song.getPrediction());
-            System.out.println("-------------------");
+//            System.out.println("Member: " + member.getMemberName());
+//            System.out.println("NickName: " + member.getMemberNickName());
+//            System.out.println("Song: " + song.getFileOriginalName());
+//            System.out.println("Prediction: " + song.getPrediction());
+//            System.out.println("-------------------");
         }
     }
     public MemberDTO login(MemberDTO memberDTO) {
