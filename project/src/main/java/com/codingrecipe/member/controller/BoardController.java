@@ -66,30 +66,58 @@ public class BoardController {
         }
     }
 
-    @GetMapping("/board/update/{id}")
-    public String board_updateForm(@PathVariable Long id, Model model,  @PageableDefault(page=1) Pageable pageable) {
+    @GetMapping("/board/PostUpdate/{id}")
+    public ResponseEntity<Map<String, Object>> board_updateForm(@PathVariable Long id,   @PageableDefault(page=1) Pageable pageable) {
         BoardDTO boardDTO = boardService.findById(id);
-        model.addAttribute("boardUpdate", boardDTO);
-        model.addAttribute("page", pageable.getPageNumber());
-        return "board_update";
+
+        Map<String, Object> response = new HashMap<>();
+
+        if ( boardDTO != null) {
+            response.put("boardUpdate", boardDTO);
+            response.put("page", pageable.getPageNumber());
+
+            System.out.println(response);
+            return ResponseEntity.status(HttpStatus.OK).body( response);
+
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
 
     }
 
-    @PostMapping("board/update")
-    public String board_update(@ModelAttribute BoardDTO boardDTO, Model model,  @PageableDefault(page=1) Pageable pageable){
-        BoardDTO board = boardService.update(boardDTO);
-        model.addAttribute("board", board);
-        model.addAttribute("page", pageable.getPageNumber());
-        return "board_detail";
-//        return "redirect:/board/" + boardDTO.getId();
+    @PostMapping("/board/PostUpdate")
+    public ResponseEntity<Map<String, Object>> board_update(@ModelAttribute BoardDTO boardDTO, @PageableDefault(page = 1) Pageable pageable) {
+        try {
+            BoardDTO updatedBoard = boardService.update(boardDTO);
 
+            if (updatedBoard != null) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("board", updatedBoard);
+                response.put("page", pageable.getPageNumber());
+
+                return ResponseEntity.status(HttpStatus.OK).body(response);
+            } else {
+                Map<String, Object> response = new HashMap<>();
+                response.put("message", "게시글 등록에 실패했습니다");
+
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+            }
+        } catch (Exception e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "게시글을 수정하지 못했습니다. 오류: " + e.getMessage());
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
     }
+
+
+
 
     @GetMapping("board/delete/{id}")
-    public String board_delete(@PathVariable Long id, Model model, @PageableDefault(page=1) Pageable pageable){
+    public void board_delete(@PathVariable Long id, Model model, @PageableDefault(page=1) Pageable pageable){
         boardService.delete(id);
-        model.addAttribute("page", pageable.getPageNumber());
-        return "redirect:/board/paging";
+
     }
 
     // /board/paging?page=1

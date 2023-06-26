@@ -15,7 +15,12 @@
     "react-router-dom": "^6.13.0",
     "react-scripts": "5.0.1",
     "startbootstrap-one-page-wonder": "^6.0.6",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+
+    "@babel/core": "7.22.5",
+    "@babel/eslint-parser": "7.22.5",
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
+    "@babel/preset-env": "7.22.5"
   },
   "scripts": {
     "start": "set PORT=3000 && react-scripts start",

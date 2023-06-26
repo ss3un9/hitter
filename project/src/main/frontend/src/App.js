@@ -10,7 +10,7 @@ import BoardUpdate from "./page/board/BoardUpdate";
 import HitAiDetail from "./page/hit/HitAiDetail";
 import Community from "./page/community/Community";
 import Write from "./page/community/Write";
-
+import BoardDelete from "./page/community/BoardDelete";
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
           <Route path="/board" element={<Community/>}/>
           {/*<Route exact path="/board" component={Community} />*/}
           {/*<Route path={`${board}/:id`} component={BoardDetail} />*/}
-
+          <Route path="/board/delete" element={<BoardDelete/>}/>
           <Route path="/board/update" element={<BoardUpdate/>}/>
           <Route path="/board/paging" element={<Community/>}/>
           <Route path="/hit_ai_detail" element={<HitAiDetail/>}/>

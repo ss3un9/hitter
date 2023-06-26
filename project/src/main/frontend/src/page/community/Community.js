@@ -29,6 +29,8 @@ const Community =  () => {
                 const response = await axios.get('/board/paging?page='+currentPage);
 
                 const { data } = response;
+
+                console.log(response);
                 const { boardPageList ,startPage, endPage } = data;
 
                 setBoardList(boardPageList.content);

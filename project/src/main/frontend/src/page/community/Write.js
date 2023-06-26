@@ -17,16 +17,14 @@ const Write =  () => {
 
             if(response.status === 200) {
                 setPostResponse(response.data.post);
-                console.log(response.data.post);
                 alert("게시글이 성공적으로 등록되었습니다");
 
-                // navigate(`/board_detail?id=${response.data.post.id}`);
 
             }else{
-                console.error('failed');
+                console.error('오류가 발생했습니다. 다시 시도해주세요 ');
             }
         } catch (error) {
-            console.error('failed');
+            console.error('게시글을 등록하지 못했습니다.');
         }
     };
     useEffect(() => {

@@ -3,16 +3,12 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import axios from "axios";
 // import './HitAi.css'
 
-const BoardDetail = ({session}) => {
+const BoardDetail = () => {
 
 
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
-
-    //
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location)
-
 
     let id;
     let page;
@@ -20,19 +16,14 @@ const BoardDetail = ({session}) => {
     if (location.state && location.state.postResponse) {
         id = parseInt(location.state.postResponse);
         page = parseInt(location.state.page)
-
-        console.log(page)
-    } else {
+    }
+    else {
         const searchParams = new URLSearchParams(location.search);
 
         id = parseInt(searchParams.get('id'));
         page = parseInt(searchParams.get('page'));
-
-        console.log("page2")
-        console.log(page)
     }
 
-    console.log(id)
     const [boardTitle, setBoardTitle] = useState('');
     const [boardWrite, setBoardWrite] = useState('');
     const [boardHits, setBoardHits] = useState('');
@@ -42,43 +33,52 @@ const BoardDetail = ({session}) => {
     function reqList() {
         navigate(`/board/paging?page=${page}`, { state: { page: page } });
     }
-    const fetchData = async () => {
+    function deleteList(id) {
+        const confirmDelete = window.confirm('게시글을 정말 삭제하시겠습니까?');
 
-        try {
-            const response = await axios.get('/board/detail/' + id);
-
-
-            const { data } = response;
-
-
-            if(response.status === 200) {
-
-
-
-                const board_title = data.board.boardTitle;
-                setBoardTitle(board_title);
-
-                const board_writer = data.board.boardWriter;
-                setBoardWrite(board_writer);
-
-                const board_hits = data.board.boardHits;
-                setBoardHits(board_hits)
-                const board_contents = data.board.boardContents;
-                setBoardContents(board_contents)
-
-                const board_created = data.board.boardCreatedTime;
-                setBoardCreatedTime(board_created)
-
-            }  else{
-                console.error('failed');
-            }
-        } catch (error) {
-            alert("게시글 정보를 불러오는데 실패하였습니다 ");
+        if (confirmDelete) {
+            navigate(`/board/delete?id=` + id, {state: {id: id}});
         }
-    };
+    }
+
+    function UpdateList() {
+        navigate(`/board/update?id=` + id +`&page=` + page , {state: {id: id}, page: {page} });
+    }
+
+
+
     useEffect(() => {
-            fetchData();
-      
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('/board/detail/' + id);
+                const { data } = response;
+
+                if (response.status === 200) {
+                    const board_title = data.board.boardTitle;
+                    setBoardTitle(board_title);
+
+                    const board_writer = data.board.boardWriter;
+                    setBoardWrite(board_writer);
+
+                    const board_hits = data.board.boardHits;
+                    setBoardHits(board_hits);
+
+                    const board_contents = data.board.boardContents;
+                    setBoardContents(board_contents);
+
+                    const board_created = data.board.boardCreatedTime;
+                    setBoardCreatedTime(board_created);
+                } else {
+                    alert('게시글 정보를 불러오는데 실패하였습니다');
+                }
+            } catch (error) {
+                alert('오류가 발생했습니다. 다시 시도해주세요 ');
+            }
+        };
+
+        fetchData().catch((error) => {
+            console.error('Error during fetch:', error);
+        });
     }, []);
     return (
         <>
@@ -125,6 +125,9 @@ const BoardDetail = ({session}) => {
                 <p> board_created: {boardCreatedTIme}</p>
             </div>
             <button onClick={() => reqList()}>목록</button>
+
+            <button onClick={() => UpdateList()}>수정</button>
+            <button onClick={() => deleteList(id)}>삭제</button>
         </>
     )
 }
