@@ -42,21 +42,26 @@ public class MemberService {
         }
     }
     public MemberDTO login(MemberDTO memberDTO) {
+
         Optional<MemberEntity> byMemberEmail = memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
+
         if (byMemberEmail.isPresent()) {
+
             MemberEntity memberEntity = byMemberEmail.get();
+
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             if (passwordEncoder.matches(memberDTO.getMemberPassword(), memberEntity.getMemberPassword())) {
                 MemberDTO dto = MemberDTO.toMemberDTO(memberEntity);
                 return dto;
-            } else {
+            }
+
+            else {
                 return null;
             }
         } else {
             return null;
         }
     }
-
     public List<MemberDTO> findAll() {
         List<MemberEntity> memberEntityList = memberRepository.findAll();
         List<MemberDTO> memberDTOList = new ArrayList<>();
@@ -106,10 +111,21 @@ public class MemberService {
         String hashedPassword = BCrypt.hashpw(memberDTO.getMemberPassword(), BCrypt.gensalt());
         memberDTO.setMemberPassword(hashedPassword);
         memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
+
     }
 
-    public void deleteById(Long id) {
-        memberRepository.deleteById(id);
+    public void update_exceptpw(MemberDTO memberDTO) {
+        memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
+
+    }
+
+    public boolean deleteById(Long id) {
+        try {
+            memberRepository.deleteById(id);
+            return true; // 회원 탈퇴 성공
+        } catch (Exception e) {
+            return false; // 회원 탈퇴 실패
+        }
     }
 
     public String emailCheck(String memberEmail) {

@@ -9,7 +9,6 @@ const Logout = () => {
             try {
                 await fetch('/member/logout', {
                     method: 'POST',
-                    credentials: 'include', // 쿠키 전송을 위해 필요한 옵션
                 });
                 localStorage.removeItem('session');
                 console.log(localStorage);

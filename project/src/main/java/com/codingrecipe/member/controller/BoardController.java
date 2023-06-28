@@ -144,14 +144,22 @@ public class BoardController {
     }
 
     @GetMapping("/board/my-posts")
-    public String getMyPosts(Model model, HttpSession session) {
+    public ResponseEntity<Map<String, Object>> getMyPosts(Model model, HttpSession session) {
         // Retrieve user information from session
-        Long loggedInUserId = (Long) session.getAttribute("loginId"); // Get the logged-in user's ID from the session
+        String loggedInUserIdStr = (String) session.getAttribute("loginId");
+        Long loggedInUserId = Long.parseLong(loggedInUserIdStr);
 
         List<BoardDTO> boardDTOList = boardService.findBoardListByUserId(loggedInUserId);
-        model.addAttribute("boardList", boardDTOList);
-        System.out.println(boardDTOList);
-        return "my_posts";
+        Map<String, Object> responseData = new HashMap<>();
+        if (boardDTOList  != null ) {
+            responseData.put("boardList", boardDTOList);
+            System.out.println(responseData);
+            return ResponseEntity.status(HttpStatus.OK).body(responseData);
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseData);
+        }
+
     }
 
 }

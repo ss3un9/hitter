@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import React, { useState, useEffect } from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
-import "./Community.css"
+import "../community/Community.css"
 const Community =  () => {
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
     const location = useLocation();

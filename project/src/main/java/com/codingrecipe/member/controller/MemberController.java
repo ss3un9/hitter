@@ -82,34 +82,7 @@ public class MemberController {
         return ResponseEntity.ok(response);
     }
 
-//    @PostMapping("/member/login")
-//    public ResponseEntity<?> login(@RequestBody MemberDTO memberDTO) {
-//        MemberDTO loginResult = memberService.login(memberDTO);
-//        if (loginResult != null) {
-//            // 로그인 성공
-//            String token = generateToken(loginResult.getId());
-//            memberDTO.setToken(token);
-//
-//            return ResponseEntity.ok(memberDTO);
-//
-//        } else {
-//            // 로그인 실패
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-//        }
-//    }
-//
-//    private String generateToken(Long memberId) {
-//        // 토큰 생성 로직 구현
-//        // (예시: JWT 토큰 생성)
-//        String secretKey = "mySecretKey";
-//        Date expirationDate = new Date(System.currentTimeMillis() + 3600000); // 토큰 유효시간 1시간
-//        String token = Jwts.builder()
-//                .setSubject(memberId.toString())
-//                .setExpiration(expirationDate)
-//                .signWith(SignatureAlgorithm.HS512, secretKey)
-//                .compact();
-//        return token;
-//    }
+
 
     @GetMapping("/member/")
     public String findAll(Model model) {
@@ -127,23 +100,41 @@ public class MemberController {
     }
 
     @GetMapping("/member/update")
-    public String updateForm(HttpSession session, Model model) {
+    public ResponseEntity<Map<String, Object>> updateForm(HttpSession session) {
         String myEmail = (String) session.getAttribute("loginEmail");
         MemberDTO memberDTO = memberService.updateForm(myEmail);
-        model.addAttribute("updateMember", memberDTO);
-        return "update";
+        Map<String, Object> response = new HashMap<>();
+        if (memberDTO != null) {
+            response.put("updateMember", memberDTO);
+
+            return ResponseEntity.status(HttpStatus.OK).body( response);
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
     }
 
     @PostMapping("/member/update")
-    public String update(@ModelAttribute MemberDTO memberDTO) {
+    public void update(@ModelAttribute MemberDTO memberDTO) {
         memberService.update(memberDTO);
-        return "redirect:/member/" + memberDTO.getId();
+    }
+
+    @PostMapping("/member/update/name")
+    public void updateName(@ModelAttribute MemberDTO memberDTO) {
+        memberService.update_exceptpw(memberDTO);
     }
 
     @GetMapping("/member/delete/{id}")
-    public String deleteById(@PathVariable Long id) {
-        memberService.deleteById(id);
-        return "redirect:/member/";
+    public  ResponseEntity<Map<String, Object>> deleteById(@PathVariable Long id) {
+        boolean success = memberService.deleteById(id);
+        Map<String, Object> response = new HashMap<>();
+        System.out.println(success);
+        if (success) {
+            return ResponseEntity.status(HttpStatus.OK).body( response);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+
+        }
     }
 
 //    @GetMapping("/member/logout")
