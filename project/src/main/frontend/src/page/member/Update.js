@@ -58,7 +58,7 @@ const Update = () => {
     }, []);
 
     const handleSubmit = async (event) => {
-
+        event.preventDefault();
         try {
             const formData = new FormData(event.target);
             const response = await axios.post("/member/update", formData, {
@@ -69,8 +69,10 @@ const Update = () => {
 
                 alert("회원 정보가 성공적으로 수정되었습니다");
                 alert("다시 로그인 해주세요")
-                window.location.reload();
-                navigate("/member/logout")
+                console.log()
+                setTimeout(() => {
+                    navigate("/member/logout");
+                }, 1000);
 
 
 
@@ -82,7 +84,7 @@ const Update = () => {
         }
     };
     const handleSubmitName = async (event) => {
-
+        event.preventDefault();
         try {
             const formData = new FormData(event.target);
             const response = await axios.post("/member/update/name", formData, {
@@ -93,7 +95,6 @@ const Update = () => {
 
                 alert("회원 정보가 성공적으로 수정되었습니다");
                 alert("다시 로그인 해주세요")
-                window.location.reload(); // 페이지 새로고침
                 navigate("/member/logout")
 
 
@@ -224,7 +225,7 @@ const Update = () => {
 
 
 
-            <form method="post" onSubmit={ handleSubmitName }>
+            <form method="post" onSubmit={ handleSubmit }>
                 로그인 정보
                 <input type="hidden" value={memberId} name="id" />
                 <input type="hidden" value={memberEmail} name="memberEmail" />

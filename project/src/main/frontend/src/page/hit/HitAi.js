@@ -13,13 +13,15 @@ const HitAi = ({session}) => {
 
     const [uploadResponse, setUploadResponse] = useState(null);
     const [selectedGenre, setSelectedGenre] = useState("pop");
+    const [songTitle, setSongTitle] = useState("");
 
     const navigate = useNavigate();
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
             const formData = new FormData(event.target);
-            formData.append("genre", selectedGenre)
+            formData.append("genre", selectedGenre);
+            formData.append("title", songTitle);
             const response = await fetch('/api/upload', {
                 method: 'POST',
                 body: formData,
@@ -29,6 +31,7 @@ const HitAi = ({session}) => {
                 const data = await response.json();
                 console.log(data);
                 setUploadResponse(data)
+
                 alert("히트 분석 성공 ");
 
             } else {
@@ -38,18 +41,17 @@ const HitAi = ({session}) => {
 
         } catch (error) {
             // 오류 처리
-            console.error('Error occurred');
-            alert("히트 분석 실패");
+            alert("파일을 등록해주세요");
         }
     };
 
     useEffect(() => {
         if (uploadResponse && uploadResponse.songDTO) {
-            navigate("/hit_ai_detail", {
+            const id = uploadResponse.songDTO.id;
+            console.log(uploadResponse);
+            navigate(`/hit_ai_detail?id=${id}`, {
                 state: {
-                    UserNickName: uploadResponse.userNickName,
-                    Title: uploadResponse.songDTO.songTitle,
-                    Prediction: uploadResponse.songDTO.prediction,
+                   songDTO: uploadResponse.songDTO
                 }
             });
         }
@@ -100,6 +102,14 @@ const HitAi = ({session}) => {
                 <label htmlFor="music">Choose a music file:</label>
                 <input type="file" id="music" name="file" accept="audio/*"/>
                 <input type="file" id="text" name="file1" />
+                <input
+                    type="text"
+                    id="title"
+                    name="songTitle"
+                    value={songTitle}
+                    onChange={(e) => setSongTitle(e.target.value)}
+                    placeholder="노래 제목을 입력하세요"
+                />
                 <div>
                     <label htmlFor="genre">Genre</label>
                     <select name="genres" id="genres" value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)}>

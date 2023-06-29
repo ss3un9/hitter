@@ -44,6 +44,9 @@ function App() {
           <Route path="/member/mysong" element={<MySong/>}></Route>
           <Route path="/member/myboard" element={<MyBoard/>}></Route>
 
+
+          <Route path="/song/board" element={<LeaderBoard/>}></Route>
+
         </Routes>
       </Router>
     </div>

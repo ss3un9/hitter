@@ -2,6 +2,7 @@ package com.codingrecipe.member.controller;
 
 import com.codingrecipe.member.dto.MemberDTO;
 
+import com.codingrecipe.member.dto.SongDTO;
 import com.codingrecipe.member.service.MemberService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -102,25 +103,38 @@ public class MemberController {
     @GetMapping("/member/update")
     public ResponseEntity<Map<String, Object>> updateForm(HttpSession session) {
         String myEmail = (String) session.getAttribute("loginEmail");
+        System.out.println("1111");
         MemberDTO memberDTO = memberService.updateForm(myEmail);
+        System.out.println(memberDTO);
         Map<String, Object> response = new HashMap<>();
+        System.out.println("1111");
         if (memberDTO != null) {
             response.put("updateMember", memberDTO);
-
+            System.out.println("1111");
             return ResponseEntity.status(HttpStatus.OK).body( response);
         }
         else{
+            System.out.println("1222");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+    @GetMapping("/member/getMySong/{id}")
+    public ResponseEntity<List<SongDTO>> getMySong(@PathVariable Long id) {
+        List<SongDTO> songDTOList = memberService.getSongsByMemberId(id);
+
+        return ResponseEntity.ok(songDTOList);
+    }
+
 
     @PostMapping("/member/update")
     public void update(@ModelAttribute MemberDTO memberDTO) {
+
         memberService.update(memberDTO);
     }
 
     @PostMapping("/member/update/name")
     public void updateName(@ModelAttribute MemberDTO memberDTO) {
+
         memberService.update_exceptpw(memberDTO);
     }
 
@@ -137,12 +151,6 @@ public class MemberController {
         }
     }
 
-//    @GetMapping("/member/logout")
-//    public String logout(HttpSession session) {
-//        session.invalidate();
-//        return "index";
-//    }
-
     @PostMapping("/member/logout")
     public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
         // 세션 무효화
@@ -150,9 +158,7 @@ public class MemberController {
         if (session != null) {
             session.invalidate();
         }
-        System.out.println(session);
-        System.out.println("logout");
-        // 로그아웃 처리 후, 클라이언트에게 적절한 응답 반환
+
         return ResponseEntity.ok().build();
     }
     @PostMapping("/member/email-check")
@@ -162,27 +168,8 @@ public class MemberController {
         return checkResult;
     }
 
-    @GetMapping("/member/hit_ai")
-    public String hitai() {
-        return "hit_ai";
-    }
 
 
-    @GetMapping("/member/mypage")
-    public String mypage() {
-        return "mypage";
-    }
-
-
-    @GetMapping("/member/leader_board")
-    public String leaderboard() {
-        return "leader_board";
-    }
-
-    @GetMapping("/kakao")
-    public String kakao() {
-        return "kakao";
-    }
 
 }
 

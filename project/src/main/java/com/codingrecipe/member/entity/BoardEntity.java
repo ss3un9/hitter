@@ -28,7 +28,7 @@ public class BoardEntity extends BaseEntity {
     private String boardWriter;
 
     @Column(name = "user_id")
-    private String boardWriterId;
+    private Long boardWriterId;
 
     @Column(name="board_title" )
     @NotBlank(message = "Board title must not be null or empty")

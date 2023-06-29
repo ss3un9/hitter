@@ -34,6 +34,7 @@ public class SongFileController {
         @PostMapping("/api/upload")
         public ResponseEntity<Map<String, Object>> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1, @ModelAttribute SongDTO songDTO, HttpSession session) throws Exception {
                 Long loginId = (Long) session.getAttribute("loginId");
+                String loginNickName = (String) session.getAttribute("loginNickName");
                 RestTemplate restTemplate = new RestTemplate();
 
 
@@ -79,7 +80,7 @@ public class SongFileController {
                 Path path = Paths.get(filePath);
                 Files.write(path, fileBytes);
 
-                String fileName1 = file.getOriginalFilename();
+                String fileName1 = file1.getOriginalFilename();
                 String sysFileName1 = System.currentTimeMillis() +  "_" +  fileName1;
                 String filePath1 = "C:/bp_music/" + sysFileName1;
                 byte[] fileBytes1 = file1.getBytes();
@@ -89,23 +90,21 @@ public class SongFileController {
 
                 songDTO.setPrediction(prediction);
                 songDTO.setMemberId(loginId);
-                songDTO.setSongTitle(fileName);
+                songDTO.setMemberNickName(loginNickName);
                 songDTO.setFileSysName(sysFileName);
                 songDTO.setLyrics(sysFileName1);
                 songService.save(songDTO);
-
-                Optional<String> nicknameOptional = memberService.findNicknameById(loginId);
-                String userNickName = nicknameOptional.orElse("");
-
-                System.out.println(userNickName);
+//
+//                Optional<String> nicknameOptional = memberService.findNicknameById(loginId);
+//                String userNickName = nicknameOptional.orElse("");
 
                 Map<String, Object> ResponseSong = new HashMap<>();
 
 
                 ResponseSong.put("songDTO",songDTO );
+
                 ResponseSong.put("success", true);
                 ResponseSong.put("message", "File uploaded successfully!");
-                ResponseSong.put("userNickName",userNickName );
 
                 System.out.println(ResponseSong);
                 return ResponseEntity.status(HttpStatus.OK).body(ResponseSong);

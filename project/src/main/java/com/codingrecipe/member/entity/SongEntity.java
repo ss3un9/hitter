@@ -16,7 +16,7 @@ public class SongEntity extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private MemberEntity member;
 
@@ -25,6 +25,9 @@ public class SongEntity extends BaseEntity{
 
     @Column(name="song_title")
     private String songTitle;
+
+    @Column(name="user_nickname")
+    private String memberNickName;
 
 
     @Column(name="file_sys_name")
@@ -42,7 +45,9 @@ public class SongEntity extends BaseEntity{
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setId(songDTO.getMemberId());
 
+
         songEntity.setMember(memberEntity);
+        songEntity.setMemberNickName(songDTO.getMemberNickName());
         songEntity.setPrediction(songDTO.getPrediction());
         songEntity.setSongTitle(songDTO.getSongTitle());
         songEntity.setFileSysName(songDTO.getFileSysName());

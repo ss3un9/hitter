@@ -143,13 +143,11 @@ public class BoardController {
 
     }
 
-    @GetMapping("/board/my-posts")
-    public ResponseEntity<Map<String, Object>> getMyPosts(Model model, HttpSession session) {
-        // Retrieve user information from session
-        String loggedInUserIdStr = (String) session.getAttribute("loginId");
-        Long loggedInUserId = Long.parseLong(loggedInUserIdStr);
+    @GetMapping("/board/MyPosts/{writeId}")
+    public ResponseEntity<Map<String, Object>> getMyPosts(Model model, HttpSession session, @PathVariable Long writeId) {
 
-        List<BoardDTO> boardDTOList = boardService.findBoardListByUserId(loggedInUserId);
+        List<BoardDTO> boardDTOList = boardService.findBoardListByUserId(writeId);
+        System.out.println("boardDTOList");
         Map<String, Object> responseData = new HashMap<>();
         if (boardDTOList  != null ) {
             responseData.put("boardList", boardDTOList);

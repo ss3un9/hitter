@@ -30,7 +30,7 @@ public class MemberEntity {
     @Column(name = "user_nickname")
     private String memberNickName;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<SongEntity> songs = new ArrayList<>();
 
     public static MemberEntity toMemberEntity(MemberDTO memberDTO) {

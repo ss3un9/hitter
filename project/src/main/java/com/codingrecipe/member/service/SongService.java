@@ -28,13 +28,13 @@ public class SongService {
         return findById(songDTO.getId());
     }
 
-    @Transactional
+
     public SongDTO findById(Long id) {
         Optional<SongEntity> optionalSongEntity = songRepository.findById(id);
         if (optionalSongEntity.isPresent()) {
             SongEntity songEntity = optionalSongEntity.get();
             SongDTO songDTO = SongDTO.toSongDTO(songEntity);
-
+            System.out.println(songDTO);
             return songDTO;
         }else{
             return null;
@@ -52,6 +52,7 @@ public class SongService {
 
 
     }
+
 
 
 }

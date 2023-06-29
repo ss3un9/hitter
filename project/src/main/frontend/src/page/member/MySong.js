@@ -1,14 +1,43 @@
 import React, {useEffect, useState} from "react";
 
 import {Link, useNavigate} from "react-router-dom";
+import axios from "axios";
 
 
-const MySong = ({session}) => {
+const MySong = ()  => {
 
 
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
     const navigate = useNavigate();
     const id = storedSession.loginId;
+
+    const [mySongList, setMySongList] = useState([]);
+
+
+    const fetchData = async () => {
+        try {
+
+
+            const response = await axios.get(`/member/getMySong/${id}`);
+            const {data} = response;
+            console.log(data);
+            setMySongList(data);
+
+
+
+        } catch (error) {
+            // Handle errors
+            console.error('Error fetching data:', error);
+
+        }
+    };
+
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+
     return (
         <>
             {/* <!-- Navigation--> */}
@@ -70,7 +99,29 @@ const MySong = ({session}) => {
                 </ul>
             </nav>
 
+            (
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Song Title</th>
+                    <th>Genre</th>
+                    <th>CreatedTime</th>
+                    {/* Add more table headers for other properties */}
+                </tr>
+                </thead>
+                <tbody>
+                {mySongList.map((song) => (
+                    <tr key={song.id}>
+                        <td>{song.id}</td>
+                        <td>{song.songTitle}</td>
+                        <td>{song.genre}</td>
+                        <td>{song.songCreatedTime.replace("T", " ")}</td>
 
+                    </tr>
+                ))}
+                </tbody>
+            </table>
         </>
     )
 }

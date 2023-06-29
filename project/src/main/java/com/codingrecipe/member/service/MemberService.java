@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,19 +28,32 @@ public class MemberService {
         memberRepository.save(memberEntity);
         // repository의 save메서드 호출 (조건. entity객체를 넘겨줘야 함)
     }
+
+    @Transactional
     public void printMembersAndSongs() {
         List<Object[]> membersAndSongs = memberRepository.findMembersAndSongs();
+
+        List<SongDTO> songDTOs = new ArrayList<>();
 
         for (Object[] result : membersAndSongs) {
             MemberEntity member = (MemberEntity) result[0];
             SongEntity song = (SongEntity) result[1];
 
-//            System.out.println("Member: " + member.getMemberName());
-//            System.out.println("NickName: " + member.getMemberNickName());
-//            System.out.println("Song: " + song.getFileOriginalName());
-//            System.out.println("Prediction: " + song.getPrediction());
-//            System.out.println("-------------------");
+            SongDTO songDTO = new SongDTO();
+            songDTO.setId(song.getId());
+            songDTO.setMemberId(member.getId());
+
+            songDTO.setPrediction(song.getPrediction());
+            songDTO.setSongTitle(song.getSongTitle());
+            songDTO.setFileSysName(song.getFileSysName());
+            songDTO.setLyrics(song.getLyrics());
+            songDTO.setGenre(song.getGenre());
+            songDTO.setSongCreatedTime(song.getCreatedTime());
+            songDTO.setMemberNickName(member.getMemberNickName());
+            songDTOs.add(songDTO);
         }
+
+        System.out.println(songDTOs);
     }
     public MemberDTO login(MemberDTO memberDTO) {
 
@@ -100,6 +114,7 @@ public class MemberService {
     }
     public MemberDTO updateForm(String myEmail) {
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(myEmail);
+        System.out.println(optionalMemberEntity);
         if (optionalMemberEntity.isPresent()) {
             return MemberDTO.toMemberDTO(optionalMemberEntity.get());
         } else {

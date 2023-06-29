@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class SongDTO {
     private Long id;
     private Long memberId;
+    private String memberNickName;
     private Float prediction;
     private String songTitle;
     private String fileSysName;
@@ -26,6 +27,7 @@ public class SongDTO {
         SongDTO songDTO = new SongDTO();
         songDTO.setId(songEntity.getId());
         songDTO.setMemberId(songEntity.getMember().getId());
+        songDTO.setMemberNickName(songEntity.getMemberNickName());
         songDTO.setPrediction(songEntity.getPrediction());
         songDTO.setFileSysName(songEntity.getFileSysName());
         songDTO.setSongTitle(songEntity.getSongTitle());
@@ -34,6 +36,7 @@ public class SongDTO {
         songDTO.setSongCreatedTime(songEntity.getCreatedTime());
         return songDTO;
     }
+
 
 }
 

@@ -25,7 +25,9 @@ const BoardDetail = () => {
     }
 
     console.log(page);
-
+    if (!page) {
+        page = 1; // 페이지 값이 없을 경우 1( 내 게시판에서 들어왔을때임)
+    }
     const [boardTitle, setBoardTitle] = useState('');
     const [boardWrite, setBoardWrite] = useState('');
     const [boardHits, setBoardHits] = useState('');
