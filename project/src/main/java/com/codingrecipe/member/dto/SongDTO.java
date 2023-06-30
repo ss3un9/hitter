@@ -23,6 +23,7 @@ public class SongDTO {
     private String genre;
 
     private LocalDateTime SongCreatedTime;
+    private Integer songLike;
     public static SongDTO toSongDTO(SongEntity songEntity) {
         SongDTO songDTO = new SongDTO();
         songDTO.setId(songEntity.getId());
@@ -34,6 +35,7 @@ public class SongDTO {
         songDTO.setLyrics(songEntity.getLyrics());
         songDTO.setGenre(songEntity.getGenre());
         songDTO.setSongCreatedTime(songEntity.getCreatedTime());
+        songDTO.setSongLike(songEntity.getSongLike());
         return songDTO;
     }
 

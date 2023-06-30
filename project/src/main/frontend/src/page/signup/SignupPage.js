@@ -209,7 +209,7 @@ const SignupPage = () => {
 
                             <li class="nav-item"><a className="nav-link" href="/member/hit_ai">Hit</a></li>
 
-                            <li className="nav-item"><a className="nav-link" href="/member/leader_board">Leader Board</a></li>
+                            <li className="nav-item"><a className="nav-link" href="/song/board">Leader Board</a></li>
 
                             <li className="nav-item"><a className="nav-link" href="/board/paging">Community</a></li>
 

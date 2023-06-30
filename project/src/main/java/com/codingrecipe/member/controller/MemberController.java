@@ -29,8 +29,6 @@ public class MemberController {
     private final MemberService memberService;
 
 
-    // 회원가입 페이지 출력 요청
-
     @PostMapping("/member/save")
     public void save(@ModelAttribute MemberDTO memberDTO) {
         memberService.save(memberDTO);

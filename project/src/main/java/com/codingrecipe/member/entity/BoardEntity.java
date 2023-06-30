@@ -43,8 +43,6 @@ public class BoardEntity extends BaseEntity {
     @Column(name = "board_count")
     private int boardHits;
 
-    @Column(name = "category_id")
-    private BigInteger category;
     public static BoardEntity toSaveEntity(BoardDTO boardDTO){
         BoardEntity boardEntity = new BoardEntity();
         boardEntity.setBoardWriter(boardDTO.getBoardWriter());

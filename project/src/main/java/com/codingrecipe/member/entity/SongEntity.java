@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Setter
@@ -39,6 +41,13 @@ public class SongEntity extends BaseEntity{
     @Column(name="genre")
     private String genre;
 
+    @Column(name="song_like")
+    private Integer songLike;
+
+    @OneToMany(mappedBy = "song", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<LikeEntity> likes = new ArrayList<>();
+
+
     public static SongEntity toSongEntity(SongDTO songDTO) {
         SongEntity songEntity = new SongEntity();
 
@@ -53,6 +62,7 @@ public class SongEntity extends BaseEntity{
         songEntity.setFileSysName(songDTO.getFileSysName());
         songEntity.setLyrics(songDTO.getLyrics());
         songEntity.setGenre(songDTO.getGenre());
+        songEntity.setSongLike(0);
 
         return songEntity;
     }

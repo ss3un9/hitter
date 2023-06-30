@@ -12,7 +12,7 @@ import Community from "./page/board/Community";
 import Write from "./page/board/Write";
 import BoardDelete from "./page/board/BoardDelete";
 import Mypage from "./page/member/MyPage";
-import LeaderBoard from "./page/board/LeaderBoard";
+import LeaderBoard from "./page/hit/LeaderBoard";
 import Update from "./page/member/Update";
 import MySong from "./page/member/MySong";
 import MyBoard from "./page/member/MyBoard";

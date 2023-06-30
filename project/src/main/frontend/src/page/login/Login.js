@@ -73,7 +73,7 @@ const Login = () => {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/member/leader_board">
+                                <a className="nav-link" href="/song/board">
                                     Leader Board
                                 </a>
                             </li>

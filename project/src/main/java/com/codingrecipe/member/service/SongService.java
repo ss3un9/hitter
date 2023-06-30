@@ -34,7 +34,6 @@ public class SongService {
         if (optionalSongEntity.isPresent()) {
             SongEntity songEntity = optionalSongEntity.get();
             SongDTO songDTO = SongDTO.toSongDTO(songEntity);
-            System.out.println(songDTO);
             return songDTO;
         }else{
             return null;
@@ -52,6 +51,9 @@ public class SongService {
 
 
     }
+
+
+
 
 
 
