@@ -12,6 +12,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Size
 @Entity
 @Getter
@@ -42,6 +45,11 @@ public class BoardEntity extends BaseEntity {
 
     @Column(name = "board_count")
     private int boardHits;
+
+
+    @OneToMany(mappedBy = "boardEntity", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<CommentEntity> commentEntityList = new ArrayList<>();
+
 
     public static BoardEntity toSaveEntity(BoardDTO boardDTO){
         BoardEntity boardEntity = new BoardEntity();

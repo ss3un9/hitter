@@ -6,7 +6,20 @@ import axios from "axios";
 const BoardDetail = () => {
 
 
+    const [session, setSession] = useState({});
+
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
+
+    useEffect(() => {
+        const storedSession = JSON.parse(localStorage.getItem('session')) || {};
+
+        if (storedSession && storedSession.loginName) {
+            setSession(storedSession);
+        }
+    }, []);
+
+    const memberId = storedSession.loginId;
+
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -49,7 +62,27 @@ const BoardDetail = () => {
         navigate(`/board/update?id=` + id +`&page=` + page , {state: {id: id}, page: {page} });
     }
 
+    const commentWrite = async() => {
+        const writer = document.getElementById("commentWriter").value;
+        const contents = document.getElementById("commentContents").value;
+        const board_id = id;
+        console.log(board_id);
+        console.log("작성자:", writer);
+        console.log("내용", contents);
 
+        const response = await axios.post(`/comment/save`, {
+                commentWriter: writer,
+                commentContents: contents,
+                boardId: id
+        });
+            if (response.status === 200) {
+                console.log("성공", response)
+
+        }else{
+                console.log("실패")
+            }
+
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -132,6 +165,13 @@ const BoardDetail = () => {
 
             <button onClick={() => UpdateList()}>수정</button>
             <button onClick={() => deleteList(id)}>삭제</button>
+
+
+            <div>
+                <input type="text" id ="commentWriter" placeholder="작성자" value={storedSession.loginNickName}/>
+                <input type="text" id= "commentContents" placeholder="내용" />
+                <button id="comment-write-btn" onClick={() => commentWrite()}>댓글작성</button>
+            </div>
         </>
     )
 }

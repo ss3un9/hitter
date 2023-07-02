@@ -24,6 +24,7 @@ public class LikeController {
         Map<String, Object> response = new HashMap<>();
         likeDTO.setMemberId(memberId);
         likeDTO.setSongId(songId);
+
         LikeDTO  savelikeDTO = likeService.likeSong(likeDTO);
         likeService.updateLikes(songId);
 

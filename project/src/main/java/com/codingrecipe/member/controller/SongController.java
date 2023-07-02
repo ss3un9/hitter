@@ -50,6 +50,8 @@ public class SongController {
         List<SongDTO> songDTOList = songService.findAll();
         List<LikeDTO> likeDTOList = likeService.findByUserId(memberId);
 
+//        List<LikeDTO> likeDTOList = likeService.findAll();
+
         Map<String, Object> responseData = new HashMap<>();
 
         if (songDTOList  != null ) {

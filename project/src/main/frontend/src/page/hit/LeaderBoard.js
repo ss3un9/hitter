@@ -5,10 +5,20 @@ import {Link, useLocation, useNavigate} from 'react-router-dom';
 import "../community/Community.css"
 import LikeButton from './LikeButton';
 const LeaderBoard =  () => {
+    const [session, setSession] = useState({});
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
+
+    useEffect(() => {
+        const storedSession = JSON.parse(localStorage.getItem('session')) || {};
+
+        if (storedSession && storedSession.loginName) {
+            setSession(storedSession);
+        }
+    }, []);
     const location = useLocation();
 
     const memberId = storedSession.loginId;
+    console.log(memberId);
 
     const searchParams = new URLSearchParams(location.search);
 
@@ -40,8 +50,8 @@ const LeaderBoard =  () => {
             });
 
             const { data } = response;
-
             console.log(data);
+
             const updatedSongList = data.songList.map(song => {
                 const matchingLike = data.likeList.find(like => like.songId === song.id);
 
@@ -54,6 +64,7 @@ const LeaderBoard =  () => {
             });
 
             setSongList(updatedSongList);
+            // console.log(songList);
             setLikeList(data.likeList);
             // const { boardPageList ,startPage, endPage } = data;
             //
@@ -148,7 +159,7 @@ const LeaderBoard =  () => {
                                 {/*<td><LikeButton memberId={song.memberId} songId={song.id} />  </td>*/}
                                 <td>
                                     <LikeButton
-                                        memberId={song.memberId}
+                                        memberId={memberId}
                                         songId={song.id}
                                         likeId = {song.likeId}
                                         isLiked={song.isLiked}

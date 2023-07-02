@@ -55,7 +55,16 @@ public class LikeService {
         for (LikeEntity likeEntity: likeEntityList){
             likeDTOList.add(LikeDTO.toLikeDTO(likeEntity));
         }
+        System.out.println(likeDTOList);
+        return likeDTOList;
+    }
 
+    public List<LikeDTO> findAll() {
+        List<LikeEntity> likeEntityList = likeRepository.findAll();
+        List<LikeDTO> likeDTOList = new ArrayList<>();
+        for (LikeEntity likeEntity: likeEntityList) {
+            likeDTOList.add(LikeDTO.toLikeDTO(likeEntity));
+        }
         return likeDTOList;
     }
 }
