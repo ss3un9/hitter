@@ -6,7 +6,10 @@ import com.codingrecipe.member.entity.LikeEntity;
 import com.codingrecipe.member.service.LikeService;
 import com.codingrecipe.member.service.SongService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,6 +89,34 @@ public class SongController {
         else{
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
+
+    }
+
+
+
+    @GetMapping("/song/play/{id}")
+    public ResponseEntity<Resource> PlaySong(@PathVariable Long id) throws IOException {
+        SongDTO songDTO = songService.findById(id);
+
+        String songFilePath = "/home/ubuntu/song/" + songDTO.getFileSysName();
+        Resource resource = new UrlResource(Paths.get(songFilePath).toUri());
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
+
+
+    }
+
+    @GetMapping("/song/txt/{id}")
+    public ResponseEntity<Resource> SongTxt(@PathVariable Long id) throws IOException {
+        SongDTO songDTO = songService.findById(id);
+
+        String text = "/home/ubuntu/txt/" + songDTO.getLyrics();
+        Resource resource = new UrlResource(Paths.get(text).toUri());
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
+
 
     }
 

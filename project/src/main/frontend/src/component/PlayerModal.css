@@ -1,0 +1,38 @@
+/* 모달 컨테이너 스타일 */
+.player-modal {
+  position: fixed; /* 화면 스크롤에 영향을 받지 않고 고정 위치 */
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  z-index: 9999; /* 다른 요소보다 앞에 표시되도록 큰 Z-인덱스 설정 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 모달 내용 컨테이너 스타일 */
+.player-modal-content {
+  background-color: #f2f2f2;
+  width: 100%;
+  padding: 20px 30px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 닫기 버튼 스타일 */
+.close {
+  position: absolute;
+
+  top: 0px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+/* 스크롤이 있는 경우 모달 이외의 영역 스크롤 방지 */
+body.modal-open {
+  overflow: hidden;
+}

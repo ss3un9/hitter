@@ -1,0 +1,40 @@
+/* 모달 컨테이너 스타일 */
+.modal {
+  position: fixed; /* 화면 스크롤에 영향을 받지 않고 고정 위치 */
+  top: 50%; /* 화면 상단에서 50% 지점에 위치 */
+  left: 50%; /* 화면 왼쪽에서 50% 지점에 위치 */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* 수평, 수직 방향으로 50%만큼 이동하여 중앙 정렬 */
+  background-color: rgba(171, 171, 171, 0.4); /* 반투명한 검정 배경 */
+  z-index: 9999; /* 다른 요소보다 앞에 표시되도록 큰 Z-인덱스 설정 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 모달 내용 컨테이너 스타일 */
+.modal-content {
+  background-color: rgb(216, 216, 216);
+  padding: 50px 30px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 60%; /* 모달의 가로 폭을 화면 크기의 30%로 설정합니다. */
+  max-width: 400px; /* 최대 너비를 400px로 제한합니다. */
+  height: 60%;
+}
+
+/* 닫기 버튼 스타일 */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* 스크롤이 있는 경우 모달 이외의 영역 스크롤 방지 */
+body.modal-open {
+  overflow: hidden;
+}
