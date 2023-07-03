@@ -1,0 +1,285 @@
+
+@font-face {
+    font-family: "Game";
+    src: url('../../fonts/neodgm.ttf')
+}
+@font-face {
+    font-family: "Iceland";
+    src: url('../../fonts/Iceland-Regular.ttf')
+}
+
+@font-face {
+    font-family: "Suit";
+    src: url('../../fonts/SUITE-Regular.ttf')
+}
+
+@font-face {
+    font-family: "Nexon";
+    src: url("../../fonts/NEXONLv1GothicRegular.ttf");
+}
+
+.home-page{
+    background: #252525;
+}
+
+.header{
+    background: url(../../imgs/mic.jpg) center;
+    background-size: cover;
+    height: 850px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-title{
+    text-align: center;
+}
+
+
+
+.main-msg{
+    font-size: 300px;
+    background: linear-gradient(to right, #d6086d, #6B8DD6, #8E37D7,#ffcd39);
+    font-family: Iceland;
+    letter-spacing: 0.2em;
+    margin-bottom: 0;
+    color: transparent;
+    -webkit-background-clip: text;
+}
+
+.explain-main{
+    font-family: Iceland;
+    background: linear-gradient(to right, #b7ffb2, #6B8DD6, #8E37D7, #ff9200);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 50px;
+}
+
+.about-us{
+    background: #802274;
+    color: white;
+    border: 2px solid #a0397f;
+    border-radius: 5px;
+    padding: 10px 30px;
+    font-size: 20px;
+    transition: .5s ease;
+    cursor: pointer;
+    font-family: Iceland;
+}
+
+.about-us:hover{
+    transition: .5s ease;
+    border: 2px solid #ffffff;
+    background: transparent;
+    color: white;
+}
+
+
+.intro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.card{
+    flex: 1;
+    text-align:center;
+    margin: 200px 200px;
+}
+
+.react{
+    margin-bottom: 10px;
+    width: 250px;
+    height:250px;
+}
+.react-logo{
+    font-family: Suit;
+    letter-spacing: 0.2em;
+    color: white;
+    font-size: 40px;
+
+}
+
+.react-exp{
+    color: white;
+    font-size: 15px;
+    font-family: Suit;
+    letter-spacing: 0.1em;
+
+}
+
+.tensorflow{
+    margin-bottom: 10px;
+    width: 250px;
+    height: 250px;
+}
+.tensorflow-logo{
+    font-family: Suit;
+    letter-spacing: 0.2em;
+    color: white;
+    font-size: 40px;
+}
+
+.tensorflow-exp{
+    color: white;
+    font-size: 15px;
+    font-family: Suit;
+    letter-spacing: 0.1em;
+
+}
+
+.java{
+    margin-bottom: 10px;
+    width: 250px;
+    height: 250px;
+}
+.java-logo{
+    font-family: Suit;
+    letter-spacing: 0.2em;
+    color: white;
+    font-size: 40px;
+}
+
+.java-exp{
+    color: white;
+    font-size: 15px;
+    font-family: Suit;
+    letter-spacing: 0.1em;
+
+}
+
+.service-intro{
+    background: rgba(186, 197, 186, 10%)
+}
+
+.s-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.person{
+    height: 300px;
+    width: 500px;
+}
+
+.exp-txt{
+    text-align: left;
+    color: white;
+    padding-left: 100px;
+}
+.behitter{
+    letter-spacing: 0.2em;
+}
+
+.be-exp{
+    word-wrap: break-word;
+    word-break: keep-all;
+    font-size: 15px;
+    font-family: Suit;
+}
+
+/*서비스인트로2*/
+.service-intro2{
+    background: rgba(0, 0, 0, 0.78)
+}
+
+.s-container2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.person2{
+    height: 300px;
+    width: 500px;
+    -webkit-filter: opacity(80%);
+}
+
+.exp-txt2{
+    text-align: left;
+    color: white;
+    padding-left: 100px;
+}
+.behitter2{
+    letter-spacing: 0.2em;
+}
+
+.be-exp2{
+    word-wrap: break-word;
+    word-break: keep-all;
+    font-size: 15px;
+    font-family: Suit;
+}
+
+
+
+
+
+.bottom{
+    color: white;
+    background: black;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.fo-container{
+    max-width: 1000px;
+    margin: auto;
+    padding-bottom: 10px;
+    display: flex;
+    align-items:center;
+}
+.bottom-logo
+{  -webkit-filter: invert(1);
+    max-width: 200px;
+}
+
+.right-coms{
+    font-family: Suit;
+    flex: 1;
+    padding-left: 50px;
+}
+
+.coms-list{
+    flex: 1;
+    margin-left: 20px;
+}
+
+.connect{
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid white;
+}
+
+.connect-list{
+    list-style: none;
+    padding: 0;
+}
+
+.contact{
+    font-size: 12px;
+    padding: 5px 5px;
+    text-align: left;
+}
+
+.contact:hover{
+    background: #222;
+}
+
+.copyright{
+    text-align: center;
+}
+
+.copp{
+    font-size: 10px;
+    margin: 0;
+}

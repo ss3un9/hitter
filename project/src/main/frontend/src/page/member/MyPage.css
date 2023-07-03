@@ -1,0 +1,163 @@
+.main{
+    background: #252525;
+}
+
+/*
+@font-face {
+    font-family: Nexon;
+    src: url('../../fonts/NEXONLv1GothicRegular.ttf') format("truetype");
+}
+.wrap{
+    font-family: 'Nexon';
+    display: flex;
+    width: 75%;
+    margin: auto;
+    min-height: 100px;
+    max-height: 1300px;
+    padding-top: 300px;
+    padding-bottom: 150px;
+
+}
+.wrapping-design{
+    min-height: 550px;
+    max-height: 999px;
+    box-sizing: content-box;
+}
+
+
+.wrapping-design{
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius:2%;
+    box-sizing: content-box;
+    background-color: rgb(163, 160, 239);
+    box-shadow: 0 10px 25px 0 rgba(204,153,255,.6);
+}
+
+.profile-photo{
+    width: 123px;
+    height:123px;
+    border-radius:50%;
+    overflow:hidden;
+    box-shadow: 0 10px 25px 0 rgba(0,0,0,0.3);
+}
+.nickname{
+    padding: 10px;
+    text-align: center;
+}
+
+.hover-button{
+    width: 130px;
+    height: 40px;
+    border: 2px solid #363546;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: 'Nexon';
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+
+}
+.hover-button:hover{
+    background: #000;
+    color:#fff;
+}
+.hover-button:before{
+    position: absolute;
+    content: '';
+    display: inline-block;
+    !*!*top: -180px;
+    left: 0;
+    width: 30px;*!
+    height: 100%;*!
+    background-color: #fff;
+    animation: shiny-btn1 3s ease-in-out infinite;
+}
+
+.hover-button:active{
+    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+    -4px -4px 6px 0 rgba(116, 125, 136, .2),
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+}
+
+.BsPencilSquare{
+    align-items:center;
+}
+
+.info-corr{
+    font-size: 7px;
+    text-align: center;
+}
+
+.GiMusicalNotes{
+    align-items:center;
+}
+
+.info-song{
+    font-size: 7px;
+    text-align: center;
+}
+.FaChalkboardUser{
+    align-items:center;
+}
+
+.info-board{
+    font-size: 7px;
+    text-align: center;
+}
+.FaRegFaceSadTear{
+    align-items:center;
+}
+
+.byebye{
+    font-size: 7px;
+    text-align: center;
+}
+
+
+
+!*
+.menu-bar{
+    font-family: "Orbit" ;
+    display: flex;
+    width: 95%;
+    margin: 30px;
+    background-color: white;
+}
+
+.all-texts {
+    display: flex;
+    list-style: none;
+    font-size:25px;
+    color: white;
+}
+.BsPencilSquare{
+    display:flex;
+    align-items: center;
+}
+.info-corr{
+    display: flex;
+    font-family: "Orbit";
+    color: #ffffff;
+    cursor: pointer;
+    background-color: #000000;
+    border: 1px solid #000000;
+    font-size: 28px;
+}
+
+.info-corr-button{
+    cursor: pointer;
+    color: white;
+    background-color: #000000;
+    border: 1px solid #000000;
+    font-size: 28px;
+}*!
+
+
+*/

@@ -22,8 +22,20 @@ public class SongDTO {
     private String lyrics;
     private String genre;
 
-    private LocalDateTime SongCreatedTime;
+    private LocalDateTime songCreatedTime;
     private Integer songLike;
+
+    public SongDTO(Long id, String memberNickName, Float prediction, String songTitle, String genre, Integer songLike, LocalDateTime songCreatedTime) {
+        this.id = id;
+        this.memberNickName = memberNickName;
+        this.prediction = prediction;
+        this.songTitle = songTitle;
+        this.genre = genre;
+        this.songLike = songLike;
+        this.songCreatedTime = songCreatedTime;
+
+    }
+
     public static SongDTO toSongDTO(SongEntity songEntity) {
         SongDTO songDTO = new SongDTO();
         songDTO.setId(songEntity.getId());
@@ -41,5 +53,4 @@ public class SongDTO {
 
 
 }
-
 

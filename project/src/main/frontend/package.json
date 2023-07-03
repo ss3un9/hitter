@@ -16,6 +16,9 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.1",
+    "react-icons": "^4.10.1",
+    "react-native": "^0.72.1",
     "react-router-dom": "^6.13.0",
     "react-scripts": "^5.0.1",
     "startbootstrap-one-page-wonder": "^6.0.6",
@@ -29,10 +32,7 @@
   },
   "proxy": "http://localhost:8080",
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": []
   },
   "browserslist": {
     "production": [
