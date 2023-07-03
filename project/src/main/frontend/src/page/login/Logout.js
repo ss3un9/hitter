@@ -13,6 +13,8 @@ const Logout = () => {
                 localStorage.removeItem('session');
                 console.log(localStorage);
                 navigate('/');
+                window.location.reload();
+
             } catch (error) {
                 console.error('로그아웃 중 에러 발생:', error);
                 // 에러 처리 로직 작성

@@ -1,0 +1,173 @@
+.page-whole{
+    background-color: #252525;
+    padding-bottom: 500px;
+}
+
+.hit-form{
+    background-color: rgb(255, 255, 255);
+    width: 850px;
+    margin: auto;
+    padding-bottom: 200px;
+    align-items: center;
+    border: 3px solid #000000;
+    border-radius: .4em;
+    box-shadow: 0 5px 10px 5px rgba(0,0,0,0.2);
+    height: 900px;
+}
+.bd{
+    width: 850px;
+    display: flex;
+    height: 500px;
+}
+
+
+.hit-text{
+    font-family: Suit;
+    font-size: 30px;
+    text-align: center;
+}
+
+
+
+.g3{
+    font-family: Suit;
+    align-content: center;
+    text-align: center;
+
+}
+
+.mp3-container{
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    align-self: center;
+}
+
+
+.choose {
+    font-family: Suit;
+    text-align: center;
+    align-content: center;
+    font-size: 20px;
+
+}
+.file{
+    text-align: center;
+    align-items: center;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    font-family: Suit;
+    margin-bottom: 15px;
+    border-bottom: none;
+    padding-left: 150px;
+}
+
+
+.file::file-selector-button{
+    cursor: pointer;
+    background-color: white;
+    border-radius: 8px;
+    background-position-x: 0%;
+    background-size: 200%;
+    color:black;
+    transition: all 0.25s;
+    font-size: 15px;
+    font-family: Suit;
+    border: 1px solid #252525;
+
+}
+.file::file-selector-button:hover{
+    background-color: black;
+    color: white;
+}
+
+
+
+.txt-container{
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    align-self: center;
+}
+
+
+
+.choose-txt{
+    font-family: Suit;
+    text-align: center;
+    align-content: center;
+    font-size: 20px;
+}
+
+
+.txt{
+    text-align: center;
+    align-items: center;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    font-family: Suit;
+    margin-bottom: 15px;
+    border-bottom: none;
+    padding-left: 150px;
+}
+
+.txt::file-selector-button{
+    cursor: pointer;
+    background-color: white;
+    border-radius: 8px;
+    background-position-x: 0%;
+    background-size: 200%;
+    color:black;
+    transition: all 0.25s;
+    font-size: 15px;
+    font-family: Suit;
+    border: 1px solid #252525;
+
+}
+.txt::file-selector-button:hover{
+    background-color: black;
+    color: white;
+}
+
+
+.title{
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 3px solid black;
+    text-align: center;
+    font-family: Suit;
+    display: flex;
+}
+
+.ub{
+    cursor: pointer;
+    color: white;
+    width: 300px;
+    height: 30px;
+    font-family: Suit;
+    background-color: #252525;
+    margin-left: 32%;
+    border-radius: 0.5em;
+
+
+}
+.loading-container {
+    margin-top: 10px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Remove absolute positioning */
+  }
+
+.loading-text {
+    margin-top: 20px; 
+    text-align: center;
+}
+
+  

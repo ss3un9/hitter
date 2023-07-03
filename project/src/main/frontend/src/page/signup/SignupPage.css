@@ -1,18 +1,80 @@
-header.masthead {
-    position: relative;
-    overflow: hidden;
-    padding-top: 7rem !important;
-    padding-bottom: 7rem;
-    background: linear-gradient(180deg, rgba(123, 152, 255, 0.28) 0%, rgba(0, 0, 0, 0.28) 100%);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: scroll;
-    background-size: cover;
+.signup-box{
+    background-color: #252525;
+    padding-top: 300px;
+    padding-bottom: 300px;
+
 }
 
-input[type="text"], input[type="password"] {
-    width: 50%;
+.form-box{
+    background: #000000;
+    border: 1px solid #191919;
+    border-radius: .4em;
+    width: 800px;
+    height: 100%;
+    box-shadow: 0 5px 10px 5px rgba(0,0,0,0.2);
+    margin: auto;
+    color: white;
+
+}
+
+.signup-txt{
+    font-family: Iceland;
+    font-size: 120px;
+    color: #6930C3;
+    text-align: center;
+}
+
+.agree-list{
+    width: 500px;
     margin: 0 auto;
+    font-family: suit;
+}
+
+.join-box{
+    border: 1px solid #000000;
+    background-color: #fff;
+    list-style: none;
+}
+
+
+ul>li{
+    list-style: none;
+    text-align: center;
+}
+
+
+.checkBox-check02{
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    text-align: center;
+}
+.checkBox-check03{
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    text-align: center;
+}
+
+
+.first{
+    width: 100%;
+    height: 90px;
+    margin: 0 auto;
+    background-color: #f7f7f7;
+    color: #888;
+    border: none;
+    font-family: Suit;
+}
+
+.second{
+    width: 100%;
+    height: 90px;
+    margin: 0 auto;
+    background-color: #f7f7f7;
+    color: #888;
+    border: none;
+    font-family: Suit;
 }
 
 .form-group {
@@ -31,7 +93,45 @@ input[type="text"], input[type="password"] {
 
 .label_text {
     display: block;
-    text-align: left;
-    margin-top: 0;
-    margin-left: 25%;
+    text-align: center;
+    margin: 0 auto;
+    font-family: Suit;
+}
+
+.form-control{
+    display: block;
+    align-items: center;
+}
+
+input[type="text"], input[type="password"] {
+    width: 40%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    font-family: Suit;
+}
+
+.email-state{
+    text-align: center;
+    font-size: 11px;
+    font-family: Suit;
+}
+
+.re-pwd-state{
+    text-align: center;
+    font-size: 11px;
+    font-family: Suit;
+}
+
+.pwd-state{
+    text-align: center;
+    font-size: 11px;
+    font-family: Suit;
+}
+
+.btn-signup{
+    background-color: #252525;
+    color: white;border-radius: .6em;
+    border: none;
+    margin-left: 44%;
+    cursor: pointer;
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
+import MypageBar from "../../component/MypageBar";
 
 const Update = () => {
     const storedSession = JSON.parse(localStorage.getItem("session")) || {};
@@ -162,192 +163,132 @@ const Update = () => {
     }, [newPassword, confirmPassword]);
 
     return (
-        <>
+            <div className='bar-table'>
+                <div className='bar'>
+                    <MypageBar/>
+                    <div className='form-table'>
+                        <form className='info-login' method="post" onSubmit={ handleSubmit }>
+                            로그인 정보
+                            <input type="hidden" value={memberId} name="id" />
+                            <input type="hidden" value={memberEmail} name="memberEmail" />
+                            <input type="hidden" value={memberName} name="memberName" />
+                            <input type="hidden" value={memberNickName} name="memberNickName" />
+                            {passwordMatchError || !editingPassword ? null : (
+                                <input type="hidden" value={newPassword} name="memberPassword" />
+                            )}
 
-            <nav className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-                <div className="container px-5">
-                    <a className="navbar-brand" href="/">HITTABLE</a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
-                        className="navbar-toggler-icon"></span></button>
-                    <div className="collapse navbar-collapse" id="navbarResponsive">
-                        <ul className="navbar-nav ms-auto">
-                            <li className="nav-item"><a className="nav-link" href="/member/hit_ai">Hit</a></li>
-                            <li className="nav-item"><a className="nav-link" href="/song/board">Leader Board</a></li>
-                            <li className="nav-item"><a className="nav-link" href="/board/paging">Community</a></li>
-                            <li className="nav-item">
-                                {storedSession.loginName != null && (
-                                    <a className="nav-link" href="/member/mypage">
-                                        <p>{storedSession.memberName || storedSession.loginName}</p>
-                                    </a>
-                                )}
-                            </li>
-                            <li className="nav-item">
-                                {storedSession.loginName != null ? (
-                                    <a className="nav-link" href="/member/logout">로그아웃</a>
-                                ) : (
-                                    <a className="nav-link" href="/member/save">Sign Up</a>
-                                )}
-                            </li>
-                            <li className="nav-item">
-                                {storedSession.loginName == null && (
-                                    <a className="nav-link" href="/member/login">Log In</a>
-                                )}
-                            </li>
-                        </ul>
+                            <br />
+                            이메일: <span>{memberEmail}</span>
+                            <br />
+                            비밀번호:{" "}
+                            {editingPassword ? (
+                                <>
+                                    <input
+                                        type="password"
+                                        value={newPassword}
+                                        id="pwd"
+                                        onChange={(e) => {setNewPassword(e.target.value); handlePwdInput();}}
+                                        placeholder="새로운 비밀번호"
+
+                                    />
+                                    {pwdState && <span style={{ color: "red" }}>{pwdState}</span>}
+                                    <input
+                                        type="password"
+                                        value={confirmPassword}
+                                        id="re_pwd"
+                                        onChange={(e) => {
+                                            setConfirmPassword(e.target.value);
+                                            handlePwdInput();
+                                        }}
+                                        placeholder="비밀번호 확인"
+
+                                    />
+                                    {passwordMatchError && (
+                                        <span style={{ color: "red" }}>비밀번호가 일치하지 않습니다.</span>
+                                    )}
+
+                                    <button type = "submit" disabled={!isValidForm}>
+                                        수정하기
+                                    </button>
+                                    <button type="button" onClick={handleCancelEdit}>변경취소</button>
+                                </>
+                            ) : (
+                                <>
+                                    <span>********</span>
+                                    <button type="button" onClick={handlePasswordEdit}>수정</button>
+                                </>
+                            )}
+                        </form>
+
+                        <form method="post" onSubmit={ handleSubmitName }>
+                            <input type="hidden" value={memberId} name="id" />
+                            <input type="hidden" value={memberEmail} name="memberEmail" />
+                            <input type="hidden" value={memberNickName} name="memberNickName" />
+                            <input type="hidden" value={memberPassword} name="memberPassword" />
+
+                            사용자 정보 <br />
+                            이름:{" "}
+                            {editingName ? (
+                                <>
+                                    <input
+                                        type="text"
+                                        value={memberName}
+                                        name="memberName"
+                                        onChange={(e) => setMemberName(e.target.value)}
+                                    />
+
+                                    <button type="button" onClick={() => setEditingName(false)}>변경취소</button>
+                                    <button type = "submit" >
+                                        수정하기
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <span>{memberName}</span>
+                                    <button type="button" onClick={() => setEditingName(true)}>
+                                        변경하기
+                                    </button>
+
+                                </>
+                            )}
+                            <br />
+                        </form>
+
+                        <form method="post" onSubmit={handleSubmit}>
+                            <input type="hidden" value={memberId} name="id" />
+                            <input type="hidden" value={memberEmail} name="memberEmail" />
+                            <input type="hidden" value={memberName} name="memberName" />
+                            <input type="hidden" value={memberPassword} name="memberPassword" />
+                            <br />
+                            닉네임:{" "}
+                            {editingNickName ? (
+                                <>
+                                    <input
+                                        type="text"
+                                        value={memberNickName}
+                                        name="memberNickName"
+                                        onChange={(e) => setMemberNickName(e.target.value)}
+                                    />
+
+                                    <button type="button"  onClick={() => setEditingNickName(false)}>취소</button>
+                                    <button type = "submit" >
+                                        수정하기
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <span>{memberNickName}</span>
+                                    <button type="button"  onClick={() => setEditingNickName(true)}>수정</button>
+
+                                </>
+                            )}
+                            <br />
+                        </form>
                     </div>
                 </div>
-            </nav>
-            <nav>
-                <ul>
-                    <li className="nav-item">
-                        <Link to={`/member/update?id=${id}`} className="nav-link">
-                            회원 정보 수정하기
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/member/mySong" className="nav-link">
-                            내 노래 조회하기
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/member/myBoard" className="nav-link">
-                            내 게시판 조회하기
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/member/delete" className="nav-link">
-                            회원 탈퇴하기
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
-
-
-
-            <form method="post" onSubmit={ handleSubmit }>
-                로그인 정보
-                <input type="hidden" value={memberId} name="id" />
-                <input type="hidden" value={memberEmail} name="memberEmail" />
-                <input type="hidden" value={memberName} name="memberName" />
-                <input type="hidden" value={memberNickName} name="memberNickName" />
-                {passwordMatchError || !editingPassword ? null : (
-                    <input type="hidden" value={newPassword} name="memberPassword" />
-                )}
-
-                <br />
-                이메일: <span>{memberEmail}</span>
-                <br />
-                비밀번호:{" "}
-                {editingPassword ? (
-                    <>
-                        <input
-                            type="password"
-                            value={newPassword}
-                            id="pwd"
-                            onChange={(e) => {setNewPassword(e.target.value); handlePwdInput();}}
-                            placeholder="새로운 비밀번호"
-
-                        />
-                        {pwdState && <span style={{ color: "red" }}>{pwdState}</span>}
-                        <input
-                            type="password"
-                            value={confirmPassword}
-                            id="re_pwd"
-                            onChange={(e) => {
-                                setConfirmPassword(e.target.value);
-                                handlePwdInput();
-                            }}
-                            placeholder="비밀번호 확인"
-
-                        />
-                        {passwordMatchError && (
-                            <span style={{ color: "red" }}>비밀번호가 일치하지 않습니다.</span>
-                        )}
-
-                        <button type = "submit" disabled={!isValidForm}>
-                            수정하기
-                        </button>
-                        <button type="button" onClick={handleCancelEdit}>변경취소</button>
-                    </>
-                ) : (
-                    <>
-                        <span>********</span>
-                        <button type="button" onClick={handlePasswordEdit}>수정</button>
-                    </>
-                )}
-            </form>
-
-            <form method="post" onSubmit={ handleSubmitName }>
-                <input type="hidden" value={memberId} name="id" />
-                <input type="hidden" value={memberEmail} name="memberEmail" />
-                <input type="hidden" value={memberNickName} name="memberNickName" />
-                <input type="hidden" value={memberPassword} name="memberPassword" />
-
-                사용자 정보 <br />
-                이름:{" "}
-                {editingName ? (
-                    <>
-                        <input
-                            type="text"
-                            value={memberName}
-                            name="memberName"
-                            onChange={(e) => setMemberName(e.target.value)}
-                        />
-
-                        <button type="button" onClick={() => setEditingName(false)}>변경취소</button>
-                        <button type = "submit" >
-                            수정하기
-                        </button>
-                    </>
-                ) : (
-                    <>
-                        <span>{memberName}</span>
-                        <button type="button" onClick={() => setEditingName(true)}>
-                            변경하기
-                        </button>
-
-                    </>
-                )}
-                <br />
-            </form>
-
-            <form method="post" onSubmit={handleSubmit}>
-                <input type="hidden" value={memberId} name="id" />
-                <input type="hidden" value={memberEmail} name="memberEmail" />
-                <input type="hidden" value={memberName} name="memberName" />
-                <input type="hidden" value={memberPassword} name="memberPassword" />
-                <br />
-                닉네임:{" "}
-                {editingNickName ? (
-                    <>
-                        <input
-                            type="text"
-                            value={memberNickName}
-                            name="memberNickName"
-                            onChange={(e) => setMemberNickName(e.target.value)}
-                        />
-
-                        <button type="button"  onClick={() => setEditingNickName(false)}>취소</button>
-                        <button type = "submit" >
-                            수정하기
-                        </button>
-                    </>
-                ) : (
-                    <>
-                        <span>{memberNickName}</span>
-                        <button type="button"  onClick={() => setEditingNickName(true)}>수정</button>
-
-                    </>
-                )}
-                <br />
-            </form>
-
-
-        </>
-
-
+            </div>
     );
+
 };
 
 export default Update;

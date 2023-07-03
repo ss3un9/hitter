@@ -1,0 +1,274 @@
+@font-face {
+    font-family: Suit;
+    src: url("../fonts/NEXONLv1GothicRegular.ttf") format("truetype")
+}
+
+.all-texts{
+    padding: 20px;
+}
+.wrap{
+    font-family: Suit;
+    display: flex;
+    width: 75%;
+    margin: auto;
+    padding-top: 200px;
+
+}
+
+.wrapping-design{
+
+    box-sizing: content-box;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    padding: 80px 80px 50px 80px;
+    border-radius:2%;
+    background-color: rgb(30, 29, 29);
+    box-shadow: 0 10px 25px 0 rgba(255, 255, 255, 0.5);
+}
+
+.profile-photo{
+    width: 150px;
+    height: 150px;
+    border-radius:50%;
+    overflow:hidden;
+    box-shadow: 0 10px 25px 0 rgba(74, 71, 84, 0.78);
+}
+.nickname{
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+
+.hover-button{
+    background: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+    background-size: 300% 100%;
+    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+    width: 180px;
+    height: 50px;
+    border: none;
+    margin-left: 0px;
+    margin-right: 30px;
+    font-family: Nexon;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    border-radius: 50px;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+
+}
+.hover-button:hover{
+    background-position: 100% 0;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+
+}
+
+
+.hover-button:focus{
+    outline: none;
+}
+
+
+
+.hover-button2{
+    background: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+    background-size: 300% 100%;
+    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+    width: 180px;
+    height: 50px;
+    border: none;
+    margin-left: 0px;
+    margin-right: 30px;
+    font-family: Nexon;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    border-radius: 50px;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+
+
+}
+.hover-button2:hover{
+    background-position: 100% 0;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+
+}
+
+
+.hover-button2:focus{
+    outline: none;
+}
+
+
+.hover-button3{
+    background: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+    background-size: 300% 100%;
+    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+    width: 180px;
+    height: 50px;
+    border: none;
+    margin-left: 0px;
+    margin-right: 30px;
+    font-family: Nexon;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    border-radius: 50px;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+
+}
+.hover-button3:hover{
+     background-position: 100% 0;
+     -moz-transition: all .4s ease-in-out;
+     -o-transition: all .4s ease-in-out;
+     -webkit-transition: all .4s ease-in-out;
+     transition: all .4s ease-in-out;
+
+ }
+
+
+.hover-button3:focus{
+    outline: none;
+}
+
+.hover-button4{
+    background: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+    background-size: 300% 100%;
+    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+    width: 180px;
+    height: 50px;
+    border: none;
+    margin-left: 0px;
+    margin-right: 30px;
+    font-family: Nexon;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    border-radius: 50px;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+
+}
+.hover-button4:hover{
+    background-position: 100% 0;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+
+}
+
+
+.hover-button4:focus{
+    outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+.BsPencilSquare{
+    transform: scale(1.4);
+    padding-right: 7px;
+    text-align:center;
+    align-items: center;
+    align-content: center;
+    color:white;
+    padding-top: 2px;
+}
+
+.info-corr{
+    font-size: 14px;
+    color: #ffffff;
+    text-align: center;
+    padding-top: 2px;
+}
+
+.GiMusicalNotes{
+    transform: scale(1.4);
+    padding-right: 7px;
+    text-align:center;
+    align-items: center;
+    align-content: center;
+    color:white;
+    padding-top: 2px;
+
+}
+
+.info-song{
+    font-size: 14px;
+    color: #ffffff;
+    text-align: center;
+    padding-top: 2px;
+}
+.FaChalkboardUser{
+    transform: scale(1.4);
+    padding-right: 7px;
+    text-align:center;
+    align-items: center;
+    align-content: center;
+    color:white;
+    padding-top: 2px;
+
+}
+
+.info-board{
+    font-size: 14px;
+    color: #ffffff;
+    text-align: center;
+    padding-top: 2px;
+
+}
+.FaRegFaceSadTear{
+    transform: scale(1.4);
+    padding-right: 7px;
+    text-align:center;
+    align-items: center;
+    align-content: center;
+    color:white;
+    padding-top: 2px;
+
+
+}
+
+.byebye{
+    font-size: 14px;
+    color: #ffffff;
+    text-align: center;
+    padding-top: 2px;
+
+}
+
+

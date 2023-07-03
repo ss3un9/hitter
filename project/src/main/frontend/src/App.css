@@ -1,0 +1,29 @@
+
+/*배경색 지정*/
+.main-app{
+    background-color: #252525;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* 폰트들 */
+
+@font-face {
+    font-family: "Game";
+    src: url('./fonts/neodgm.ttf')
+}
+@font-face {
+    font-family: "Iceland";
+    src: url('./fonts/Iceland-Regular.ttf')
+}
+
+@font-face {
+    font-family: "Orbit";
+    src: url('./fonts/Orbit-Regular.ttf')
+}
+
+@font-face {
+    font-family: "Nexon";
+    src: url("./fonts/NEXONLv1GothicRegular.ttf");
+}
