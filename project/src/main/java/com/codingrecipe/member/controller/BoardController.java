@@ -1,8 +1,10 @@
 package com.codingrecipe.member.controller;
 
 import com.codingrecipe.member.dto.BoardDTO;
+import com.codingrecipe.member.dto.CommentDTO;
 import com.codingrecipe.member.entity.BoardEntity;
 import com.codingrecipe.member.service.BoardService;
+import com.codingrecipe.member.service.CommentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
@@ -24,7 +26,8 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 public class BoardController {
-    private  final BoardService boardService;
+    private final BoardService boardService;
+    private final CommentService commentService;
 
     @PostMapping("/board/post")
     public ResponseEntity<Map<String, Object>> write(@Valid @ModelAttribute BoardDTO boardDTO, @PageableDefault(page=1) Pageable pageable){
@@ -50,11 +53,12 @@ public class BoardController {
     public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id, @PageableDefault(page=1) Pageable pageable) {
         boardService.updateHits(id);
         BoardDTO boardDTO = boardService.findById(id);
-
+        List<CommentDTO> commentDTOList = commentService.findAll(id);
         Map<String, Object> response = new HashMap<>();
 
         if ( boardDTO != null) {
             response.put("board", boardDTO);
+            response.put("commentList", commentDTOList);
             response.put("page", pageable.getPageNumber());
 
             System.out.println(response);

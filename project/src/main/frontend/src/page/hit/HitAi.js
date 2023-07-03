@@ -29,11 +29,12 @@ const HitAi = ({session}) => {
             const formData = new FormData(event.target);
             formData.append("genre", selectedGenre);
             formData.append("title", songTitle);
+            console.log(formData);
             const response = await fetch('/api/upload', {
                 method: 'POST',
                 body: formData,
             });
-
+            console.log(response);
             if (response.ok) {
                 const data = await response.json();
                 console.log(data);
@@ -43,7 +44,7 @@ const HitAi = ({session}) => {
 
             } else {
                 // 로그인 실패
-                console.error('failed');
+                console.error('failed',error);
             }
 
         } catch (error) {
@@ -56,9 +57,9 @@ const HitAi = ({session}) => {
         if (uploadResponse && uploadResponse.songDTO) {
             const id = uploadResponse.songDTO.id;
             console.log(uploadResponse);
-            navigate(`/hit_ai_detail`, {
+            navigate(`/hit_ai_detail?id=${id}`, {
                 state: {
-                   songDTO: uploadResponse.songDTO
+                    songDTO: uploadResponse.songDTO
                 }
             });
         }
@@ -100,9 +101,7 @@ const HitAi = ({session}) => {
                        placeholder="노래 제목을 입력하세요"
                 />
                 <br></br>
-                <Link to='/hit_ai_detail'>
                     <input className='ub' type="submit" value={"Upload"}/>
-                </Link>
             </form>
             <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
         </div>

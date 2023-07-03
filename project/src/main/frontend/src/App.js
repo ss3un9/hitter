@@ -55,6 +55,7 @@ class App extends Component {
               <Route path="/member/mypage" element={<Mypage/>}></Route>
               <Route path="/member/mysong" element={<MySong/>}></Route>
               <Route path="/member/myboard" element={<MyBoard/>}></Route>
+
               <Route path={"/hit_ai_detail"} element={<HitAiDetail/>}></Route>
               <Route path="/board/delete" element={<BoardDelete/>}/>
               <Route path="/board/update" element={<BoardUpdate/>}/>

@@ -36,8 +36,7 @@ public class SongFileController {
                 Long loginId = (Long) session.getAttribute("loginId");
                 String loginNickName = (String) session.getAttribute("loginNickName");
                 RestTemplate restTemplate = new RestTemplate();
-
-
+;
                 MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
 
                 body.add("file", new ByteArrayResource(file.getBytes()) {
@@ -54,13 +53,14 @@ public class SongFileController {
                         }
                 });
 
+                System.out.println(loginId);
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
                 HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+                System.out.println(loginId);
 
-
-                ResponseEntity<String> response = restTemplate.postForEntity("http://3.36.204.155:8000/api/upload", requestEntity, String.class);
+                ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8000/api/upload", requestEntity, String.class);
 
                 String responseBody = response.getBody();
                 System.out.println(responseBody);
@@ -74,15 +74,15 @@ public class SongFileController {
 
                 String fileName = file.getOriginalFilename();
                 String sysFileName = System.currentTimeMillis() +  "_" +  fileName;
-                System.out.println(sysFileName);
-                String filePath = "/Users/ss3un9/Desktop/fastapi/song/" + sysFileName;
+
+                String filePath = "C:/bp_music/" + sysFileName;
                 byte[] fileBytes = file.getBytes();
                 Path path = Paths.get(filePath);
                 Files.write(path, fileBytes);
 
                 String fileName1 = file1.getOriginalFilename();
-                String sysFileName1 = System.currentTimeMillis() +  "_" +fileName1;
-                String filePath1 = "/Users/ss3un9/Desktop/fastapi/song/"+sysFileName1;
+                String sysFileName1 = System.currentTimeMillis() +  "_" +  fileName1;
+                String filePath1 = "C:/bp_music/" + sysFileName1;
                 byte[] fileBytes1 = file1.getBytes();
                 Path path1 = Paths.get(filePath1);
                 Files.write(path1, fileBytes1);
@@ -94,9 +94,6 @@ public class SongFileController {
                 songDTO.setFileSysName(sysFileName);
                 songDTO.setLyrics(sysFileName1);
                 songService.save(songDTO);
-//
-//                Optional<String> nicknameOptional = memberService.findNicknameById(loginId);
-//                String userNickName = nicknameOptional.orElse("");
 
                 Map<String, Object> ResponseSong = new HashMap<>();
 
