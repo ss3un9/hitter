@@ -157,3 +157,17 @@
 
 
 }
+.loading-container {
+    margin-top: 10px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Remove absolute positioning */
+  }
+
+.loading-text {
+    margin-top: 20px; 
+    text-align: center;
+}
+
+  

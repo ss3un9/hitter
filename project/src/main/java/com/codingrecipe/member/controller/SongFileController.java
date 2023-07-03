@@ -32,7 +32,7 @@ public class SongFileController {
         private  final SongService songService;
         private  final MemberService memberService;
         @PostMapping("/api/upload")
-        public ResponseEntity<Map<String, Object>> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1, @ModelAttribute SongDTO songDTO, HttpSession session) throws Exception {
+        public ResponseEntity<Map<String, Object>> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1,@RequestParam("genre") String genre, @ModelAttribute SongDTO songDTO, HttpSession session) throws Exception {
                 Long loginId = (Long) session.getAttribute("loginId");
                 String loginNickName = (String) session.getAttribute("loginNickName");
                 RestTemplate restTemplate = new RestTemplate();
@@ -54,12 +54,14 @@ public class SongFileController {
                         }
                 });
 
+                body.add("genre", genre);
+
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
                 HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-
+                System.out.println("reqEntity : "+requestEntity);
                 ResponseEntity<String> response = restTemplate.postForEntity("http://3.36.204.155:8000/api/upload", requestEntity, String.class);
 
                 String responseBody = response.getBody();
@@ -82,7 +84,7 @@ public class SongFileController {
 
                 String fileName1 = file1.getOriginalFilename();
                 String sysFileName1 = System.currentTimeMillis() +  "_" +fileName1;
-                String filePath1 = "/Users/ss3un9/Desktop/fastapi/song/"+sysFileName1;
+                String filePath1 = "/Users/ss3un9/Desktop/fastapi/txt/"+sysFileName1;
                 byte[] fileBytes1 = file1.getBytes();
                 Path path1 = Paths.get(filePath1);
                 Files.write(path1, fileBytes1);
