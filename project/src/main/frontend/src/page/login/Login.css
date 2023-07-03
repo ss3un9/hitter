@@ -6,6 +6,7 @@
 
 .login-page{
     padding-bottom: 300px;
+    background-color: #252525;
 }
 
 .login-form{
@@ -57,5 +58,6 @@
 }
 .text-bottom{
     font-family: Iceland;
+    font-size: 15px;
 
 }

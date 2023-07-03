@@ -1,5 +1,5 @@
 @font-face {
-    font-family: Nexon;
+    font-family: Suit;
     src: url("../fonts/NEXONLv1GothicRegular.ttf") format("truetype")
 }
 
@@ -7,26 +7,24 @@
     padding: 20px;
 }
 .wrap{
-    font-family: Nexon;
+    font-family: Suit;
     display: flex;
     width: 75%;
     margin: auto;
-    padding-top: 250px;
-    padding-bottom: 150px;
+    padding-top: 200px;
 
 }
 
 .wrapping-design{
-    min-height: 600px;
-    max-height: 999px;
+
     box-sizing: content-box;
     align-items: center;
     text-align: center;
     margin: 0 auto;
-    padding: 80px 80px 200px 80px;
+    padding: 80px 80px 50px 80px;
     border-radius:2%;
     background-color: rgb(30, 29, 29);
-    box-shadow: 0 10px 25px 0 rgba(174, 151, 243, 0.5);
+    box-shadow: 0 10px 25px 0 rgba(255, 255, 255, 0.5);
 }
 
 .profile-photo{

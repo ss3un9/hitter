@@ -163,133 +163,132 @@ const Update = () => {
     }, [newPassword, confirmPassword]);
 
     return (
-        <>
             <div className='bar-table'>
-                <MypageBar/>
-                <div className='form-table'>
-                    <form className='info-login' method="post" onSubmit={ handleSubmit }>
-                        로그인 정보
-                        <input type="hidden" value={memberId} name="id" />
-                        <input type="hidden" value={memberEmail} name="memberEmail" />
-                        <input type="hidden" value={memberName} name="memberName" />
-                        <input type="hidden" value={memberNickName} name="memberNickName" />
-                        {passwordMatchError || !editingPassword ? null : (
-                            <input type="hidden" value={newPassword} name="memberPassword" />
-                        )}
+                <div className='bar'>
+                    <MypageBar/>
+                    <div className='form-table'>
+                        <form className='info-login' method="post" onSubmit={ handleSubmit }>
+                            로그인 정보
+                            <input type="hidden" value={memberId} name="id" />
+                            <input type="hidden" value={memberEmail} name="memberEmail" />
+                            <input type="hidden" value={memberName} name="memberName" />
+                            <input type="hidden" value={memberNickName} name="memberNickName" />
+                            {passwordMatchError || !editingPassword ? null : (
+                                <input type="hidden" value={newPassword} name="memberPassword" />
+                            )}
 
-                        <br />
-                        이메일: <span>{memberEmail}</span>
-                        <br />
-                        비밀번호:{" "}
-                        {editingPassword ? (
-                            <>
-                                <input
-                                    type="password"
-                                    value={newPassword}
-                                    id="pwd"
-                                    onChange={(e) => {setNewPassword(e.target.value); handlePwdInput();}}
-                                    placeholder="새로운 비밀번호"
+                            <br />
+                            이메일: <span>{memberEmail}</span>
+                            <br />
+                            비밀번호:{" "}
+                            {editingPassword ? (
+                                <>
+                                    <input
+                                        type="password"
+                                        value={newPassword}
+                                        id="pwd"
+                                        onChange={(e) => {setNewPassword(e.target.value); handlePwdInput();}}
+                                        placeholder="새로운 비밀번호"
 
-                                />
-                                {pwdState && <span style={{ color: "red" }}>{pwdState}</span>}
-                                <input
-                                    type="password"
-                                    value={confirmPassword}
-                                    id="re_pwd"
-                                    onChange={(e) => {
-                                        setConfirmPassword(e.target.value);
-                                        handlePwdInput();
-                                    }}
-                                    placeholder="비밀번호 확인"
+                                    />
+                                    {pwdState && <span style={{ color: "red" }}>{pwdState}</span>}
+                                    <input
+                                        type="password"
+                                        value={confirmPassword}
+                                        id="re_pwd"
+                                        onChange={(e) => {
+                                            setConfirmPassword(e.target.value);
+                                            handlePwdInput();
+                                        }}
+                                        placeholder="비밀번호 확인"
 
-                                />
-                                {passwordMatchError && (
-                                    <span style={{ color: "red" }}>비밀번호가 일치하지 않습니다.</span>
-                                )}
+                                    />
+                                    {passwordMatchError && (
+                                        <span style={{ color: "red" }}>비밀번호가 일치하지 않습니다.</span>
+                                    )}
 
-                                <button type = "submit" disabled={!isValidForm}>
-                                    수정하기
-                                </button>
-                                <button type="button" onClick={handleCancelEdit}>변경취소</button>
-                            </>
-                        ) : (
-                            <>
-                                <span>********</span>
-                                <button type="button" onClick={handlePasswordEdit}>수정</button>
-                            </>
-                        )}
-                    </form>
+                                    <button type = "submit" disabled={!isValidForm}>
+                                        수정하기
+                                    </button>
+                                    <button type="button" onClick={handleCancelEdit}>변경취소</button>
+                                </>
+                            ) : (
+                                <>
+                                    <span>********</span>
+                                    <button type="button" onClick={handlePasswordEdit}>수정</button>
+                                </>
+                            )}
+                        </form>
 
-                    <form method="post" onSubmit={ handleSubmitName }>
-                        <input type="hidden" value={memberId} name="id" />
-                        <input type="hidden" value={memberEmail} name="memberEmail" />
-                        <input type="hidden" value={memberNickName} name="memberNickName" />
-                        <input type="hidden" value={memberPassword} name="memberPassword" />
+                        <form method="post" onSubmit={ handleSubmitName }>
+                            <input type="hidden" value={memberId} name="id" />
+                            <input type="hidden" value={memberEmail} name="memberEmail" />
+                            <input type="hidden" value={memberNickName} name="memberNickName" />
+                            <input type="hidden" value={memberPassword} name="memberPassword" />
 
-                        사용자 정보 <br />
-                        이름:{" "}
-                        {editingName ? (
-                            <>
-                                <input
-                                    type="text"
-                                    value={memberName}
-                                    name="memberName"
-                                    onChange={(e) => setMemberName(e.target.value)}
-                                />
+                            사용자 정보 <br />
+                            이름:{" "}
+                            {editingName ? (
+                                <>
+                                    <input
+                                        type="text"
+                                        value={memberName}
+                                        name="memberName"
+                                        onChange={(e) => setMemberName(e.target.value)}
+                                    />
 
-                                <button type="button" onClick={() => setEditingName(false)}>변경취소</button>
-                                <button type = "submit" >
-                                    수정하기
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <span>{memberName}</span>
-                                <button type="button" onClick={() => setEditingName(true)}>
-                                    변경하기
-                                </button>
+                                    <button type="button" onClick={() => setEditingName(false)}>변경취소</button>
+                                    <button type = "submit" >
+                                        수정하기
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <span>{memberName}</span>
+                                    <button type="button" onClick={() => setEditingName(true)}>
+                                        변경하기
+                                    </button>
 
-                            </>
-                        )}
-                        <br />
-                    </form>
+                                </>
+                            )}
+                            <br />
+                        </form>
 
-                    <form method="post" onSubmit={handleSubmit}>
-                        <input type="hidden" value={memberId} name="id" />
-                        <input type="hidden" value={memberEmail} name="memberEmail" />
-                        <input type="hidden" value={memberName} name="memberName" />
-                        <input type="hidden" value={memberPassword} name="memberPassword" />
-                        <br />
-                        닉네임:{" "}
-                        {editingNickName ? (
-                            <>
-                                <input
-                                    type="text"
-                                    value={memberNickName}
-                                    name="memberNickName"
-                                    onChange={(e) => setMemberNickName(e.target.value)}
-                                />
+                        <form method="post" onSubmit={handleSubmit}>
+                            <input type="hidden" value={memberId} name="id" />
+                            <input type="hidden" value={memberEmail} name="memberEmail" />
+                            <input type="hidden" value={memberName} name="memberName" />
+                            <input type="hidden" value={memberPassword} name="memberPassword" />
+                            <br />
+                            닉네임:{" "}
+                            {editingNickName ? (
+                                <>
+                                    <input
+                                        type="text"
+                                        value={memberNickName}
+                                        name="memberNickName"
+                                        onChange={(e) => setMemberNickName(e.target.value)}
+                                    />
 
-                                <button type="button"  onClick={() => setEditingNickName(false)}>취소</button>
-                                <button type = "submit" >
-                                    수정하기
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <span>{memberNickName}</span>
-                                <button type="button"  onClick={() => setEditingNickName(true)}>수정</button>
+                                    <button type="button"  onClick={() => setEditingNickName(false)}>취소</button>
+                                    <button type = "submit" >
+                                        수정하기
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <span>{memberNickName}</span>
+                                    <button type="button"  onClick={() => setEditingNickName(true)}>수정</button>
 
-                            </>
-                        )}
-                        <br />
-                    </form>
+                                </>
+                            )}
+                            <br />
+                        </form>
+                    </div>
                 </div>
             </div>
-        </>
-
-
     );
+
 };
 
 export default Update;

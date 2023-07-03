@@ -28,7 +28,6 @@ class App extends Component {
     if (storedSession && storedSession.loginName) {
       console.log(storedSession.loginName);
     }
-    const id = storedSession.loginId;
 
     return (
         <div className="main-app">
@@ -54,7 +53,7 @@ class App extends Component {
               <Route path="/member/mypage" element={<Mypage/>}></Route>
               <Route path="/member/mySong" element={<MySong/>}></Route>
               <Route path={"/member/myBoard"} element={<MyBoard/>}></Route>
-              <Route path="/hit_ai_detail" element={<HitAiDetail/>}></Route>
+              <Route path={"/hit_ai_detail"} element={<HitAiDetail/>}></Route>
             </Routes>
           </BrowserRouter>
 

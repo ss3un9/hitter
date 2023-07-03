@@ -56,7 +56,7 @@ const HitAi = ({session}) => {
         if (uploadResponse && uploadResponse.songDTO) {
             const id = uploadResponse.songDTO.id;
             console.log(uploadResponse);
-            navigate(`/hit_ai_detail?id=${id}`, {
+            navigate(`/hit_ai_detail`, {
                 state: {
                    songDTO: uploadResponse.songDTO
                 }
@@ -65,29 +65,30 @@ const HitAi = ({session}) => {
     }, [uploadResponse, navigate]);
 
     return (
-        <>
+        <div className='page-whole'>
             <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
             <form className='hit-form' method="post" onSubmit={handleFormSubmit}>
                 <img className='bd' src={band} alt='band'/>
-                <h2 className= 'hit-text'>당신의 곡이 히트할 확률은 어느정도일까요?<br></br>
+                <h2 className= 'hit-text'>당신의 곡의 히트성 점수는 몇점일까요?<br></br>
                     AI 기반 예측 모델로 히트성을 측정해보세요!
                 </h2>
                 <div className='g3'>
                     <select className='options' name="genres" id="genres" value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)}>
-                        <option disabled selected="GENRE">GENRE</option>
+                        <option value={"none"} className='base' selected={false} disabled={true}>GENRE</option>
                         <option value="pop"><BsMusicNote className='BsMusicNote'/>POP</option>
                         <option value="dance"><BsMusicNoteBeamed className='BsMusicNoteBeamed'/>DANCE</option>
                         <option value="ballad"><GiMusicalNotes className='GiMusicalNotes'/>BALLAD</option>
                     </select>
                 </div>
+                <br></br>
                 <div className='mp3-container'>
                     <label className='choose' htmlFor="music">Choose a music(.mp3) file</label>
-                    <br></br>
+                    <br></br><br></br>
                     <input className='file' type="file" id="music" name="file" accept="audio/*"/>
                 </div>
                 <div className='txt-container'>
                     <label className='choose-txt' htmlFor="txt">Choose a lyric(.txt) file</label>
-                    <br></br>
+                    <br></br><br></br>
                     <input className='txt' type="file" id="text" name="file1" accept="text/*"/>
                 </div>
                 <input className='title'
@@ -98,12 +99,13 @@ const HitAi = ({session}) => {
                        onChange={(e) => setSongTitle(e.target.value)}
                        placeholder="노래 제목을 입력하세요"
                 />
-                <Link to='/hit_ai_detail?id=${id}'>
+                <br></br>
+                <Link to='/hit_ai_detail'>
                     <input className='ub' type="submit" value={"Upload"}/>
                 </Link>
             </form>
             <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-        </>
+        </div>
     )
 }
 

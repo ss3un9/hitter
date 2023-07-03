@@ -39,34 +39,32 @@ const MySong = ()  => {
 
     return (
         <>
-            (
             <div className='tbl-bar'>
                 <div className= 'bar'>
-                    <MypageBar/>
-                    <div className='table'>
-                        <table className='song-table'>
-                            <thead className='table-head'>
-                                <tr className='table-tr'>
-                                    <th className='th'>ID</th>
-                                    <th className='th'>Song Title</th>
-                                    <th className='th'>Genre</th>
-                                    <th className='th'>CreatedTime</th>
-                                    {/* Add more table headers for other properties */}
-                                </tr>
-                            </thead>
-                            <tbody className='table-body'>
-                            {mySongList.map((song) => (
-                                <tr key={song.id}>
-                                    <td className='td'>{song.id}</td>
-                                    <td className='td'>{song.songTitle}</td>
-                                    <td className='td'>{song.genre}</td>
-                                    <td className='td'>{song.songCreatedTime.replace("T", " ")}</td>
-                                    {/* Render additional table cells for other properties */}
-                                </tr>
-                            ))}
-                            </tbody>
-                        </table>
-                    </div>
+                    <MypageBar/></div>
+                <div className='table'>
+                    <table className='song-table'>
+                        <thead className='table-head'>
+                            <tr className='table-tr'>
+                                <th className='th'>ID</th>
+                                <th className='th'>Song Title</th>
+                                <th className='th'>Genre</th>
+                                <th className='th'>CreatedTime</th>
+                                {/* Add more table headers for other properties */}
+                            </tr>
+                        </thead>
+                        <tbody className='table-body'>
+                        {mySongList.map((song) => (
+                            <tr key={song.id}>
+                                <td className='td'>{song.id}</td>
+                                <td className='td'>{song.songTitle}</td>
+                                <td className='td'>{song.genre}</td>
+                                <td className='td'>{song.songCreatedTime.replace("T", " ")}</td>
+                                {/* Render additional table cells for other properties */}
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </>

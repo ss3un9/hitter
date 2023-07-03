@@ -32,6 +32,8 @@ const Login = () => {
                     localStorage.setItem('session', JSON.stringify(data.session)); // 세션 정보를 로컬 스토리지에 저장
                     console.log(localStorage);
                     navigate('/');
+                    window.location.reload();
+
                 } else {
                     // 로그인 실패
                     console.error('Login failed');
@@ -63,7 +65,9 @@ const Login = () => {
                 <button className='login-button' id="signin" type="submit">Login</button>
                 <p className='text-bottom'>
                     <Link to='/signup'>
-                        Want to sign up?</Link>
+                        Want to be HITTER?
+                    </Link>
+
                 </p>
             </div>
         </form>

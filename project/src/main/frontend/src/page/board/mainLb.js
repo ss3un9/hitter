@@ -86,7 +86,7 @@ const LeaderBoard =  () => {
                         <tr key={song.id}>
                             <td>{song.id}</td>
                             <td>
-                                <Link to={`/hit_ai_detail?id=` + song.id} >
+                                <Link to={`/hit_ai_detail/` + song.id} >
                                     {song.songTitle}
                                 </Link>
                             </td>
