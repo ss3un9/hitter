@@ -28,6 +28,8 @@ class App extends Component {
     if (storedSession && storedSession.loginName) {
       console.log(storedSession.loginName);
     }
+    const id = storedSession.loginId;
+
     return (
         <div className="main-app">
 
@@ -41,17 +43,18 @@ class App extends Component {
 
             <Routes>
               <Route path="/" exact element={<Home/>}></Route>
+              <Route path="/member/delete" element={<MemberDelete/>}></Route>
               <Route path="/hit" element={<HitAi/>}></Route>
               <Route path="/leaderboard" element={<LeaderBoard/>}></Route>
               <Route path="/board" element={<Community/>}></Route>
-
+              <Route path={`/member/update`} element={<Update/>}></Route>
               <Route path="/signup" element={<SignupPage/>}></Route>
               <Route path="/login" element={<Login/>}></Route>
               <Route path="/logout" element={<Logout/>}></Route>
               <Route path="/member/mypage" element={<Mypage/>}></Route>
               <Route path="/member/mySong" element={<MySong/>}></Route>
-              <Route path="/memeber/myBoard" element={<MyBoard/>}></Route>
-              <Route path="/hit_ai_detail?:id=${:id}" element={<HitAiDetail/>}></Route>
+              <Route path={"/member/myBoard"} element={<MyBoard/>}></Route>
+              <Route path="/hit_ai_detail" element={<HitAiDetail/>}></Route>
             </Routes>
           </BrowserRouter>
 

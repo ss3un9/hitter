@@ -1,3 +1,10 @@
 .table{
-    display: flex;
+    table-layout: fixed;
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    margin: auto;
+    overflow: visible;
 }
