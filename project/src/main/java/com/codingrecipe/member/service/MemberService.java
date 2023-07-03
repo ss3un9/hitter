@@ -153,6 +153,18 @@ public class MemberService {
             return "ok";
         }
     }
+
+    public String NickNameCheck(String memberNickName) {
+        Optional<String> byMemberNickName = memberRepository.findByMemberNickName(memberNickName);
+        if (byMemberNickName.isPresent()) {
+            // 조회결과가 있다 -> 사용할 수 없다.
+            return null;
+        } else {
+            // 조회결과가 없다 -> 사용할 수 있다.
+            return "ok";
+        }
+    }
+
 }
 
 

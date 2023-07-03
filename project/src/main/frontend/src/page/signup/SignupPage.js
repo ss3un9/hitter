@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import './SignupPage.css';
+import axios from "axios";
 
 
 const SignupPage = () => {
@@ -16,175 +17,160 @@ const SignupPage = () => {
     const [repwdState, setRepwdState] = useState('');
 
     const [isValidForm, setIsValidForm] = useState(false);
-
+    const [isEmailForm, setIsEmailForm] = useState(false);
+    const [isPwForm, setPwForm] = useState(false);
+    const [isNickForm, setIsNickForm] = useState(false);
     const navigate = useNavigate();
 
 
     const handleEmailBlur = () => {
-
         const email = document.getElementById('memberEmail').value;
-
         const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
-
         if (email.match(regExp) != null) {
-
             setEmailState('올바른 이메일 형식입니다!');
-
             setIsValidForm(true);
-
         } else {
-
             setEmailState('이메일 형식이 올바르지 않습니다!');
-
             setIsValidForm(false);
-
         }
-
     };
-
 
     const handlePwdInput = () => {
-
         const pwd = document.getElementById('pwd').value;
-
         const regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
-
         const missingConditions = [];
 
-
-
-
         if (!regExp.test(pwd)) {
-
             if (!/(?=.*[A-Za-z])/.test(pwd)) {
-
                 missingConditions.push('영문자');
-
             }
-
             if (!/(?=.*\d)/.test(pwd)) {
-
                 missingConditions.push('숫자');
-
             }
-
             if (!/(?=.*[@$!%*#?&])/.test(pwd)) {
-
                 missingConditions.push('특수문자');
-
             }
-
             if (pwd.length < 8 || pwd.length > 16) {
-
                 if (pwd.length < 8) {
-
                     missingConditions.push(`비밀번호 자릿수(${pwd.length}/8)`);
-
                 } else if (pwd.length > 16) {
-
-                    missingConditions.push(`비밀번호 자릿수가 16보다 작아야 하는`);
-
+                    missingConditions.push(`비밀번호 자릿수가 16보다 작아야 합니다`);
                 }
-
             }
-
-
-
-
             setPwdState(`비밀번호는 ${missingConditions.join(', ')} 조건을 포함해야 합니다!`);
-
-            setIsValidForm(false);
-
+            setPwForm(false);
         } else {
-
             setPwdState('');
-
-            setIsValidForm(true);
-
+            setPwForm(true);
         }
-
         handleRepwdInput();
-
     };
-
 
 
 
     const handleRepwdInput = () => {
-
         const pwd = document.getElementById('pwd').value;
-
         const repwd = document.getElementById('re_pwd').value;
 
-
-
-
         if (repwd !== '' && repwd !== pwd) {
-
             setRepwdState('비밀번호가 다릅니다');
-
             setIsValidForm(false);
-
         } else {
-
             setRepwdState('');
-
             setIsValidForm(true);
-
         }
-
     };
     const handleFormSubmit = async (event) => {
-
         event.preventDefault();
 
-
         if (!isValidForm) {
-
             alert('입력값이 올바르지 않습니다. 다시 확인해주세요.');
-
             return;
-
         }
+
 
 
         try {
-
             const formData = new FormData(event.target);
-
             const response = await fetch('/member/save', {
-
                 method: 'POST',
-
                 body: formData,
-
             });
 
-
             if (response.ok) {
-
                 alert('회원가입이 완료되었습니다.');
-
                 navigate('/member/login');
-
             } else {
-
                 alert('회원가입에 실패했습니다. 다시 시도해주세요.');
-
             }
-
         } catch (error) {
-
             console.error('Error occurred:', error);
-
             alert('오류가 발생했습니다. 다시 시도해주세요.');
-
         }
-
     };
 
+    const emailCheck = () => {
+        const email = document.getElementById("memberEmail").value;
+        const checkResult = document.getElementById("check-result");
+        console.log("입력값: ", email);
 
+        axios.post("/member/email-check", null, {
+            params: {
+                memberEmail: email
+            }
+        })
+            .then(response => {
+                console.log("요청성공", response.data);
+                if (response.data === "ok") {
+                    console.log("사용가능한 이메일");
+                    checkResult.style.color = "green";
+                    checkResult.innerHTML = "사용가능한 이메일";
+                    alert("사용가능한 이메일입니다");
+                    setIsEmailForm(true);
+                } else {
+                    console.log("이미 사용중인 이메일");
+                    checkResult.style.color = "red";
+                    checkResult.innerHTML = "이미 사용중인 이메일";
+                    alert("이미 사용중인 이메일입니다");
+                    setIsEmailForm(false);
+                }
+            })
+            .catch(error => {
+                console.log("에러발생", error);
+            });
+    };
+
+    const NickNameCheck = () => {
+        const nickname = document.getElementById("memberNickName").value;
+        const checkNickResult = document.getElementById("checkNick-result");
+        console.log("입력값: ", nickname);
+
+        axios.post("/member/nick-check", null, {
+            params: {
+                memberNickName: nickname
+            }
+        })
+            .then(response => {
+                console.log("요청성공", response.data);
+                if (response.data === "ok") {
+                    console.log("사용가능한 닉네임");
+                    checkNickResult.style.color = "green";
+                    checkNickResult.innerHTML = "사용가능한 닉네임";
+                    alert("사용가능한 닉네임입니다");
+                    setIsNickForm(true);
+                } else {
+                    console.log("이미 사용중인 닉네임");
+                    checkNickResult.style.color = "red";
+                    checkNickResult.innerHTML = "이미 사용중인 닉네임";
+                    alert("이미 사용중인 닉네임입니다");
+                    setIsNickForm(false);
+                }
+            })
+            .catch(error => {
+                console.log("에러발생", error);
+            });
+    };
     return (
 
         <>
@@ -261,124 +247,43 @@ const SignupPage = () => {
                         </ul>
                     </form>
 
-            <div className="jumbotron">
-
-                <div className="container-text-center">
-
-                    <form method="post" action="/member/save" onSubmit={handleFormSubmit}>
-
-                        <div className="form-group">
-
-                            <label className="label_text" htmlFor = "memberEmail">
-                                Email
-
-                            </label>
-
-                            <input
-
-                                type="text"
-
-                                className="form-control"
-
-                                id="memberEmail"
-
-                                name="memberEmail"
-
-                                onBlur={handleEmailBlur}
-
-                            />
-
-                            <p id="check-result"></p>
-
-                            <div className='email-state' id="emailstate">{emailState}</div>
-
+                    <div className="jumbotron">
+                        <div className="container text-center">
+                            <form method="post" action="/member/save" onSubmit={handleFormSubmit}>
+                                <div className="form-group">
+                                    <label className="label_text" htmlFor="memberEmail">Email</label>
+                                    <div className="input-group">
+                                        <input type="text" className="form-control" id="memberEmail" name="memberEmail" />
+                                        <button type="button" className="btn btn-primary" onClick={emailCheck}>Check Email</button>
+                                    </div>
+                                    <p id="check-result"></p>
+                                </div>
+                                <div className="form-group">
+                                    <label className="label_text" htmlFor="pwd">비밀번호</label>
+                                    <input type="password" className="form-control" id="pwd" name="memberPassword" onInput={handlePwdInput} />
+                                    <div id="pwdstate">{pwdState}</div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="label_text" htmlFor="re_pwd">비밀번호 재확인</label>
+                                    <input type="password" className="form-control" id="re_pwd" name="re_pwd" onInput={handleRepwdInput} />
+                                    <div id="repwdstate">{repwdState}</div>
+                                </div>
+                                <div className="form-group">
+                                    <label className="label_text" htmlFor="name">이름</label>
+                                    <input type="text" className="form-control" id="name" name="memberName" />
+                                </div>
+                                <div className="form-group">
+                                    <label className="label_text" htmlFor="name">닉네임</label>
+                                    <input type="text" className="form-control" id="memberNickName" name="memberNickName" />
+                                    <button type="button" className="btn btn-primary" onClick={NickNameCheck}>Check NickName</button>
+                                </div>
+                                <p id="checkNick-result"></p>
+                                <button className="btn btn-primary btn-block" id="signup" type="submit">Sign Up</button>
+                            </form>
                         </div>
-
-
-                        <div className="form-group">
-
-                            <label className="label_text" for="pwd">
-
-                                비밀번호
-
-                            </label>
-
-                            <input
-
-                                type="password"
-
-                                className="form-control"
-
-                                id="pwd"
-
-                                name="memberPassword"
-
-                                onInput={handlePwdInput}
-
-                            />
-
-                            <div className='pwd-state' id="pwdstate">{pwdState}</div>
-
-                        </div>
-
-
-                        <div className="form-group">
-
-                            <label className="label_text" htmlFor="re_pwd">
-
-                                비밀번호 재확인
-
-                            </label>
-
-                            <input
-
-                                type="password"
-
-                                className="form-control"
-
-                                id="re_pwd"
-
-                                name="re_pwd"
-
-                                onInput={handleRepwdInput}
-
-                            />
-
-                            <div className='re-pwd-state' id="repwdstate">{repwdState}</div>
-
-                        </div>
-
-
-                        <div className="form-group">
-
-                            <label className="label_text" htmlFor="name">이름</label>
-
-                            <input type="text" className="form-control" id="name" name="memberName" />
-
-                        </div>
-
-
-                        <div className="form-group">
-
-                            <label className="label_text" htmlFor="name">닉네임</label>
-
-                            <input type="text" className="form-control" id="nickname" name="memberNickName" />
-
-                        </div>
-
-
-                        <button className="btn-signup" id="signup" type="submit">
-
-                            Sign Up
-
-                        </button>
-
-                    </form>
+                    </div>
 
                 </div>
-
-            </div>
-            </div>
             </div>
         </>
 

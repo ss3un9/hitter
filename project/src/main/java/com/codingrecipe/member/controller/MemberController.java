@@ -161,8 +161,15 @@ public class MemberController {
     }
     @PostMapping("/member/email-check")
     public @ResponseBody String emailCheck(@RequestParam("memberEmail") String memberEmail) {
-        System.out.println("memberEmail = " + memberEmail);
         String checkResult = memberService.emailCheck(memberEmail);
+        return checkResult;
+    }
+
+    @PostMapping("/member/nick-check")
+    public @ResponseBody String nickCheck(@RequestParam("memberNickName") String memberNickName) {
+        System.out.println(memberNickName);
+        String checkResult = memberService.NickNameCheck(memberNickName);
+
         return checkResult;
     }
 
