@@ -75,14 +75,14 @@ public class SongFileController {
                 String fileName = file.getOriginalFilename();
                 String sysFileName = System.currentTimeMillis() +  "_" +  fileName;
                 System.out.println(sysFileName);
-                String filePath = "/home/ubuntu/song/" + sysFileName;
+                String filePath = "/Users/ss3un9/Desktop/fastapi/song/" + sysFileName;
                 byte[] fileBytes = file.getBytes();
                 Path path = Paths.get(filePath);
                 Files.write(path, fileBytes);
 
                 String fileName1 = file1.getOriginalFilename();
                 String sysFileName1 = System.currentTimeMillis() +  "_" +fileName1;
-                String filePath1 = "/home/ubuntu/txt/"+sysFileName1;
+                String filePath1 = "/Users/ss3un9/Desktop/fastapi/song/"+sysFileName1;
                 byte[] fileBytes1 = file1.getBytes();
                 Path path1 = Paths.get(filePath1);
                 Files.write(path1, fileBytes1);
