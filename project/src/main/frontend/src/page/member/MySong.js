@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
-
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
-
-
+import "./MySong.css"
+import MypageBar from "../../component/MypageBar";
 const MySong = ()  => {
 
 
@@ -19,6 +18,7 @@ const MySong = ()  => {
 
 
             const response = await axios.get(`/member/getMySong/${id}`);
+            console.log(response)
             const {data} = response;
             console.log(data);
             setMySongList(data);
@@ -37,91 +37,38 @@ const MySong = ()  => {
         fetchData();
     }, []);
 
-
     return (
         <>
-            {/* <!-- Navigation--> */}
-            <nav className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-                <div className="container px-5">
-                    <a className="navbar-brand" href="/">HITTABLE</a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
-                        className="navbar-toggler-icon"></span></button>
-                    <div className="collapse navbar-collapse" id="navbarResponsive">
-                        <ul className="navbar-nav ms-auto">
-                            <li className="nav-item"><a className="nav-link" href="/member/hit_ai">Hit</a></li>
-                            <li className="nav-item"><a className="nav-link" href="/song/board">Leader Board</a></li>
-                            <li className="nav-item"><a className="nav-link" href="/board/paging">Community</a></li>
-                            <li className="nav-item">
-                                {storedSession.loginName != null && (
-                                    <a className="nav-link" href="/member/mypage"><p>{storedSession.loginName}</p></a>
-                                )}
-                            </li>
-                            <li className="nav-item">
-                                {storedSession.loginName != null ? (
-                                    <a className="nav-link" href="/member/logout">로그아웃</a>
-                                ) : (
-                                    <a className="nav-link" href="/member/save">Sign Up</a>
-                                )}
-                            </li>
-                            <li className="nav-item">
-                                {storedSession.loginName == null && (
-                                    <a className="nav-link" href="/member/login">Log In</a>
-                                )}
-                            </li>
-                        </ul>
+            (
+            <div className='tbl-bar'>
+                <div className= 'bar'>
+                    <MypageBar/>
+                    <div className='table'>
+                        <table className='song-table'>
+                            <thead className='table-head'>
+                                <tr className='table-tr'>
+                                    <th className='th'>ID</th>
+                                    <th className='th'>Song Title</th>
+                                    <th className='th'>Genre</th>
+                                    <th className='th'>CreatedTime</th>
+                                    {/* Add more table headers for other properties */}
+                                </tr>
+                            </thead>
+                            <tbody className='table-body'>
+                            {mySongList.map((song) => (
+                                <tr key={song.id}>
+                                    <td className='td'>{song.id}</td>
+                                    <td className='td'>{song.songTitle}</td>
+                                    <td className='td'>{song.genre}</td>
+                                    <td className='td'>{song.songCreatedTime.replace("T", " ")}</td>
+                                    {/* Render additional table cells for other properties */}
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </nav>
-
-            <nav>
-                <ul>
-                    <li className="nav-item">
-                        <Link to={`/member/update?id=${id}`} className="nav-link">
-                            회원 정보 수정하기
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/member/mySong" className="nav-link">
-                            내 노래 조회하기
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/member/myBoard" className="nav-link">
-                            내 게시판 조회하기
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/member/delete" className="nav-link">
-                            회원 탈퇴하기
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
-
-            (
-            <table>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Song Title</th>
-                    <th>Genre</th>
-                    <th>CreatedTime</th>
-                    {/* Add more table headers for other properties */}
-                </tr>
-                </thead>
-                <tbody>
-                {mySongList.map((song) => (
-                    <tr key={song.id}>
-                        <td>{song.id}</td>
-                        <td>{song.songTitle}</td>
-                        <td>{song.genre}</td>
-                        <td>{song.songCreatedTime.replace("T", " ")}</td>
-
-                    </tr>
-                ))}
-                </tbody>
-            </table>
+            </div>
         </>
     )
 }

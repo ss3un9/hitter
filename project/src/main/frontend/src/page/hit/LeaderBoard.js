@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import "../community/Community.css"
 import LikeButton from './LikeButton';
 import LyricsModal from './LyricsModal.js';
-import { NavBar } from '../../component/NavBar.js';
 import playIcon from '../../assets/play_icon.png';
 import './LeaderBoard.css';
 import PlayerModal from '../../component/PlayerModal.js';

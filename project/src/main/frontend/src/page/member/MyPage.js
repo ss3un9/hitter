@@ -1,7 +1,13 @@
 import React, {useEffect, useState} from "react";
-
+import "./MyPage.css"
 import {Link, useNavigate} from "react-router-dom";
-
+import {BsPencilSquare} from "react-icons/bs";
+import {Button, Container} from "react-bootstrap";
+import {GiMusicalNotes} from "react-icons/gi";
+import photo from "../../imgs/profile.png";
+import {FaChalkboardUser} from "react-icons/fa6";
+import {FaRegFaceSadTear} from "react-icons/fa6"
+import MyBar from "../../component/MypageBar"
 function Select() {
     return null;
 }
@@ -16,9 +22,58 @@ const Mypage = ({session}) => {
 
 
     return (
-        <>
-            {/* <!-- Navigation--> */}
-            <nav className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div className='main'>
+            <MyBar/>
+        </div>
+
+
+    )
+}
+export default Mypage;
+
+            /*<nav>
+                <ul>
+                    <li className="nav-item">
+                        <Link to={`/member/update?id=${id}`} className="nav-link">
+                            <Button className='info-corr-button'>
+                                <div className='info-corr'>
+                                    <BsPencilSquare className= "BsPencilSquare" size="20"/>
+                                    회원 정보 수정하기
+                                </div>
+
+                            </Button>
+
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/member/mySong" className="nav-link">
+                            <Button className='song-info-button'>
+                                <GiMusicalNotes className="GiMusicalNotes" size="20"/>
+                                내 노래 조회하기
+                            </Button>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/member/myBoard" className="nav-link">
+                            내 게시판 조회하기
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/member/delete" className="nav-link">
+                            회원 탈퇴하기
+                        </Link>
+                    </li>
+                </ul>
+            </nav>
+
+    )
+}
+
+
+export default Mypage;
+
+/*
+<nav className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
                 <div className="container px-5">
                     <a className="navbar-brand" href="/">HITTABLE</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
@@ -50,35 +105,4 @@ const Mypage = ({session}) => {
                     </div>
                 </div>
             </nav>
-            <nav>
-                <ul>
-                    <li className="nav-item">
-                        <Link to={`/member/update?id=${id}`} className="nav-link">
-                            회원 정보 수정하기
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/member/mySong" className="nav-link">
-                            내 노래 조회하기
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/member/myBoard" className="nav-link">
-                            내 게시판 조회하기
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/member/delete" className="nav-link">
-                            회원 탈퇴하기
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
-
-
-        </>
-    )
-}
-
-
-export default Mypage;
+ */

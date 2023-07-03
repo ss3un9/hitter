@@ -1,0 +1,125 @@
+.menubar{
+    font-family: "Iceland";
+    display: flex;
+    width:95%;
+    margin:30px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000000 ;
+    position: fixed;
+}
+.logo-png{
+    color:white;
+    background-color: #000000;
+    padding: 15px;
+    font-size: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.logo-text{
+    display:flex;
+    align-items:center;
+}
+.menutexts {
+    display: flex;
+    list-style: none;
+    font-size:25px;
+    color: white;
+}
+.parent-icon-hit{
+    display:flex;
+    align-items: center;
+}
+.menu-hit{
+    margin-right:30px;
+    cursor: pointer;
+    font-family: Iceland;
+    color: white;
+    background-color: #000000;
+    border: 1px solid #000000;
+    font-size: 28px;
+
+}
+.parent-icon-lb{
+    display:flex;
+    align-items: center;
+}
+.menu-lb{
+    margin-right:30px;
+    cursor: pointer;
+    font-family: Iceland;
+    color: white;
+    background-color: #000000;
+    border: 1px solid #000000;
+    font-size: 28px;
+}
+.parent-icon-com{
+    display:flex;
+    align-items: center;
+}
+.menu-commu{
+    margin-right:30px;
+    cursor: pointer;
+    font-family: Iceland;
+    color: white;
+    background-color: #000000;
+    border: 1px solid #000000;
+    font-size: 28px;
+}
+
+.parent-icon-su{
+    display:flex;
+    align-items: center;
+}
+.menu-signup{
+    margin-right:30px;
+    cursor: pointer;
+    font-family: Iceland;
+    color: white;
+    background-color: #000000;
+    border: 1px solid #000000;
+    font-size: 28px;
+}
+
+.parent-icon-login{
+    display:flex;
+    align-items: center;
+}
+.menu-login{
+    margin-right:30px;
+    cursor: pointer;
+    font-family: Iceland;
+    color: white;
+    background-color: #000000;
+    border: 1px solid #000000;
+    font-size: 28px;
+}
+.parent-icon-mp{
+    display:flex;
+    align-items: center;
+}
+
+.menu-mypage{
+    margin-right:30px;
+    cursor: pointer;
+    font-family: Iceland;
+    color: white;
+    background-color: #000000;
+    border: 1px solid #000000;
+    font-size: 28px;
+}
+
+.parent-icon-logout{
+    display:flex;
+    align-items: center;
+}
+.menu-logout{
+    margin-right:30px;
+    font-family: Iceland;
+    cursor: pointer;
+    color: white;
+    background-color: #000000;
+    border: 1px solid #000000;
+    font-size: 28px;
+}
