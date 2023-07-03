@@ -1,4 +1,70 @@
 .play-button {
     cursor: pointer;
   }
-  
+.leaderboard-txt{
+    color: #aba8fa;
+    font-family: Iceland;
+    font-size: 100px;
+}
+
+.HiOutlineTrophy{
+    align-items: center;
+}
+
+
+.container{
+    width: 100%;
+    height: 800px;
+    background-color: #252525;
+    margin: auto;
+    padding-top: 150px;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    text-align: center;
+}
+
+.predict-button{
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.whole-button{
+    display: inline-block;
+
+}
+
+.pop-button{
+    display: inline-block;
+
+}
+
+.dance-button{
+    display: inline-block;
+
+}
+.ballad-button{
+    display: inline-block;
+
+}
+
+
+
+.community-table-wrapper{
+    width: 60%;
+    background-color: #da6767;
+    align-items: center;
+    font-family: Suit;
+    margin: 0 auto;
+    align-content: center;
+    text-align: center;
+    align-self: center;
+    color:white;
+    overflow: auto;
+    height: 400px;
+}
+
+.tbl{
+    margin: 0 auto;
+    padding: 20px;
+}

@@ -27,7 +27,7 @@ const MenuBar = () => {
                             </Button>
                         </Link>
 
-                        <Link to="/leaderboard">
+                        <Link to="/song/board">
                             <Button className="menu-lb">
                                 <div className="parent-icon-lb">
                                     <HiOutlineTrophy size="20"/>

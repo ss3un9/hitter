@@ -28,7 +28,7 @@ const MyBar = () => {
                                     </div>
                                 </Button>
                             </Link>
-                            <Link to="/member/mySong" className="nav-link">
+                            <Link to="/member/mysong" className="nav-link">
                                 <Button className='hover-button2'>
                                     <div className='info-song'>
                                         <GiMusicalNotes className="GiMusicalNotes"/>
@@ -36,7 +36,7 @@ const MyBar = () => {
                                     </div>
                                 </Button>
                             </Link>
-                            <Link to="/member/myBoard" className="nav-link">
+                            <Link to="/member/myboard" className="nav-link">
                                 <Button className='hover-button3'>
                                     <div className='info-board'>
                                         <FaChalkboardUser className="FaChalkboardUser"/>

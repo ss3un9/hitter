@@ -55,8 +55,6 @@ const LikeButton = ({ memberId, songId, isLiked, likeId}) => {
     return (
         <button onClick={handleLikeClick}>
             {liked ? 'Unlike' : 'Like'}
-            {buttonLikeId && ` (likeId: ${buttonLikeId})`}
-
         </button>
     );
 };

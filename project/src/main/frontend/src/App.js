@@ -1,5 +1,5 @@
-import React, {Component, useState} from "react";
-import {Link, useNavigate, Route, BrowserRouter, Routes, Navigate} from "react-router-dom";
+import React, {Component} from "react";
+import {Route, BrowserRouter, Routes} from "react-router-dom";
 import SignupPage from './page/signup/SignupPage';
 import Login from "./page/login/Login";
 import Logout from "./page/login/Logout";
@@ -41,19 +41,24 @@ class App extends Component {
             }
 
             <Routes>
+              <Route path="/board/write" element={<Write/>}/>
+              <Route path="/board/detail" element={<BoardDetail/>}/>
               <Route path="/" exact element={<Home/>}></Route>
               <Route path="/member/delete" element={<MemberDelete/>}></Route>
               <Route path="/hit" element={<HitAi/>}></Route>
-              <Route path="/leaderboard" element={<LeaderBoard/>}></Route>
+              <Route path="/song/board" element={<LeaderBoard/>}></Route>
               <Route path="/board" element={<Community/>}></Route>
               <Route path={`/member/update`} element={<Update/>}></Route>
               <Route path="/signup" element={<SignupPage/>}></Route>
               <Route path="/login" element={<Login/>}></Route>
               <Route path="/logout" element={<Logout/>}></Route>
               <Route path="/member/mypage" element={<Mypage/>}></Route>
-              <Route path="/member/mySong" element={<MySong/>}></Route>
-              <Route path={"/member/myBoard"} element={<MyBoard/>}></Route>
+              <Route path="/member/mysong" element={<MySong/>}></Route>
+              <Route path="/member/myboard" element={<MyBoard/>}></Route>
               <Route path={"/hit_ai_detail"} element={<HitAiDetail/>}></Route>
+              <Route path="/board/delete" element={<BoardDelete/>}/>
+              <Route path="/board/update" element={<BoardUpdate/>}/>
+              <Route path="/board/paging" element={<Community/>}/>
             </Routes>
           </BrowserRouter>
 
