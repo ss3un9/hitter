@@ -135,7 +135,7 @@ public class SongController {
     public ResponseEntity<Resource> PlaySong(@PathVariable Long id) throws IOException {
         SongDTO songDTO = songService.findById(id);
 
-        String songFilePath = "/Users/ss3un9/Desktop/fastapi/song/" + songDTO.getFileSysName();
+        String songFilePath = "/home/ubuntu/song/" + songDTO.getFileSysName();
         Resource resource = new UrlResource(Paths.get(songFilePath).toUri());
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
@@ -148,7 +148,7 @@ public class SongController {
     public ResponseEntity<Resource> SongTxt(@PathVariable Long id) throws IOException {
         SongDTO songDTO = songService.findById(id);
 
-        String text = "/Users/ss3un9/Desktop/fastapi/txt/" + songDTO.getLyrics();
+        String text = "/home/ubuntu/txt/" + songDTO.getLyrics();
         Resource resource = new UrlResource(Paths.get(text).toUri());
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
@@ -156,10 +156,6 @@ public class SongController {
 
 
     }
-
-
-
-//    @PostMapping("/song/like/{id}")
 
 
 }

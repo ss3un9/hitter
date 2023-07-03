@@ -23,7 +23,7 @@ public class CommentEntity extends BaseEntity{
     @Column(name="comment_nickname")
     private String commentNickName;
 
-    @Column
+    @Column(name="comment_contents")
     private String commentContents;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -40,5 +40,13 @@ public class CommentEntity extends BaseEntity{
         return commentEntity;
     }
 
-
+    public static CommentEntity toUpdateEntity(CommentDTO commentDTO, BoardEntity boardEntity) {
+        CommentEntity commentEntity = new CommentEntity();
+        commentEntity.setId(commentDTO.getId());
+        commentEntity.setCommentWriterId(commentDTO.getCommentWriterId());
+        commentEntity.setCommentNickName(commentDTO.getCommentNickName());
+        commentEntity.setCommentContents(commentDTO.getCommentContents());
+        commentEntity.setBoardEntity(boardEntity);
+        return commentEntity;
+    }
 }

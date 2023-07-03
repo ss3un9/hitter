@@ -15,7 +15,7 @@ const HitAiDetail = ({session}) => {
     const searchParams = new URLSearchParams(location.search);
 
     id = parseInt(searchParams.get('id'));
-
+    console.log(id);
 
     const [songTitle, setSongTitle] = useState('');
     const [songGenre, setSongGenre] = useState('');

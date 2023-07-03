@@ -35,11 +35,13 @@ const HitAi = ({ session }) => {
             const formData = new FormData(event.target);
             formData.append("genre", selectedGenre);
             formData.append("title", songTitle);
+
             const response = await fetch("/api/upload", {
                 method: "POST",
+
                 body: formData,
             });
-
+            console.log(response);
             if (response.ok) {
                 const data = await response.json();
                 console.log(data);
@@ -49,7 +51,9 @@ const HitAi = ({ session }) => {
                 alert("히트 분석 성공 ");
             } else {
                 // 로그인 실패
-                console.error("failed");
+
+                console.error('failed',error);
+
             }
         } catch (error) {
             // 오류 처리
@@ -63,6 +67,7 @@ const HitAi = ({ session }) => {
             console.log(uploadResponse);
             // 폼을 제출한 후에 분석 결과를 받은 뒤에 hitdetail로 이동
             navigate(`/hit_ai_detail?id=${id}`);
+
         }
     }, [uploadResponse, navigate]);
 
@@ -103,6 +108,7 @@ const HitAi = ({ session }) => {
                 />
                 <br></br>
 
+
                 <input className='ub' type="submit" value={"Upload"} />
                 {isLoading && (
                     <div className="loading-container">
@@ -110,6 +116,7 @@ const HitAi = ({ session }) => {
                         <div className="loading-text">분석중입니다. 잠시만 기다려주세요</div>
                     </div>
                 )}
+
 
             </form>
 

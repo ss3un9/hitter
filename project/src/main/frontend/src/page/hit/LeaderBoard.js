@@ -85,14 +85,15 @@ const LeaderBoard = () => {
 
             const response = await axios.get(`/song/leader_board/${memberId}`, {
                 params: {
-                    memberId: memberId
+                    memberId: memberId,
+                    page: currentPage
                 }
             });
 
             const { data } = response;
             console.log(data);
 
-            const updatedSongList = data.songList.map(song => {
+            const updatedSongList = data.songPageList.content.map(song => {
                 const matchingLike = data.likeList.find(like => like.songId === song.id);
 
                 return {
@@ -108,16 +109,14 @@ const LeaderBoard = () => {
             setLikeList(data.likeList);
             const { songPageList ,startPage, endPage } = data;
 
+
+            setSongList(updatedSongList);
+
             setSongPageList(songPageList);
             setStartPage(startPage);
             setEndPage(endPage);
+
             navigate(`/song/board?page=${page}`);
-            // const { boardPageList ,startPage, endPage } = data;
-            //
-            // setBoardList(boardPageList.content);
-            // setBoardPageList(boardPageList);
-            // setStartPage(startPage);
-            // setEndPage(endPage);
 
         } catch (error) {
             // Handle errors
@@ -225,10 +224,10 @@ const LeaderBoard = () => {
                     </thead>
                     <tbody>
                     {songList
-                        .sort((a, b) => b.prediction - a.prediction)    //높은순 정렬
+
                         .map((song, index) => (
                             <tr key={song.id}>
-                                {/*<td><LikeButton memberId={song.memberId} songId={song.id} />  </td>*/}
+
                                 <td>
                                     <LikeButton
                                         memberId={memberId}
@@ -237,12 +236,8 @@ const LeaderBoard = () => {
                                         isLiked={song.isLiked}
                                     />
                                 </td>
-{/*
-                                <td>{index + 1}</td>
-*/}
-                                {/*<td>{song.id}</td>*/}
 
-                                <td>{(page - 1) * songPageList.size + index + 1}</td>
+                                <td>{songPageList.number * songPageList.size + index + 1}</td>
 
                                 <td>
                                     <Link to={`/hit_ai_detail?id=` + song.id} >
@@ -293,7 +288,41 @@ const LeaderBoard = () => {
                 songId={selectedSongId}
             />
 
+            <div>
+                {/* First page */}
+                <Link to="" onClick={() => handlePageChange(1)}>First</Link>
 
+                {/* Previous page */}
+                {songPageList.number > 0 ? (
+                    <Link to={`/song/board?page=${songPageList.number}`} onClick={() => handlePageChange(songPageList.number)}>prev</Link>
+                ) : (
+                    <span>prev</span>
+                )}
+
+                {/* Page numbers */}
+                {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((page) => (
+                    <span key={page}>
+              {/* Current page */}
+                        {page === songPageList.number + 1 ? (
+                            <span>{page}</span>
+                        ) : (
+                            <Link to={`/song/board?page=${page}`} onClick={() => handlePageChange(page)}>
+                                {page}
+                            </Link>
+                        )}
+            </span>
+                ))}
+
+                {/* Next page */}
+                {songPageList.number + 1 < songPageList.totalPages ? (
+                    <Link to={`/song/board?page=${songPageList.number + 2}` }  onClick={() => handlePageChange(songPageList.number + 2)}>next</Link>
+                ) : (
+                    <span>next</span>
+                )}
+
+                {/* Last page */}
+                <Link to={`/song/board?page=${songPageList.totalPages}`}  onClick={() => handlePageChange(songPageList.totalPages)}>Last</Link>
+            </div>
         </div>
     );
 };
