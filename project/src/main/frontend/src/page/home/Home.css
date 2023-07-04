@@ -22,6 +22,11 @@
     background: #252525;
 }
 
+.menubars-log-or-not{
+    top: 50%;
+}
+
+
 .header{
     background: url(../../imgs/mic.jpg) center;
     background-size: cover;

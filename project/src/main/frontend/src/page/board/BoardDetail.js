@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate} from 'react-router-dom';
 import axios from "axios";
-// import './HitAi.css'
+import "./BoardDetail.css"
 
 const BoardDetail = () => {
 
@@ -165,7 +165,7 @@ const BoardDetail = () => {
     return (
         <>
 
-            <div>
+            <div className='board-detail-all'>
                 <p>board_id: {id}</p>
                 <p>board_title: {boardTitle}</p>
                 <p>board_content: {boardContents}</p>
@@ -173,13 +173,15 @@ const BoardDetail = () => {
                 <p> board_hits: { boardHits}</p>
                 <p> board_created: {boardCreatedTIme}</p>
             </div>
+            <div className='btns-board'>
             <button onClick={() => reqList()}>목록</button>
 
             <button onClick={() => UpdateList()}>수정</button>
             <button onClick={() => deleteList(id)}>삭제</button>
+            </div>
 
 
-            <div>
+            <div className='comment-box'>
                 <input type="hidden" id ="commentNickName" value={storedSession.loginNickName}/>
 
                 <input type="hidden" id ="commentWriterId"  value={storedSession.loginId}/>
@@ -187,8 +189,8 @@ const BoardDetail = () => {
                 <button id="comment-write-btn" onClick={() => commentWrite()}>댓글작성</button>
             </div>
 
-            <div id="commentList">
-                <table>
+            <div className='comm-list' id="commentList">
+                <table className='cmtable'>
                     <thead>
                     <tr>
                         <th>댓글번호</th>

@@ -9,11 +9,15 @@ import SingSong from "../../imgs/singasong.jpg";
 import CompanyL from "../../imgs/com-logo.png"
 import Equal from "../../imgs/equal.png"
 import {useRef} from "react";
+import {useNavigate} from "react-router-dom";
 
 const Home = () => {
     const inputForm = useRef();
+    const navigate = useNavigate();
     const onMoveToForm = () => {
-        inputForm.current.scrollIntoView({behavior: 'smooth', block: 'start'}); };
+        // inputForm.current.scrollIntoView({behavior: 'smooth', block: 'start'}); };
+        navigate("/howtouse")
+    }
 
     return (
         <div className='home-page'>

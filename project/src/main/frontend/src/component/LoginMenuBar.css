@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: space-between;
     background-color: #000000 ;
-    position: fixed;
+    position: absolute;
 }
 .logo-png{
     color:white;

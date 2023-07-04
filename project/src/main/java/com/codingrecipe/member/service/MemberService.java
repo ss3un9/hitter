@@ -108,6 +108,8 @@ public class MemberService {
 
         return songDTOs;
     }
+
+
     public Optional<String> findNicknameById(Long id) {
         Optional<MemberEntity> memberEntityOptional = memberRepository.findById(id);
         return memberEntityOptional.map(MemberEntity::getMemberNickName);
@@ -164,6 +166,8 @@ public class MemberService {
             return "ok";
         }
     }
+
+
 
 }
 

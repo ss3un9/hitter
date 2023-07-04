@@ -1,0 +1,28 @@
+.board-detail-all{
+    padding-top: 200px;
+    align-items: center;
+    text-align: center;
+}
+
+.comment-box{
+    text-align: center;
+    align-items: center;
+}
+
+.btns-board{
+    text-align: center;
+    align-items: center;
+}
+
+.comm-list{
+    text-align: center;
+    align-items: center;
+}
+
+.cmtable{
+    align-content: center;
+    align-self: center;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+}

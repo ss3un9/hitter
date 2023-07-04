@@ -1,9 +1,12 @@
 package com.codingrecipe.member.controller;
 
+import com.codingrecipe.member.dto.LikeDTO;
 import com.codingrecipe.member.dto.MemberDTO;
 
 import com.codingrecipe.member.dto.SongDTO;
+import com.codingrecipe.member.service.LikeService;
 import com.codingrecipe.member.service.MemberService;
+import com.codingrecipe.member.service.SongService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
@@ -17,16 +20,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
 public class MemberController {
     // 생성자 주입
     private final MemberService memberService;
+    private final SongService songService;
+    private final LikeService likeService;
 
 
     @PostMapping("/member/save")
@@ -123,6 +125,22 @@ public class MemberController {
         return ResponseEntity.ok(songDTOList);
     }
 
+    @GetMapping("/member/getMyLikeSong/{id}")
+    public ResponseEntity<Map<String, Object>> getMyLikeSong(@PathVariable Long id) {
+        List<LikeDTO> likeDTOList = likeService.findByUserId(id);
+        List<SongDTO> songDTOList = songService.findAll();
+
+        Map<String, Object> responseData = new HashMap<>();
+
+        if (songDTOList != null) {
+            responseData.put("songList", songDTOList);
+            responseData.put("likeList", likeDTOList);
+
+            return ResponseEntity.status(HttpStatus.OK).body(responseData);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseData);
+        }
+    }
 
     @PostMapping("/member/update")
     public void update(@ModelAttribute MemberDTO memberDTO) {
