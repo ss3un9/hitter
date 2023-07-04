@@ -19,7 +19,7 @@ const HitAi = ({session}) => {
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
 
     const [uploadResponse, setUploadResponse] = useState(null);
-    const [selectedGenre, setSelectedGenre] = useState("pop");
+    const [selectedGenre, setSelectedGenre] = useState("none");
     const [songTitle, setSongTitle] = useState("");
 
     const navigate = useNavigate();

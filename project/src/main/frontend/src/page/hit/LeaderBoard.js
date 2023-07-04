@@ -8,6 +8,8 @@ import './LeaderBoard.css';
 import PlayerModal from '../../component/PlayerModal.js';
 import {HiOutlineTrophy} from "react-icons/hi2";
 import {HiTrendingUp} from "react-icons/hi"
+import {BsCheck2All} from "react-icons/bs";
+import {BsPlayCircleFill} from "react-icons/bs";
 
 const LeaderBoard = () => {
     const [session, setSession] = useState({});
@@ -199,28 +201,30 @@ const LeaderBoard = () => {
             <div className='buttons'>
                 <ul className='bt-ul'>
             {storedSession.loginName != null && (
-                <button className='predict-button' onClick={Posting}><div className='btn-info'><HiTrendingUp size='15'/>노래 예측하기</div> </button>
+                <button className='predict-button' onClick={Posting}><div className='btn-info'><HiTrendingUp className='HiTrendingUp' size='20'/>노래 예측하기</div> </button>
             )}
-            <button className='whole-button' onClick={() => fetchData()}>전체보기</button>
-            <button className='pop-button' onClick={() => handleGenreFilter('pop')}>Pop</button>
+            <button className='whole-button' onClick={() => fetchData()}><div className='whole-info'><BsCheck2All size='20'/>전체보기</div> </button>
+            <div>
+                <br></br><br></br>
+                <button className='pop-button' onClick={() => handleGenreFilter('pop')}><div className='pop-info'>Pop</div></button>
             <button className='dance-button' onClick={() => handleGenreFilter('dance')}>Dance</button>
             <button className='ballad-button' onClick={() => handleGenreFilter('ballad')}>Ballad</button>
+                </div>
                 </ul>
             </div>
-            <div className="community-table-wrapper">
+            <div className="board-table-wrapper">
                 <table className='tbl'>
-                    <thead>
-                    <tr>
-
-                        <th>liked</th>
-                        <th>순위</th>
-                        <th>노래제목</th>
-                        <th>장르</th>
-                        <th>닉네임</th>
-                        <th>예측결과</th>
-                        <th>좋아요</th>
-                        <th>재생</th> {/* 재생 버튼 추가 */}
-                        <th>가사</th>
+                    <thead className='tbl-head'>
+                    <tr className='trs'>
+                        <th className='ths'>liked</th>
+                        <th className='ths'>순위</th>
+                        <th className='ths'>노래제목</th>
+                        <th className='ths'>장르</th>
+                        <th className='ths'>닉네임</th>
+                        <th className='ths'>예측결과</th>
+                        <th className='ths'>좋아요</th>
+                        <th className='ths'>재생</th> {/* 재생 버튼 추가 */}
+                        <th className='ths'>가사</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -229,7 +233,7 @@ const LeaderBoard = () => {
                         .map((song, index) => (
                             <tr key={song.id}>
                                 {/*<td><LikeButton memberId={song.memberId} songId={song.id} />  </td>*/}
-                                <td>
+                                <td className='tds'>
                                     <LikeButton
                                         memberId={memberId}
                                         songId={song.id}
@@ -242,35 +246,30 @@ const LeaderBoard = () => {
 */}
                                 {/*<td>{song.id}</td>*/}
 
-                                <td>{(page - 1) * songPageList.size + index + 1}</td>
+                                <td className='tds'>{(page - 1) * songPageList.size + index + 1}</td>
 
-                                <td>
+                                <td className='tds'>
                                     <Link to={`/hit_ai_detail?id=` + song.id} >
                                         {song.songTitle}
                                     </Link>
                                 </td>
-                                <td>{song.genre}</td>
-                                <td>{song.memberNickName}</td>
-                                <td>{song.prediction}</td>
+                                <td className='tds'>{song.genre}</td>
+                                <td className='tds'>{song.memberNickName}</td>
+                                <td className='tds'>{song.prediction}</td>
                                 {/*<td>{song.songCreatedTime.replace("T", " ")}</td>*/}
-                                <td>{song.songLike}</td>
-                                <td>
+                                <td className='tds'>{song.songLike}</td>
+                                <td className='tds'>
                                     {/*<Link to={`/song/play/${song.id}`}>재생</Link> */}
                                     <div
                                         className="play-button"
                                         onClick={() => handleOpenPlayer(song.id)}
                                     >
-                                        <img
-                                            width={30}
-                                            height={30}
-                                            src={playIcon}
-                                            alt="play-icon"
-                                        />
+                                        <BsPlayCircleFill size='20'/>
                                     </div>
                                     {/* <SongPlayer songId={song.id} />{' '} */}
                                     {/* SongPlayer 컴포넌트에 songId props 전달 */}
                                 </td>
-                                <td>
+                                <td className='tds'>
                                     <button onClick={() => handleViewLyrics(song.id)}>
                                         가사보기
                                     </button>
