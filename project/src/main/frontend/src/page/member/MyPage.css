@@ -2,6 +2,17 @@
     background: #252525;
 }
 
+.mpg-txt{
+    text-align: center;
+    font-family: Suit;
+    font-size: 35px;
+    color: white;
+    padding-top: 100px;
+    padding-bottom: 400px;
+
+}
+
+
 /*
 @font-face {
     font-family: Nexon;

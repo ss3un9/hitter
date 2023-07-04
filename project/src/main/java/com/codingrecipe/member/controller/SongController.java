@@ -136,6 +136,9 @@ public class SongController {
         SongDTO songDTO = songService.findById(id);
 
         String songFilePath = "C:/bp_music/" + songDTO.getFileSysName();
+
+//        String songFilePath = "/Users/ss3un9/Desktop/fastapi/song/" + songDTO.getFileSysName();
+
         Resource resource = new UrlResource(Paths.get(songFilePath).toUri());
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
@@ -148,7 +151,11 @@ public class SongController {
     public ResponseEntity<Resource> SongTxt(@PathVariable Long id) throws IOException {
         SongDTO songDTO = songService.findById(id);
 
+
         String text = "C:/bp_music/" + songDTO.getLyrics();
+
+//        String text = "/Users/ss3un9/Desktop/fastapi/txt/" + songDTO.getLyrics();
+
         Resource resource = new UrlResource(Paths.get(text).toUri());
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)

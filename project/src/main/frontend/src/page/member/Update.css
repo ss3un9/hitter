@@ -1,15 +1,27 @@
-.bar-table{
-    color: #252525;
+.update-main{
+    width: 100%;
+    height: 1000px;
     background-color: #252525;
-    display: block;
+    margin: auto;
+    padding-top: 150px;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    text-align: center;
+
 }
-
-
-.form-table{
+.upd-bar{
+    background-color: transparent;
+}
+.upt-form{
     background-color: #252525;
     transform: translate(-50%, -50%);
     align-items: center;
     position: absolute;
     padding-bottom: 80%;
     overflow: visible;
+}
+
+.info-login{
+    background-color: #252525;
 }

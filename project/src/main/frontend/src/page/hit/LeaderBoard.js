@@ -8,6 +8,8 @@ import './LeaderBoard.css';
 import PlayerModal from '../../component/PlayerModal.js';
 import {HiOutlineTrophy} from "react-icons/hi2";
 import {HiTrendingUp} from "react-icons/hi"
+import {BsCheck2All} from "react-icons/bs";
+import {BsPlayCircleFill} from "react-icons/bs";
 
 const LeaderBoard = () => {
     const [session, setSession] = useState({});
@@ -201,31 +203,33 @@ const LeaderBoard = () => {
                 <button className='predict-button' onClick={Posting}><div className='btn-info'><HiTrendingUp size='15'/>노래 예측하기</div> </button>
             )}
             <button className='whole-button' onClick={() => fetchData()}>전체보기</button>
+                    <br></br><br></br>
+                    <div>
             <button className='pop-button' onClick={() => handleGenreFilter('pop')}>Pop</button>
             <button className='dance-button' onClick={() => handleGenreFilter('dance')}>Dance</button>
             <button className='ballad-button' onClick={() => handleGenreFilter('ballad')}>Ballad</button>
-                </ul>
             </div>
-            <div className="community-table-wrapper">
+            </ul>
+            </div>
+            <div className="board-table-wrapper">
                 <table className='tbl'>
-                    <thead>
-                    <tr>
-
-                        <th>liked</th>
-                        <th>순위</th>
-                        <th>노래제목</th>
-                        <th>장르</th>
-                        <th>닉네임</th>
-                        <th>예측결과</th>
-                        <th>좋아요</th>
-                        <th>재생</th> {/* 재생 버튼 추가 */}
-                        <th>가사</th>
+                    <thead className='tbl-head'>
+                    <tr className='trs'>
+                        <th className='ths'>liked</th>
+                        <th className='ths'>순위</th>
+                        <th className='ths'>노래제목</th>
+                        <th className='ths'>장르</th>
+                        <th className='ths'>닉네임</th>
+                        <th className='ths'>예측결과</th>
+                        <th className='ths'>좋아요</th>
+                        <th className='ths'>재생</th> {/* 재생 버튼 추가 */}
+                        <th className='ths'>가사</th>
                     </tr>
                     </thead>
                     <tbody>
                     {songList
-
                         .map((song, index) => (
+
                             <tr key={song.id}>
 
                                 <td>
@@ -241,31 +245,27 @@ const LeaderBoard = () => {
 
                                 <td>
                                     <Link to={`/hit_ai_detail?id=` + song.id} >
-                                        {song.songTitle}
+                                        <div className='song-title'> {song.songTitle} </div>
                                     </Link>
                                 </td>
-                                <td>{song.genre}</td>
-                                <td>{song.memberNickName}</td>
-                                <td>{song.prediction}</td>
+                                <td className='tds'>{song.genre}</td>
+                                <td className='tds'>{song.memberNickName}</td>
+                                <td className='tds'>{song.prediction}</td>
                                 {/*<td>{song.songCreatedTime.replace("T", " ")}</td>*/}
-                                <td>{song.songLike}</td>
+                                <td className='tds'>{song.songLike}</td>
                                 <td>
                                     {/*<Link to={`/song/play/${song.id}`}>재생</Link> */}
                                     <div
                                         className="play-button"
                                         onClick={() => handleOpenPlayer(song.id)}
                                     >
-                                        <img
-                                            width={30}
-                                            height={30}
-                                            src={playIcon}
-                                            alt="play-icon"
-                                        />
+                                        <BsPlayCircleFill size='20'/>
+
                                     </div>
                                     {/* <SongPlayer songId={song.id} />{' '} */}
                                     {/* SongPlayer 컴포넌트에 songId props 전달 */}
                                 </td>
-                                <td>
+                                <td className='tds'>
                                     <button onClick={() => handleViewLyrics(song.id)}>
                                         가사보기
                                     </button>
@@ -288,26 +288,28 @@ const LeaderBoard = () => {
                 songId={selectedSongId}
             />
 
-            <div>
+            <div className='paging'>
                 {/* First page */}
-                <Link to="" onClick={() => handlePageChange(1)}>First</Link>
+                <Link to="" onClick={() => handlePageChange(1)}>
+                    <div className='fir-page'>{'<<'}</div>
+                </Link>
 
                 {/* Previous page */}
                 {songPageList.number > 0 ? (
                     <Link to={`/song/board?page=${songPageList.number}`} onClick={() => handlePageChange(songPageList.number)}>prev</Link>
                 ) : (
-                    <span>prev</span>
+                    <span className='prev'>{'<'}</span>
                 )}
 
                 {/* Page numbers */}
                 {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((page) => (
-                    <span key={page}>
+                    <span className='cur-page' key={page}>
               {/* Current page */}
                         {page === songPageList.number + 1 ? (
                             <span>{page}</span>
                         ) : (
                             <Link to={`/song/board?page=${page}`} onClick={() => handlePageChange(page)}>
-                                {page}
+                                <div className='pages'> {page} </div>
                             </Link>
                         )}
             </span>
@@ -317,11 +319,11 @@ const LeaderBoard = () => {
                 {songPageList.number + 1 < songPageList.totalPages ? (
                     <Link to={`/song/board?page=${songPageList.number + 2}` }  onClick={() => handlePageChange(songPageList.number + 2)}>next</Link>
                 ) : (
-                    <span>next</span>
+                    <span className='nxt-pg'>{'>'}</span>
                 )}
 
                 {/* Last page */}
-                <Link to={`/song/board?page=${songPageList.totalPages}`}  onClick={() => handlePageChange(songPageList.totalPages)}>Last</Link>
+                <Link to={`/song/board?page=${songPageList.totalPages}`}  onClick={() => handlePageChange(songPageList.totalPages)}><div className='last-pg'>{'>>'}</div> </Link>
             </div>
         </div>
     );
