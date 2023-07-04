@@ -1,6 +1,6 @@
 
 
-import React, { useState } from "react";
+import React, {useRef, useState} from "react";
 
 import { useNavigate } from 'react-router-dom';
 
@@ -16,12 +16,21 @@ const SignupPage = () => {
 
     const [repwdState, setRepwdState] = useState('');
 
-    const [isValidForm, setIsValidForm] = useState(false);
-    const [isEmailForm, setIsEmailForm] = useState(false);
-    const [isPwForm, setPwForm] = useState(false);
-    const [isNickForm, setIsNickForm] = useState(false);
+    const [isValidForm, setIsValidForm] = useState(false); // 비번
+    const [isEmailForm, setIsEmailForm] = useState(false); //이메일
+    const [isPwForm, setPwForm] = useState(false); //비번
+    const [isNickForm, setIsNickForm] = useState(false);  //닉네임
+    const [isTermsChecked, setIsTermsChecked] = useState(false); //약관
+    const [isPrivacyChecked, setIsPrivacyChecked] = useState(false); //개인정보
     const navigate = useNavigate();
 
+    const handleTermsCheckboxChange = (event) => {
+        setIsTermsChecked(event.target.checked);
+    };
+
+    const handlePrivacyCheckboxChange = (event) => {
+        setIsPrivacyChecked(event.target.checked);
+    };
 
     const handleEmailBlur = () => {
         const email = document.getElementById('memberEmail').value;
@@ -84,30 +93,36 @@ const SignupPage = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        if (!isValidForm) {
-            alert('입력값이 올바르지 않습니다. 다시 확인해주세요.');
-            return;
-        }
+        if (isTermsChecked && isPrivacyChecked) {
+            try {
+                const formData = new FormData(event.target);
+                const response = await fetch('/member/save', {
+                    method: 'POST',
+                    body: formData,
+                });
 
+                if (response.ok) {
+                    alert('회원가입이 완료되었습니다.');
+                    // const scrollPosition = window.scrollY; // 현재 스크롤 위치
+                    // const url = `login.js?scrollPosition=${scrollPosition}`;
+                    //
+                    // window.location.href = url;
 
-
-        try {
-            const formData = new FormData(event.target);
-            const response = await fetch('/member/save', {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (response.ok) {
-                alert('회원가입이 완료되었습니다.');
-                navigate('/member/login');
-            } else {
-                alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+                    navigate('/login');
+                } else {
+                    alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+                }
+            } catch (error) {
+                console.error('Error occurred:', error);
+                alert('오류가 발생했습니다. 다시 시도해주세요.');
             }
-        } catch (error) {
-            console.error('Error occurred:', error);
-            alert('오류가 발생했습니다. 다시 시도해주세요.');
+        }else{
+            alert("필수약관에 동의해야 합니다.")
         }
+
+
+
+
     };
 
     const emailCheck = () => {
@@ -192,7 +207,7 @@ const SignupPage = () => {
                             <li className="checkBox-check02">
                                 <br></br><br></br>
                                     <li>이용약관 동의(필수)
-                                        <input type="checkbox" name="chk"/>
+                                        <input type="checkbox" name="chk" checked={isTermsChecked} onChange={handleTermsCheckboxChange} />
                                     </li>
                                 <br></br>
                                 <textarea className='first' name="" id="">
@@ -204,7 +219,7 @@ const SignupPage = () => {
                             <li className="checkBox-check03">
                                 <br></br><br></br>
                                     <li>개인정보 수집 및 이용에 대한 안내(필수)
-                                        <input type="checkbox" name="chk"/>
+                                        <input type="checkbox" name="chk" checked={isPrivacyChecked} onChange={handlePrivacyCheckboxChange}/>
                                     </li>
                                 <br></br>
                                 <textarea className='second' name="" id={""}>
@@ -278,7 +293,8 @@ const SignupPage = () => {
                                     <button type="button" className="btn btn-primary" onClick={NickNameCheck}>Check NickName</button>
                                 </div>
                                 <p id="checkNick-result"></p>
-                                <button className="btn btn-primary btn-block" id="signup" type="submit">Sign Up</button>
+                                <button className="btn btn-primary btn-block" id="signup" type="submit"
+                                        disabled={!isValidForm || !isEmailForm || !isPwForm || !isNickForm}>Sign Up</button>
                             </form>
                         </div>
                     </div>
