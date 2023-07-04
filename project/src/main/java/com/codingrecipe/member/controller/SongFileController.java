@@ -64,12 +64,18 @@ public class SongFileController {
 
 
         System.out.println("reqEntity : "+requestEntity);
+
         ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8000/api/upload", requestEntity, String.class);
 
         String responseBody = response.getBody();
         System.out.println(responseBody);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(responseBody);
+
+        String predictionsStr = jsonNode.get("predictions").asText();
+        predictionsStr = predictionsStr.replace("[[", "").replace("]]", "");
+        float prediction = Float.parseFloat(predictionsStr);
+
 
         String predictionsStr = jsonNode.get("predictions").asText();
         predictionsStr = predictionsStr.replace("[[", "").replace("]]", "");
@@ -94,6 +100,10 @@ public class SongFileController {
         Files.write(path1, fileBytes1);
 
 
+        String sysFileName1 = System.currentTimeMillis() +  "_" +fileName1;
+        String filePath1 = "/Users/ss3un9/Desktop/fastapi/txt/"+sysFileName1;
+
+
         songDTO.setPrediction(prediction);
         songDTO.setMemberId(loginId);
         songDTO.setMemberNickName(loginNickName);
@@ -112,8 +122,13 @@ public class SongFileController {
         System.out.println(ResponseSong);
         return ResponseEntity.status(HttpStatus.OK).body(ResponseSong);
 
+        ResponseSong.put("songDTO",songDTO );
 
+        ResponseSong.put("success", true);
+        ResponseSong.put("message", "File uploaded successfully!");
 
+        System.out.println(ResponseSong);
+        return ResponseEntity.status(HttpStatus.OK).body(ResponseSong);
 
 
     }
