@@ -64,13 +64,18 @@ public class SongFileController {
 
 
         System.out.println("reqEntity : "+requestEntity);
-        ResponseEntity<String> response = restTemplate.postForEntity("http://3.36.204.155:8000/api/upload", requestEntity, String.class);
 
+        ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8000/api/upload", requestEntity, String.class);
 
         String responseBody = response.getBody();
         System.out.println(responseBody);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(responseBody);
+
+        String predictionsStr = jsonNode.get("predictions").asText();
+        predictionsStr = predictionsStr.replace("[[", "").replace("]]", "");
+        float prediction = Float.parseFloat(predictionsStr);
+
 
         String predictionsStr = jsonNode.get("predictions").asText();
         predictionsStr = predictionsStr.replace("[[", "").replace("]]", "");
@@ -87,14 +92,16 @@ public class SongFileController {
 
         String fileName1 = file1.getOriginalFilename();
 
-
         String sysFileName1 = System.currentTimeMillis() +  "_" +fileName1;
-        String filePath1 = "/Users/ss3un9/Desktop/fastapi/txt/"+sysFileName1;
-
+        String filePath1 = "C:/bp_music/"+sysFileName1;
 
         byte[] fileBytes1 = file1.getBytes();
         Path path1 = Paths.get(filePath1);
         Files.write(path1, fileBytes1);
+
+
+        String sysFileName1 = System.currentTimeMillis() +  "_" +fileName1;
+        String filePath1 = "/Users/ss3un9/Desktop/fastapi/txt/"+sysFileName1;
 
 
         songDTO.setPrediction(prediction);
@@ -115,8 +122,13 @@ public class SongFileController {
         System.out.println(ResponseSong);
         return ResponseEntity.status(HttpStatus.OK).body(ResponseSong);
 
+        ResponseSong.put("songDTO",songDTO );
 
+        ResponseSong.put("success", true);
+        ResponseSong.put("message", "File uploaded successfully!");
 
+        System.out.println(ResponseSong);
+        return ResponseEntity.status(HttpStatus.OK).body(ResponseSong);
 
 
     }
