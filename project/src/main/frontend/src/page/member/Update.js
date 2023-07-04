@@ -25,6 +25,7 @@ const Update = () => {
     const [editingName, setEditingName] = useState(false);
     const [editingNickName, setEditingNickName] = useState(false);
 
+    const [isNickForm, setIsNickForm] = useState(false);  //닉네임
 
     useEffect(() => {
         const fetchData = async () => {
@@ -151,7 +152,35 @@ const Update = () => {
             setIsValidForm(true);
         }
     };
+    const NickNameCheck = (nickname) => {
+        const checkNickResult = document.getElementById("checkNick-result");
+        console.log("입력값: ", nickname);
 
+        axios.post("/member/nick-check", null, {
+            params: {
+                memberNickName: nickname
+            }
+        })
+            .then(response => {
+                console.log("요청성공", response.data);
+                if (response.data === "ok") {
+                    console.log("사용가능한 닉네임");
+                    checkNickResult.style.color = "green";
+                    checkNickResult.innerHTML = "사용가능한 닉네임";
+                    alert("사용가능한 닉네임입니다");
+                    setIsNickForm(true);
+                } else {
+                    console.log("이미 사용중인 닉네임");
+                    checkNickResult.style.color = "red";
+                    checkNickResult.innerHTML = "이미 사용중인 닉네임";
+                    alert("이미 사용중인 닉네임입니다");
+                    setIsNickForm(false);
+                }
+            })
+            .catch(error => {
+                console.log("에러발생", error);
+            });
+    };
 
     useEffect(() => {
         if (newPassword !== confirmPassword) {
@@ -163,10 +192,10 @@ const Update = () => {
     }, [newPassword, confirmPassword]);
 
     return (
-            <div className='bar-table'>
-                <div className='bar'>
-                    <MypageBar/>
-                    <div className='form-table'>
+            <div className='update-main'>
+                <div className='upd-bar'>
+                    <MypageBar/></div>
+                <div className='upt-form'>
                         <form className='info-login' method="post" onSubmit={ handleSubmit }>
                             로그인 정보
                             <input type="hidden" value={memberId} name="id" />
@@ -238,16 +267,13 @@ const Update = () => {
                                     />
 
                                     <button type="button" onClick={() => setEditingName(false)}>변경취소</button>
-                                    <button type = "submit" >
-                                        수정하기
-                                    </button>
+                                    <button type = "submit" >수정하기</button>
+
                                 </>
                             ) : (
                                 <>
                                     <span>{memberName}</span>
-                                    <button type="button" onClick={() => setEditingName(true)}>
-                                        변경하기
-                                    </button>
+                                    <button type="button" onClick={() => setEditingName(true)}>변경하기</button>
 
                                 </>
                             )}
@@ -271,21 +297,20 @@ const Update = () => {
                                     />
 
                                     <button type="button"  onClick={() => setEditingNickName(false)}>취소</button>
-                                    <button type = "submit" >
-                                        수정하기
-                                    </button>
+                                    <button type = "submit" disabled={!isNickForm}>수정하기</button>
+                                    <button type="button" onClick={() => NickNameCheck(memberNickName)}>Check</button>
+                                    <p id="checkNick-result"></p>
                                 </>
                             ) : (
                                 <>
                                     <span>{memberNickName}</span>
-                                    <button type="button"  onClick={() => setEditingNickName(true)}>수정</button>
+                                    <button type="button"  onClick={() => setEditingNickName(true)} >수정</button>
 
                                 </>
                             )}
                             <br />
                         </form>
                     </div>
-                </div>
             </div>
     );
 

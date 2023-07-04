@@ -29,92 +29,95 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 public class SongFileController {
-        private  final SongService songService;
-        private  final MemberService memberService;
-        @PostMapping("/api/upload")
-        public ResponseEntity<Map<String, Object>> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1,@RequestParam("genre") String genre, @ModelAttribute SongDTO songDTO, HttpSession session) throws Exception {
-                Long loginId = (Long) session.getAttribute("loginId");
-                String loginNickName = (String) session.getAttribute("loginNickName");
-                RestTemplate restTemplate = new RestTemplate();
-;
-                MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+    private  final SongService songService;
+    private  final MemberService memberService;
+    @PostMapping("/api/upload")
+    public ResponseEntity<Map<String, Object>> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1,@RequestParam("genre") String genre, @ModelAttribute SongDTO songDTO, HttpSession session) throws Exception {
+        Long loginId = (Long) session.getAttribute("loginId");
+        String loginNickName = (String) session.getAttribute("loginNickName");
+        RestTemplate restTemplate = new RestTemplate();
+        ;
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
 
-                body.add("file", new ByteArrayResource(file.getBytes()) {
-                        @Override
-                        public String getFilename() {
-                                return file.getOriginalFilename();
-                        }
-                });
+        body.add("file", new ByteArrayResource(file.getBytes()) {
+            @Override
+            public String getFilename() {
+                return file.getOriginalFilename();
+            }
+        });
 
-                body.add("file1", new ByteArrayResource(file1.getBytes()) {
-                        @Override
-                        public String getFilename() {
-                                return file1.getOriginalFilename();
-                        }
-                });
-
-
-                body.add("genre", genre);
-
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-                HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-                System.out.println(loginId);
+        body.add("file1", new ByteArrayResource(file1.getBytes()) {
+            @Override
+            public String getFilename() {
+                return file1.getOriginalFilename();
+            }
+        });
 
 
-                System.out.println("reqEntity : "+requestEntity);
-                ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8000/api/upload", requestEntity, String.class);
+        body.add("genre", genre);
 
-                String responseBody = response.getBody();
-                System.out.println(responseBody);
-                ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode jsonNode = objectMapper.readTree(responseBody);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-                String predictionsStr = jsonNode.get("predictions").asText();
-                predictionsStr = predictionsStr.replace("[[", "").replace("]]", "");
-                float prediction = Float.parseFloat(predictionsStr);
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+        System.out.println(loginId);
 
 
-                String fileName = file.getOriginalFilename();
-                String sysFileName = System.currentTimeMillis() +  "_" +  fileName;
-
-                String filePath = "/Users/ss3un9/Desktop/fastapi/song/" + sysFileName;
-                byte[] fileBytes = file.getBytes();
-                Path path = Paths.get(filePath);
-                Files.write(path, fileBytes);
-
-                String fileName1 = file1.getOriginalFilename();
-
-                String sysFileName1 = System.currentTimeMillis() +  "_" +fileName1;
-                String filePath1 = "C:/bp_music/"+sysFileName1;
-
-                byte[] fileBytes1 = file1.getBytes();
-                Path path1 = Paths.get(filePath1);
-                Files.write(path1, fileBytes1);
+        System.out.println("reqEntity : "+requestEntity);
+        ResponseEntity<String> response = restTemplate.postForEntity("http://3.36.204.155:8000/api/upload", requestEntity, String.class);
 
 
-                songDTO.setPrediction(prediction);
-                songDTO.setMemberId(loginId);
-                songDTO.setMemberNickName(loginNickName);
-                songDTO.setFileSysName(sysFileName);
-                songDTO.setLyrics(sysFileName1);
-                songService.save(songDTO);
+        String responseBody = response.getBody();
+        System.out.println(responseBody);
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(responseBody);
 
-                Map<String, Object> ResponseSong = new HashMap<>();
-
-
-                ResponseSong.put("songDTO",songDTO );
-
-                ResponseSong.put("success", true);
-                ResponseSong.put("message", "File uploaded successfully!");
-
-                System.out.println(ResponseSong);
-                return ResponseEntity.status(HttpStatus.OK).body(ResponseSong);
+        String predictionsStr = jsonNode.get("predictions").asText();
+        predictionsStr = predictionsStr.replace("[[", "").replace("]]", "");
+        float prediction = Float.parseFloat(predictionsStr);
 
 
+        String fileName = file.getOriginalFilename();
+        String sysFileName = System.currentTimeMillis() +  "_" +  fileName;
+
+        String filePath = "C:/bp_music/" + sysFileName;
+        byte[] fileBytes = file.getBytes();
+        Path path = Paths.get(filePath);
+        Files.write(path, fileBytes);
+
+        String fileName1 = file1.getOriginalFilename();
+
+
+        String sysFileName1 = System.currentTimeMillis() +  "_" +fileName1;
+        String filePath1 = "/Users/ss3un9/Desktop/fastapi/txt/"+sysFileName1;
+
+
+        byte[] fileBytes1 = file1.getBytes();
+        Path path1 = Paths.get(filePath1);
+        Files.write(path1, fileBytes1);
+
+
+        songDTO.setPrediction(prediction);
+        songDTO.setMemberId(loginId);
+        songDTO.setMemberNickName(loginNickName);
+        songDTO.setFileSysName(sysFileName);
+        songDTO.setLyrics(sysFileName1);
+        songService.save(songDTO);
+
+        Map<String, Object> ResponseSong = new HashMap<>();
+
+
+        ResponseSong.put("songDTO",songDTO );
+
+        ResponseSong.put("success", true);
+        ResponseSong.put("message", "File uploaded successfully!");
+
+        System.out.println(ResponseSong);
+        return ResponseEntity.status(HttpStatus.OK).body(ResponseSong);
 
 
 
-        }
+
+
+    }
 }

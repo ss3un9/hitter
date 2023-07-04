@@ -1,7 +1,10 @@
-import React, {useEffect, useState} from "react";
-import {useLocation, useNavigate} from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
 // import './HitAi.css'
+import "../community/Write.css"
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
 
 const BoardUpdate = () => {
 
@@ -30,6 +33,7 @@ const BoardUpdate = () => {
     const [boardWriteId, setBoardWriteId] = useState('');
     const [boardContents, setBoardContents] = useState('');
     const [boardCreatedTIme, setBoardCreatedTime] = useState('');
+
     //
     function reqList() {
         navigate(`/board/paging?page=${page}`, { state: { page: page } });
@@ -38,7 +42,7 @@ const BoardUpdate = () => {
         const confirmDelete = window.confirm('게시글을 정말 삭제하시겠습니까?');
 
         if (confirmDelete) {
-            navigate(`/board/delete?id=` + id, {state: {id: id}});
+            navigate(`/board/delete?id=` + id, { state: { id: id } });
         }
     }
 
@@ -83,37 +87,45 @@ const BoardUpdate = () => {
     const PostUpdate = async (event) => {
         event.preventDefault();
 
+
         try {
             const formData = new FormData(event.target);
+            formData.set('boardContents', stripPTags(boardContents)); 
             const response = await axios.post('/board/PostUpdate', formData, { responseType: "json" });
             console.log(response);
-            if(response.status === 200) {
+            if (response.status === 200) {
                 setRepostResponse(response.data.post);
                 alert("게시글이 성공적으로 수정되었습니다");
                 navigate(`/board/detail?id=${id}&page=${page}`);
 
 
-            }else{
+            } else {
                 console.error('오류가 발생했습니다. 다시 시도해주세요 ');
             }
         } catch (error) {
-            console.error('게시글을 수정하지 못했습니다.',error);
+            console.error('게시글을 수정하지 못했습니다.', error);
         }
     };
-
+    const stripPTags = (content) => {
+        return content.replace(/<\/?p>/g, ''); // Use a regular expression to remove <p> and </p> tags
+      };
     return (
         <>
 
             <div>
-                <form  method="post" encType="multipart/form-data" onSubmit={PostUpdate}>
+                <form method="post" encType="multipart/form-data" onSubmit={PostUpdate}>
                     <label>
                         title: <input type="text" name="boardTitle" value={boardTitle} onChange={(e) => setBoardTitle(e.target.value)} />
                     </label>
                     <input type="hidden" name="Id" value={boardId} />
                     <input type="hidden" name="boardWriterId" value={boardWriteId} />
-                    <input type="hidden" name="boardWriter" value={boardWrite } />
+                    <input type="hidden" name="boardWriter" value={boardWrite} />
                     <label>
-                        contents: <textarea name="boardContents" cols="30" rows="10" defaultValue={boardContents} onChange={(e) => setBoardContents(e.target.value)}></textarea>
+                        contents: <CKEditor
+                            editor={ClassicEditor}
+                            data={boardContents}
+                            onChange={(event, editor) => setBoardContents(editor.getData())}
+                        />
                     </label>
                     <label>
                         file: <input type="file" name="boardFile" />
@@ -129,4 +141,4 @@ const BoardUpdate = () => {
 }
 
 
-export default BoardUpdate ;
+export default BoardUpdate;
