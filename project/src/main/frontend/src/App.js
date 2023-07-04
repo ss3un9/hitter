@@ -19,6 +19,8 @@ import MemberDelete from "./page/member/MemberDelete";
 import MenuBar from "./component/MenuBar";
 import LoginMenuBar from "./component/LoginMenuBar";
 import Home from "./page/home/Home";
+import HowToUse from "./page/howtouse/HowToUse";
+import MyLikeSong from "./page/member/MyLikeSong";
 
 class App extends Component {
 
@@ -54,11 +56,13 @@ class App extends Component {
               <Route path="/logout" element={<Logout/>}></Route>
               <Route path="/member/mypage" element={<Mypage/>}></Route>
               <Route path="/member/mysong" element={<MySong/>}></Route>
+              <Route path="/member/mylikesong" element={<MyLikeSong/>}></Route>
               <Route path="/member/myboard" element={<MyBoard/>}></Route>
               <Route path={"/hit_ai_detail"} element={<HitAiDetail/>}></Route>
               <Route path="/board/delete" element={<BoardDelete/>}/>
               <Route path="/board/update" element={<BoardUpdate/>}/>
               <Route path="/board/paging" element={<Community/>}/>
+              <Route path="/howtouse" element={<HowToUse/>}/>
             </Routes>
           </BrowserRouter>
 

@@ -36,6 +36,14 @@ const MyBar = () => {
                                     </div>
                                 </Button>
                             </Link>
+                            <Link to="/member/mylikesong" className="nav-link">
+                                <Button className='hover-button5'>
+                                    <div className='byebye'>
+                                        <FaRegFaceSadTear className="FaRegFaceSadTear"/>
+                                        내가 좋아요 한 곡
+                                    </div>
+                                </Button>
+                            </Link>
                             <Link to="/member/myboard" className="nav-link">
                                 <Button className='hover-button3'>
                                     <div className='info-board'>
@@ -52,6 +60,7 @@ const MyBar = () => {
                                     </div>
                                 </Button>
                             </Link>
+
 
                         </ul>
                     </nav>

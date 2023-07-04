@@ -1,6 +1,6 @@
 .play-button {
     cursor: pointer;
-  }
+}
 .leaderboard-txt{
     color: #aba8fa;
     font-family: Iceland;
@@ -240,6 +240,10 @@
     font-family: Suit;
 }
 
+.tbl {
+    margin: 0 auto;
+    padding: 20px;
+}
 .cur-page{
     display: inline-block;
     padding: 10px;
@@ -263,6 +267,7 @@
     background: transparent no-repeat center center;
     color: #FFFFFF;
     font-family: Suit;
+
 }
 
 .lr-btn{
