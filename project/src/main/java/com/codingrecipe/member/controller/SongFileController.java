@@ -79,7 +79,7 @@ public class SongFileController {
                 String fileName = file.getOriginalFilename();
                 String sysFileName = System.currentTimeMillis() +  "_" +  fileName;
 
-                String filePath = "C:/bp_music/" + sysFileName;
+                String filePath = "/Users/ss3un9/Desktop/fastapi/song/" + sysFileName;
                 byte[] fileBytes = file.getBytes();
                 Path path = Paths.get(filePath);
                 Files.write(path, fileBytes);
