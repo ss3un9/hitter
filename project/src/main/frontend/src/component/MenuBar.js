@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom';
 import React from "react";
 const MenuBar = () => {
     return (
-        <div className="menubar">
+        <div className="menubar-login">
                 <Link to="/">
                     <Button className="logo">
                         <img className="logo-png" alt= "HITTER" src={mainlogo}/>

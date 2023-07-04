@@ -5,7 +5,9 @@
     width: 100%;
     height: 100%;
 }
-
+.menubars-log-or-not{
+    top: 0;
+}
 
 /* 폰트들 */
 
