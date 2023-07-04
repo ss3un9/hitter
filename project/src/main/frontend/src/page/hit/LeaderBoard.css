@@ -35,7 +35,7 @@
 }
 
 .board-table-wrapper{
-    width: 700px;
+    width: 800px;
     background: #3f4d6b;
     align-items: center;
     font-family: Suit;
@@ -56,6 +56,13 @@
 .tbl-head{
     padding: 0;
 }
+
+.tds{
+    padding: 15px;
+}
+
+
+
 
 .HiTrendingUp{
     align-items: center;
@@ -261,4 +268,10 @@
     color: #FFFFFF;
     font-family: Suit;
 
+}
+
+.lr-btn{
+    color: white;
+    background-color: transparent;
+    border: none;
 }
