@@ -104,6 +104,12 @@ const SignupPage = () => {
                 if (response.ok) {
                     alert('회원가입이 완료되었습니다.');
 
+                    // const scrollPosition = window.scrollY; // 현재 스크롤 위치
+                    // const url = `login.js?scrollPosition=${scrollPosition}`;
+                    //
+                    // window.location.href = url;
+
+
                     navigate('/login');
                 } else {
                     alert('회원가입에 실패했습니다. 다시 시도해주세요.');
