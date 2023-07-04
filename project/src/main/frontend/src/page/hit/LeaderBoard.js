@@ -87,14 +87,15 @@ const LeaderBoard = () => {
 
             const response = await axios.get(`/song/leader_board/${memberId}`, {
                 params: {
-                    memberId: memberId
+                    memberId: memberId,
+                    page: currentPage
                 }
             });
 
             const { data } = response;
             console.log(data);
 
-            const updatedSongList = data.songList.map(song => {
+            const updatedSongList = data.songPageList.content.map(song => {
                 const matchingLike = data.likeList.find(like => like.songId === song.id);
 
                 return {
@@ -110,16 +111,14 @@ const LeaderBoard = () => {
             setLikeList(data.likeList);
             const { songPageList ,startPage, endPage } = data;
 
+
+            setSongList(updatedSongList);
+
             setSongPageList(songPageList);
             setStartPage(startPage);
             setEndPage(endPage);
+
             navigate(`/song/board?page=${page}`);
-            // const { boardPageList ,startPage, endPage } = data;
-            //
-            // setBoardList(boardPageList.content);
-            // setBoardPageList(boardPageList);
-            // setStartPage(startPage);
-            // setEndPage(endPage);
 
         } catch (error) {
             // Handle errors
@@ -201,16 +200,15 @@ const LeaderBoard = () => {
             <div className='buttons'>
                 <ul className='bt-ul'>
             {storedSession.loginName != null && (
-                <button className='predict-button' onClick={Posting}><div className='btn-info'><HiTrendingUp className='HiTrendingUp' size='20'/>노래 예측하기</div> </button>
+                <button className='predict-button' onClick={Posting}><div className='btn-info'><HiTrendingUp size='15'/>노래 예측하기</div> </button>
             )}
-            <button className='whole-button' onClick={() => fetchData()}><div className='whole-info'><BsCheck2All size='20'/>전체보기</div> </button>
+            <button className='whole-button' onClick={() => fetchData()}>전체보기</button>
             <div>
-                <br></br><br></br>
-                <button className='pop-button' onClick={() => handleGenreFilter('pop')}><div className='pop-info'>Pop</div></button>
+            <button className='pop-button' onClick={() => handleGenreFilter('pop')}>Pop</button>
             <button className='dance-button' onClick={() => handleGenreFilter('dance')}>Dance</button>
             <button className='ballad-button' onClick={() => handleGenreFilter('ballad')}>Ballad</button>
-                </div>
-                </ul>
+            </div>
+            </ul>
             </div>
             <div className="board-table-wrapper">
                 <table className='tbl'>
@@ -229,11 +227,11 @@ const LeaderBoard = () => {
                     </thead>
                     <tbody>
                     {songList
-                        .sort((a, b) => b.prediction - a.prediction)    //높은순 정렬
                         .map((song, index) => (
+
                             <tr key={song.id}>
-                                {/*<td><LikeButton memberId={song.memberId} songId={song.id} />  </td>*/}
-                                <td className='tds'>
+
+                                <td>
                                     <LikeButton
                                         memberId={memberId}
                                         songId={song.id}
@@ -241,14 +239,10 @@ const LeaderBoard = () => {
                                         isLiked={song.isLiked}
                                     />
                                 </td>
-{/*
-                                <td>{index + 1}</td>
-*/}
-                                {/*<td>{song.id}</td>*/}
 
-                                <td className='tds'>{(page - 1) * songPageList.size + index + 1}</td>
+                                <td>{songPageList.number * songPageList.size + index + 1}</td>
 
-                                <td className='tds'>
+                                <td>
                                     <Link to={`/hit_ai_detail?id=` + song.id} >
                                         {song.songTitle}
                                     </Link>
@@ -258,13 +252,14 @@ const LeaderBoard = () => {
                                 <td className='tds'>{song.prediction}</td>
                                 {/*<td>{song.songCreatedTime.replace("T", " ")}</td>*/}
                                 <td className='tds'>{song.songLike}</td>
-                                <td className='tds'>
+                                <td>
                                     {/*<Link to={`/song/play/${song.id}`}>재생</Link> */}
                                     <div
                                         className="play-button"
                                         onClick={() => handleOpenPlayer(song.id)}
                                     >
                                         <BsPlayCircleFill size='20'/>
+
                                     </div>
                                     {/* <SongPlayer songId={song.id} />{' '} */}
                                     {/* SongPlayer 컴포넌트에 songId props 전달 */}
@@ -292,7 +287,41 @@ const LeaderBoard = () => {
                 songId={selectedSongId}
             />
 
+            <div>
+                {/* First page */}
+                <Link to="" onClick={() => handlePageChange(1)}>First</Link>
 
+                {/* Previous page */}
+                {songPageList.number > 0 ? (
+                    <Link to={`/song/board?page=${songPageList.number}`} onClick={() => handlePageChange(songPageList.number)}>prev</Link>
+                ) : (
+                    <span>prev</span>
+                )}
+
+                {/* Page numbers */}
+                {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((page) => (
+                    <span key={page}>
+              {/* Current page */}
+                        {page === songPageList.number + 1 ? (
+                            <span>{page}</span>
+                        ) : (
+                            <Link to={`/song/board?page=${page}`} onClick={() => handlePageChange(page)}>
+                                {page}
+                            </Link>
+                        )}
+            </span>
+                ))}
+
+                {/* Next page */}
+                {songPageList.number + 1 < songPageList.totalPages ? (
+                    <Link to={`/song/board?page=${songPageList.number + 2}` }  onClick={() => handlePageChange(songPageList.number + 2)}>next</Link>
+                ) : (
+                    <span>next</span>
+                )}
+
+                {/* Last page */}
+                <Link to={`/song/board?page=${songPageList.totalPages}`}  onClick={() => handlePageChange(songPageList.totalPages)}>Last</Link>
+            </div>
         </div>
     );
 };

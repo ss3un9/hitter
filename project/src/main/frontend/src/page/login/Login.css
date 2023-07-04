@@ -5,7 +5,7 @@
 
 
 .login-page{
-    padding-bottom: 100%;
+    padding-bottom: 80px;
     background-color: #252525;
 }
 
@@ -19,6 +19,7 @@
     margin: auto;
     position: relative;
     width:500px;
+    overflow: hidden;
 }
 .header-id{
     font-family: Iceland;

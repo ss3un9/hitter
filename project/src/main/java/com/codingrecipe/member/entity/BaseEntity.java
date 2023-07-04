@@ -17,5 +17,5 @@ public class BaseEntity{
     @Column(updatable = false, name="created_at")
     private LocalDateTime createdTime;
 
-    }
+}
 

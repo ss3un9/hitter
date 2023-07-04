@@ -33,13 +33,44 @@ public class CommentService {
 
     public List<CommentDTO> findAll(Long boardId) {
         BoardEntity boardEntity = boardRepository.findById(boardId).get();
-        List<CommentEntity> commentEntityList = commentRepository.findAllByBoardEntityOrderByIdDesc(boardEntity);
+        List<CommentEntity> commentEntityList = commentRepository.findAllByBoardEntityOrderById(boardEntity);
 
         List<CommentDTO> commentDTOList = new ArrayList<>();
         for (CommentEntity commentEntity: commentEntityList) {
+
             CommentDTO commentDTO = CommentDTO.toCommentDTO(commentEntity, boardId);
             commentDTOList.add(commentDTO);
         }
         return commentDTOList;
+    }
+
+
+    public void deleteComment(Long commentId) {
+        try {
+            commentRepository.deleteById(commentId);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete comment");
+        }
+    }
+
+    public Long updateComment(Long commentId, CommentDTO commentDTO) {
+        Optional<CommentEntity> optionalCommentEntity = commentRepository.findById(commentId);
+        if (optionalCommentEntity.isPresent()) {
+            CommentEntity commentEntity = optionalCommentEntity.get();
+            Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(commentDTO.getBoardId());
+            if (optionalBoardEntity.isPresent()) {
+                BoardEntity boardEntity = optionalBoardEntity.get();
+
+                commentEntity.setCommentContents(commentDTO.getCommentContents());
+
+                commentEntity.setBoardEntity(boardEntity);
+
+                return commentRepository.save(commentEntity).getId();
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 }

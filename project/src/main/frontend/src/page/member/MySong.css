@@ -32,7 +32,7 @@
     padding: 20px 15px;
     text-align: center;
     align-items: center;
-    font-size: 80px;
+    /*font-size: 80px;*/
     color: #fff;
 }
 
@@ -55,10 +55,12 @@
     font-size: 16px;
     color: #ffffff;
     border-bottom: solid 1px rgba(255,255,255,.1);
+    
 }
 
 tr:hover td {
     background:#4E5066;
     color:#FFFFFF;
+    
     border-top: 1px solid #22262e;
 }
