@@ -1,8 +1,10 @@
 import axios from 'axios';
+import {PiChatsCircleLight} from "react-icons/pi";
 
 import React, { useState, useEffect } from 'react';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import "./Community.css"
+import {HiOutlineTrophy} from "react-icons/hi2";
 const Community =  () => {
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
     const location = useLocation();
@@ -58,62 +60,63 @@ const Community =  () => {
 
 
     return (
-        <>
-
-            {storedSession.loginName != null && (
-                <button onClick={Posting}>글작성</button>
-            )}
+        <div className='cm-container'>
+            <h1 className='cm-txt'>
+                <PiChatsCircleLight className={'PiChatsCircleLight'} size='55'/>COMMUNITY
+            </h1>
 
             <div className="community-table-wrapper">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>title</th>
-                        <th>writer</th>
-                        <th>date</th>
-                        <th>hits</th>
+                <table className='cmtbl'>
+                    <thead className='cmtbl-head'>
+                    <tr className='trs'>
+                        <th className='cmths'>id</th>
+                        <th className='cmths'>title</th>
+                        <th className='cmths'>writer</th>
+                        <th className='cmths'>date</th>
+                        <th className='cmths'>hits</th>
                     </tr>
                     </thead>
                     <tbody>
                     {boardList.map(board => (
                         <tr key={board.id}>
-                            <td>{board.id}</td>
+                            <td className='idtd'>{board.id}</td>
                             <td>
                                 <Link to={`/board/detail?id=` + board.id + `&page=` + page} >
-                                    {board.boardTitle}
+                                    <div className='board-title'>{board.boardTitle}</div>
                                 </Link>
                             </td>
-                            <td>{board.boardWriter}</td>
-                            <td>{board.boardCreatedTime}</td>
-                            <td>{board.boardHits}</td>
+                            <td className='cmtds'>{board.boardWriter}</td>
+                            <td className='cmtds'>{board.boardCreatedTime}</td>
+                            <td className='cmtds'>{board.boardHits}</td>
                         </tr>
                     ))}
                     </tbody>
                 </table>
             </div>
-
-
+            <div className='cm-paging'>
+            {storedSession.loginName != null && (
+                <button className='write-ar-btn' onClick={Posting}>글작성</button>
+            )}
             <div>
                 {/* First page */}
-                <Link to="" onClick={() => handlePageChange(1)}>First</Link>
+                <Link to="" onClick={() => handlePageChange(1)}><div className='rjrthl'>{'<<'}</div></Link>
 
                 {/* Previous page */}
                 {boardPageList.number > 0 ? (
-                    <Link to={`/board/paging?page=${boardPageList.number}`} onClick={() => handlePageChange(boardPageList.number)}>prev</Link>
+                    <Link to={`/board/paging?page=${boardPageList.number}`} onClick={() => handlePageChange(boardPageList.number)}><div className='rjrthl'>{'<'}</div> </Link>
                 ) : (
-                    <span>prev</span>
+                    <span className='rjrthl'>{'<'}</span>
                 )}
 
                 {/* Page numbers */}
                 {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((page) => (
-                    <span key={page}>
+                    <span className='rjrthl' key={page}>
     {/* Current page */}
                         {page === boardPageList.number + 1 ? (
-                            <span>{page}</span>
+                            <span className='rjrthl'>{page}</span>
                         ) : (
                             <Link to={`/board/paging?page=${page}`} onClick={() => handlePageChange(page)}>
-                                {page}
+                                <div className='rjrthl'> {page} </div>
                             </Link>
                         )}
   </span>
@@ -121,15 +124,16 @@ const Community =  () => {
 
                 {/* Next page */}
                 {boardPageList.number + 1 < boardPageList.totalPages ? (
-                    <Link to={`/board/paging?page=${boardPageList.number + 2}` }  onClick={() => handlePageChange(boardPageList.number + 2)}>next</Link>
+                    <Link to={`/board/paging?page=${boardPageList.number + 2}` }  onClick={() => handlePageChange(boardPageList.number + 2)}><div className='rjrthl'>{'>'}</div> </Link>
                 ) : (
-                    <span>next</span>
+                    <span className='rjrthl'>{'>'}</span>
                 )}
 
                 {/* Last page */}
-                <Link to={`/board/paging?page=${boardPageList.totalPages}`}  onClick={() => handlePageChange(boardPageList.totalPages)}>Last</Link>
+                <Link to={`/board/paging?page=${boardPageList.totalPages}`}  onClick={() => handlePageChange(boardPageList.totalPages)}><div className='rjrthl'>{'>>'}</div></Link>
             </div>
-        </>
+            </div>
+        </div>
     );
 };
 

@@ -36,7 +36,7 @@
 
 .board-table-wrapper{
     width: 700px;
-    background: linear-gradient(to right, #536976, #292E49);
+    background: #3f4d6b;
     align-items: center;
     font-family: Suit;
     margin: 0 auto;
@@ -46,6 +46,7 @@
     color:white;
     overflow: auto;
     height: 450px;
+    border-radius: .4em;
 }
 
 .tbl{
@@ -214,4 +215,45 @@
 
 .tds{
     text-align: center;
+}
+
+.fir-page{
+    display: inline-block;
+    padding: 10px;
+    background: transparent no-repeat center center;
+    color: #FFFFFF;
+    font-family: Suit;
+}
+
+.prev{
+    display: inline-block;
+    padding: 10px;
+    background: transparent no-repeat center center;
+    color: #FFFFFF;
+    font-family: Suit;
+}
+
+.cur-page{
+    display: inline-block;
+    padding: 10px;
+    background: transparent no-repeat center center;
+    color: #FFFFFF;
+    font-family: Suit;
+
+}
+
+.nxt-pg{
+    display: inline-block;
+    padding: 10px;
+    background: transparent no-repeat center center;
+    color: #FFFFFF;
+    font-family: Suit;
+}
+
+.last-pg{
+    display: inline-block;
+    padding: 10px;
+    background: transparent no-repeat center center;
+    color: #FFFFFF;
+    font-family: Suit;
 }

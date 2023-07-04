@@ -163,10 +163,10 @@ const Update = () => {
     }, [newPassword, confirmPassword]);
 
     return (
-            <div className='bar-table'>
-                <div className='bar'>
-                    <MypageBar/>
-                    <div className='form-table'>
+            <div className='update-main'>
+                <div className='upd-bar'>
+                    <MypageBar/></div>
+                <div className='upt-form'>
                         <form className='info-login' method="post" onSubmit={ handleSubmit }>
                             로그인 정보
                             <input type="hidden" value={memberId} name="id" />
@@ -285,7 +285,6 @@ const Update = () => {
                             <br />
                         </form>
                     </div>
-                </div>
             </div>
     );
 

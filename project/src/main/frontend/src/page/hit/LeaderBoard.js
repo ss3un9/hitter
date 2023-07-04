@@ -203,7 +203,8 @@ const LeaderBoard = () => {
                 <button className='predict-button' onClick={Posting}><div className='btn-info'><HiTrendingUp size='15'/>노래 예측하기</div> </button>
             )}
             <button className='whole-button' onClick={() => fetchData()}>전체보기</button>
-            <div>
+                    <br></br><br></br>
+                    <div>
             <button className='pop-button' onClick={() => handleGenreFilter('pop')}>Pop</button>
             <button className='dance-button' onClick={() => handleGenreFilter('dance')}>Dance</button>
             <button className='ballad-button' onClick={() => handleGenreFilter('ballad')}>Ballad</button>
@@ -244,7 +245,7 @@ const LeaderBoard = () => {
 
                                 <td>
                                     <Link to={`/hit_ai_detail?id=` + song.id} >
-                                        {song.songTitle}
+                                        <div className='song-title'> {song.songTitle} </div>
                                     </Link>
                                 </td>
                                 <td className='tds'>{song.genre}</td>
@@ -287,26 +288,28 @@ const LeaderBoard = () => {
                 songId={selectedSongId}
             />
 
-            <div>
+            <div className='paging'>
                 {/* First page */}
-                <Link to="" onClick={() => handlePageChange(1)}>First</Link>
+                <Link to="" onClick={() => handlePageChange(1)}>
+                    <div className='fir-page'>{'<<'}</div>
+                </Link>
 
                 {/* Previous page */}
                 {songPageList.number > 0 ? (
                     <Link to={`/song/board?page=${songPageList.number}`} onClick={() => handlePageChange(songPageList.number)}>prev</Link>
                 ) : (
-                    <span>prev</span>
+                    <span className='prev'>{'<'}</span>
                 )}
 
                 {/* Page numbers */}
                 {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((page) => (
-                    <span key={page}>
+                    <span className='cur-page' key={page}>
               {/* Current page */}
                         {page === songPageList.number + 1 ? (
                             <span>{page}</span>
                         ) : (
                             <Link to={`/song/board?page=${page}`} onClick={() => handlePageChange(page)}>
-                                {page}
+                                <div className='pages'> {page} </div>
                             </Link>
                         )}
             </span>
@@ -316,11 +319,11 @@ const LeaderBoard = () => {
                 {songPageList.number + 1 < songPageList.totalPages ? (
                     <Link to={`/song/board?page=${songPageList.number + 2}` }  onClick={() => handlePageChange(songPageList.number + 2)}>next</Link>
                 ) : (
-                    <span>next</span>
+                    <span className='nxt-pg'>{'>'}</span>
                 )}
 
                 {/* Last page */}
-                <Link to={`/song/board?page=${songPageList.totalPages}`}  onClick={() => handlePageChange(songPageList.totalPages)}>Last</Link>
+                <Link to={`/song/board?page=${songPageList.totalPages}`}  onClick={() => handlePageChange(songPageList.totalPages)}><div className='last-pg'>{'>>'}</div> </Link>
             </div>
         </div>
     );

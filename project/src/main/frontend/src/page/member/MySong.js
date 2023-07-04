@@ -75,7 +75,6 @@ const MySong = () => {
     }, []);
 
     return (
-        <>
             <div className='tbl-bar'>
                 <div className='bar'>
                     <MypageBar /></div>
@@ -138,7 +137,6 @@ const MySong = () => {
                 songId={selectedSongId}
             />
             </div>
-        </>
     )
 }
 
