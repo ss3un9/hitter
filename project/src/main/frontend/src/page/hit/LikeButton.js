@@ -56,7 +56,7 @@ const LikeButton = ({ memberId, songId, isLiked, likeId}) => {
 
     return (
         <div className='btnn' onClick={handleLikeClick}>
-            {liked ? <GoHeart className='heart' size='17' color={'#ff81f4'}/> : <GoHeartFill className='heart' size='17' color={'#ff81f4'}/>}
+            {liked ? <GoHeartFill className='heart' size='17' color={'#ff81f4'}/> : <GoHeart className='heart' size='17' color={'#ff81f4'}/>}
         </div>
     );
 };

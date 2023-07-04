@@ -10,6 +10,7 @@ import {HiOutlineTrophy} from "react-icons/hi2";
 import {HiTrendingUp} from "react-icons/hi"
 import {BsCheck2All} from "react-icons/bs";
 import {BsPlayCircleFill} from "react-icons/bs";
+import {MdOutlineLyrics} from "react-icons/md";
 
 const LeaderBoard = () => {
     const [session, setSession] = useState({});
@@ -232,7 +233,7 @@ const LeaderBoard = () => {
 
                             <tr key={song.id}>
 
-                                <td>
+                                <td className='tds'>
                                     <LikeButton
                                         memberId={memberId}
                                         songId={song.id}
@@ -241,9 +242,9 @@ const LeaderBoard = () => {
                                     />
                                 </td>
 
-                                <td>{songPageList.number * songPageList.size + index + 1}</td>
+                                <td className='tds'>{songPageList.number * songPageList.size + index + 1}</td>
 
-                                <td>
+                                <td className='tds'>
                                     <Link to={`/hit_ai_detail?id=` + song.id} >
                                         <div className='song-title'> {song.songTitle} </div>
                                     </Link>
@@ -266,8 +267,8 @@ const LeaderBoard = () => {
                                     {/* SongPlayer 컴포넌트에 songId props 전달 */}
                                 </td>
                                 <td className='tds'>
-                                    <button onClick={() => handleViewLyrics(song.id)}>
-                                        가사보기
+                                    <button className='lr-btn' onClick={() => handleViewLyrics(song.id)}>
+                                        <MdOutlineLyrics size={'30'}/>
                                     </button>
                                 </td>
 
