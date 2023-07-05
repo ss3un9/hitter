@@ -69,8 +69,11 @@ const Login = () => {
                         <Link to='/signup'>
                             Want to be HITTER?
                         </Link>
-
+                        <Link to='/findIdPw'>
+                            Lost your ID PW?
+                        </Link>
                     </p>
+
                 </div>
             </form>
         </div>

@@ -96,6 +96,18 @@ public class MemberService {
 
     }
 
+    public MemberDTO findByEmail(String memberEmail) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(memberEmail);
+        if (optionalMemberEntity.isPresent()) {
+            return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+        } else {
+            return null;
+        }
+
+    }
+
+
+
 
     public List<SongDTO> getSongsByMemberId(Long memberId) {
         MemberEntity memberEntity = memberRepository.findById(memberId)

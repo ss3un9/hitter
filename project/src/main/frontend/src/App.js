@@ -21,6 +21,8 @@ import LoginMenuBar from "./component/LoginMenuBar";
 import Home from "./page/home/Home";
 import HowToUse from "./page/howtouse/HowToUse";
 import MyLikeSong from "./page/member/MyLikeSong";
+import FindPw from "./page/login/FindPw";
+import SetPw from "./page/login/SetPw";
 
 class App extends Component {
 
@@ -54,6 +56,8 @@ class App extends Component {
               <Route path="/signup" element={<SignupPage/>}></Route>
               <Route path="/login" element={<Login/>}></Route>
               <Route path="/logout" element={<Logout/>}></Route>
+              <Route path="/findIdPw" element={<FindPw/>}></Route>
+              <Route path="/setPw" element={<SetPw/>}></Route>
               <Route path="/member/mypage" element={<Mypage/>}></Route>
               <Route path="/member/mysong" element={<MySong/>}></Route>
               <Route path="/member/mylikesong" element={<MyLikeSong/>}></Route>
