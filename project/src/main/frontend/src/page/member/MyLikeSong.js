@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import "./MyLikeSong.css"
+import "./MyPage.css"
 import {Link, useNavigate} from "react-router-dom";
 import {BsPencilSquare} from "react-icons/bs";
 import {Button, Container} from "react-bootstrap";
@@ -108,7 +108,6 @@ const MyLikeSong = ({session}) => {
     }, []);
     return (
 
-
         <div className='tbl-bar'>
             <div className='bar'>
                 <MypageBar/></div>
@@ -120,57 +119,6 @@ const MyLikeSong = ({session}) => {
                             <td colSpan="5">
                                 좋아하는 곡이 없습니다.{" "}
                                 <Link to="/song/board">노래 보러 가기</Link>
-
-        <div className='like-wrapper'>
-            <div className='likesongbar'>
-                <MypageBar /></div>
-            <div className='table'>
-                <table className='likesong-table'>
-                    <thead className='table-head'>
-                    <tr className='table-tr'>
-                        <th className='th'></th>
-                        <th className='th'>ID</th>
-                        <th className='th'>Song Title</th>
-                        <th className='th'>Genre</th>
-                        <th className='th'>CreatedTime</th>
-                        <th>좋아요</th>
-                        <th>재생</th> {/* 재생 버튼 추가 */}
-                        <th>가사</th>
-                        {/* Add more table headers for other properties */}
-                    </tr>
-                    </thead>
-                    <tbody className='table-body'>
-                    {songList
-                        .filter((song) => song.isLiked)
-                        .map((song) => (
-                        <tr key={song.id}>
-                            <td>
-                                <LikeButton
-                                    memberId={id}
-                                    songId={song.id}
-                                    likeId={song.likeId}
-                                    isLiked={"true"}
-                                />
-                            </td>
-                            <td className='td'>{song.id}</td>
-                            <td className='td'>{song.songTitle}</td>
-                            <td className='td'>{song.genre}</td>
-                            <td className='td'>{song.songCreatedTime.replace("T", " ")}</td>
-                            <td>{song.songLike}</td>
-                            <td>
-                                {/*<Link to={`/song/play/${song.id}`}>재생</Link> */}
-                                <div
-                                    className="play-button"
-                                    onClick={() => handleOpenPlayer(song.id)}
-                                >
-                                    <img
-                                        width={30}
-                                        height={30}
-                                        src={playIcon}
-                                        alt="play-icon"
-                                    />
-                                </div>
-
                             </td>
                         </tr>
                         </tbody>
