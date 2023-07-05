@@ -112,7 +112,7 @@ const MyLikeSong = ({session}) => {
             <div className='bar'>
                 <MypageBar/></div>
             <div className='table'>
-                {mySongList.length === 0 ? (
+                {songList.length === 0 ? (
                     <table className='song-table'>
                         <tbody className='tb-top-body'>
                         <tr className='tr-info'>

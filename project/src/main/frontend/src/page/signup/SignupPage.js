@@ -116,10 +116,15 @@ const SignupPage = () => {
 
     const emailCheck = () => {
         const email1 = document.getElementById("memberEmail").value;                            //이메일
-        const email2 = document.getElementById("userEmail2").value;                             //이메일 도메인
-        const email = email1 + "@" + email2
+        let email2Element = document.getElementById("userEmail2"); // 이메일 도메인 선택 요소
+        let email2 = email2Element.value; // 선택된 값 가져오기
+
+        if (email2 === "직접 입력") {
+            email2Element.value = ""; // 값을 빈 문자열로 변경
+            email2 = ""; // 변수에도 빈 문자열 할당
+        }
+        const email = email1 + email2
         const checkResult = document.getElementById("check-result");
-        console.log("입력값: ", email);
 
         axios.post("/member/email-check", null, {
             params: {
@@ -176,11 +181,10 @@ const SignupPage = () => {
     const handleMailCheck = () => {
         const email1 = document.getElementById("memberEmail").value;
         const email2 = document.getElementById("userEmail2").value;
-        const email = email1 + "@" + email2
+        const email = email1 + email2
 
         axios.get(`/mailCheck?email=${email}`)
             .then(response => {
-                console.log('data: ' + response.data);
                 setCode(response.data);
                 alert('인증번호가 전송되었습니다.');
 
@@ -288,18 +292,19 @@ const SignupPage = () => {
 
                     <div className="jumbotron">
                         <div className="container text-center">
-                            <form method="post" action="/member/save" onSubmit={handleFormSubmit}>
+                            <form method="post" onSubmit={handleFormSubmit}>
                                 <div className="form-group">
                                     <label className="label_text" htmlFor="memberEmail">Email</label>
                                     <div className="input-group">
                                         <input type="text" className="form-control" id="memberEmail"
                                                name="memberEmail"/>
                                         <select className="select-control" name="userEmail2" id="userEmail2">
-                                            <option>naver.com</option>
-                                            <option>daum.net</option>
-                                            <option>gmail.com</option>
-                                            <option>hanmail.com</option>
-                                            <option>yahoo.co.kr</option>
+                                            <option>직접 입력</option>
+                                            <option>@naver.com</option>
+                                            <option>@daum.net</option>
+                                            <option>@gmail.com</option>
+                                            <option>@hanmail.com</option>
+                                            <option>@yahoo.co.kr</option>
                                         </select>
                                         <button type="button" className="btn btn-primary" onClick={emailCheck}>Check
                                             Email
