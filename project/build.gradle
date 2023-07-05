@@ -40,6 +40,11 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	implementation group: 'javax.mail', name: 'mail', version: '1.4.7'
+	implementation group: 'org.springframework', name: 'spring-context-support', version: '5.3.9'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 }
 
 tasks.named('test') {

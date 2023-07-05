@@ -10,6 +10,8 @@ import axios from "axios";
 
 const SignupPage = () => {
 
+    const navigate = useNavigate();
+
     const [emailState, setEmailState] = useState('');
 
     const [pwdState, setPwdState] = useState('');
@@ -22,8 +24,16 @@ const SignupPage = () => {
     const [isNickForm, setIsNickForm] = useState(false);  //닉네임
     const [isTermsChecked, setIsTermsChecked] = useState(false); //약관
     const [isPrivacyChecked, setIsPrivacyChecked] = useState(false); //개인정보
-    const navigate = useNavigate();
+    const [isEmailChecked, setIsEmailChecked] = useState(false); // 메일체크
 
+    const [verifyButtonVisible, setVerifyButtonVisible] = useState(true); //일치하면 확인버튼 지움
+    const [inputDisabled, setInputDisabled] = useState(false); //일치하면 인풋 비활성화
+
+    const [inputCode, setInputCode] = useState('');
+    const [resultMsg, setResultMsg] = useState('');
+    const [resultColor, setResultColor] = useState('');
+
+    const [isMailBox, setIsMailBox] = useState(false); //인증하기 누르면 밑에 생기게 하는거
     const handleTermsCheckboxChange = (event) => {
         setIsTermsChecked(event.target.checked);
     };
@@ -188,6 +198,45 @@ const SignupPage = () => {
                 console.log("에러발생", error);
             });
     };
+    const [code, setCode] = useState('');
+    const handleMailCheck = () => {
+        const email = document.getElementById("memberEmail").value;
+        console.log('완성된 이메일: ' + email);
+        const checkInput = document.querySelector('.mail-check-input');
+
+
+        axios.get(`/mailCheck?email=${email}`)
+            .then(response => {
+                console.log('data: ' + response.data);
+                setCode(response.data);
+                setIsMailBox(true);
+                alert('인증번호가 전송되었습니다.');
+
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    };
+
+    const handleNumberCheck = () => {
+        const inputCode = parseInt(document.getElementById("inputcode").value, 10);
+        console.log(typeof inputCode);
+        console.log(typeof code)
+        if (inputCode == code) {
+            setResultMsg('인증번호가 일치합니다.');
+            alert("인증번호가 일치합니다")
+            setResultColor('green');
+            setIsEmailChecked(true);
+            setVerifyButtonVisible(false);
+            setInputDisabled(true);
+        } else {
+            setResultMsg('인증번호가 불일치합니다. 다시 확인해주세요!');
+            alert("인증번호가 불일치합니다. 다시 확인해주세요!")
+            setResultColor('red');
+            setIsEmailChecked(false);
+        }
+    };
+
     return (
 
         <>
@@ -275,6 +324,20 @@ const SignupPage = () => {
                                     </div>
                                     <p id="check-result"></p>
                                 </div>
+
+                                <div className="input-group-addon">
+                                    <button type="button" id="mail-Check-Btn" onClick={handleMailCheck}>본인 인증</button>
+                                </div>
+                                {isMailBox && (
+                                    <div className="input-group">
+                                        <input className="form-control" id="inputcode" placeholder="인증번호 6자리를 입력해주세요!" onChange={(e) => setInputCode(e.target.value)}  maxLength="6" disabled={inputDisabled} />
+                                        {verifyButtonVisible && ( // 인증번호가 일치하지 않을 때만 확인 버튼을 보여줌
+                                            <button type="button" id="number-Check-Btn" onClick={handleNumberCheck}>확인</button>
+                                        )}
+                                        <span id="mail-check-warn" style={{ color: resultColor }}>{resultMsg}</span>
+                                    </div>
+
+                                )}
                                 <div className="form-group">
                                     <label className="label_text" htmlFor="pwd">비밀번호</label>
                                     <input type="password" className="form-control" id="pwd" name="memberPassword" onInput={handlePwdInput} />
@@ -294,9 +357,11 @@ const SignupPage = () => {
                                     <input type="text" className="form-control" id="memberNickName" name="memberNickName" />
                                     <button type="button" className="btn btn-primary" onClick={NickNameCheck}>Check NickName</button>
                                 </div>
+
+
                                 <p id="checkNick-result"></p>
                                 <button className="btn btn-primary btn-block" id="signup" type="submit"
-                                        disabled={!isValidForm || !isEmailForm || !isPwForm || !isNickForm}>Sign Up</button>
+                                        disabled={!isValidForm || !isEmailForm || !isPwForm || !isNickForm || !isEmailChecked}>Sign Up</button>
                             </form>
                         </div>
                     </div>
