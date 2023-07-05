@@ -1,14 +1,17 @@
 /* Write.css */
 
-.write-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 100px;
+.write-page {
+    height: 60px; /* Adjust the height as needed */
   }
   
+  /* Style the write-container */
+  .write-container {
+    padding: 20px; /* Add padding to create space around the container */
+    margin-top: 40px; /* Add margin at the top to create additional space */
+    background-color: #f7f7f7; /* Add a background color to distinguish the container */
+    border-radius: 5px; /* Optional: Add border radius for a rounded look */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for a subtle effect */
+  }
   .form-group {
     margin-bottom: 20px;
   }
