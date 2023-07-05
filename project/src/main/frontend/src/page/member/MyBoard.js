@@ -4,13 +4,12 @@ import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import MypageBar from "../../component/MypageBar";
 
-const MyBoard = ()  => {
+const MyBoard = () => {
 
 
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
     const navigate = useNavigate();
     const id = Number(storedSession.loginId);
-
 
 
     const [myBoardList, setMyBoardList] = useState([]);
@@ -19,25 +18,28 @@ const MyBoard = ()  => {
     const fetchData = async () => {
         try {
 
-
             const response = await axios.get(`/board/MyPosts/${id}`);
-            console.log(response);
             const {data} = response;
-            console.log(data.boardList);
             setMyBoardList(data.boardList);
 
 
-
         } catch (error) {
-            // Handle errors
-            console.error('Error fetching data:', error);
+
+            alert('내 글 목록을 불러오지 못했습니다. 다시 시도해 주세요.');
 
         }
     };
 
-
     useEffect(() => {
-        fetchData();
+        const fetchDataAsync = async () => {
+            try {
+                const response = await fetchData();
+            } catch (error) {
+            }
+        };
+        fetchDataAsync().then(() => {
+        }).catch((error) => {
+        });
     }, []);
 
     const handleBoardClick = (id) => {
@@ -49,11 +51,17 @@ const MyBoard = ()  => {
     }
 
     function deleteList(id) {
-        const confirmDelete = window.confirm('게시글을 정말 삭제하시겠습니까?');
+        try {
+            const confirmDelete = window.confirm('게시글을 정말 삭제하시겠습니까?');
 
-        if (confirmDelete) {
-            navigate(`/board/delete?id=` + id, {state: {id: id}});
+            if (confirmDelete) {
+                navigate(`/board/delete?id=` + id, {state: {id: id}});
+            }
+        }catch {
+
+            alert('삭제할 게시글을 선택해주세요. ');
         }
+
     }
 
     return (

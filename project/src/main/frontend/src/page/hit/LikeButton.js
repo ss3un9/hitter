@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {GoHeartFill} from "react-icons/go";
 import {GoHeart} from "react-icons/go";
 
-const LikeButton = ({ memberId, songId, isLiked, likeId}) => {
+const LikeButton = ({memberId, songId, isLiked, likeId}) => {
     const [liked, setLiked] = useState(isLiked);
 
     const [buttonLikeId, setButtonLikeId] = useState(likeId);
@@ -49,14 +49,14 @@ const LikeButton = ({ memberId, songId, isLiked, likeId}) => {
     };
 
 
-
     useEffect(() => {
 
-    }, []); // Call fetchSongLike only once after mounting
+    }, []);
 
     return (
         <div className='btnn' onClick={handleLikeClick}>
-            {liked ? <GoHeartFill className='heart' size='17' color={'#ff81f4'}/> : <GoHeart className='heart' size='17' color={'#ff81f4'}/>}
+            {liked ? <GoHeartFill className='heart' size='17' color={'#ff81f4'}/> :
+                <GoHeart className='heart' size='17' color={'#ff81f4'}/>}
         </div>
     );
 };

@@ -1,4 +1,3 @@
-
 import {useLocation, useNavigate} from 'react-router-dom';
 import './HitAi.css'
 import React, {useEffect, useState} from "react";
@@ -32,7 +31,7 @@ const HitAiDetail = ({session}) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`/song/detail/${id}`);
-                const { data } = response;
+                const {data} = response;
                 console.log(data);
                 if (response.status === 200) {
                     const song_title = data.songDTO.songTitle;
@@ -60,10 +59,9 @@ const HitAiDetail = ({session}) => {
         };
 
         fetchData().catch((error) => {
-            console.error('Error during fetch:', error);
+            alert('오류가 발생했습니다. 다시 시도해주세요 ');
         });
     }, []);
-
 
 
     return (
@@ -74,7 +72,7 @@ const HitAiDetail = ({session}) => {
                 <p>닉네임: {nickName}</p>
                 <p>Title:{songTitle}</p>
                 <p>Prediction: {songPrediction}</p>
-                <p>CreatedTime: {songCreatedTIme}</p>
+                <p>CreatedTime: {songCreatedTIme.replace('T', ' ')}</p>
                 <p>genre: {songGenre}</p>
 
             </div>

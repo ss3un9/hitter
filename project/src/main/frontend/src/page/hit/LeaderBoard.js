@@ -1,14 +1,12 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import LikeButton from './LikeButton';
 import LyricsModal from './LyricsModal.js';
-import playIcon from '../../assets/play_icon.png';
 import './LeaderBoard.css';
 import PlayerModal from '../../component/PlayerModal.js';
 import {HiOutlineTrophy} from "react-icons/hi2";
 import {HiTrendingUp} from "react-icons/hi"
-import {BsCheck2All} from "react-icons/bs";
 import {BsPlayCircleFill} from "react-icons/bs";
 import {MdOutlineLyrics} from "react-icons/md";
 
@@ -48,9 +46,6 @@ const LeaderBoard = () => {
     const Posting = () => {
         navigate("/hit")
     };
-    const handleLikeUpdate = () => {
-        fetchData(); // 좋아요 값 갱신을 위해 fetchData 호출
-    };
 
     const handleCloseLyricsModal = () => {
         setShowLyricsModal(false);
@@ -70,16 +65,16 @@ const LeaderBoard = () => {
 
     // 가사 보기 버튼을 클릭했을 때 호출되는 함수
     const handleViewLyrics = async (songId) => {
-        console.log('함수호출댐');
+
         try {
             const response = await axios.get(`/song/txt/${songId}`);
-            const { data } = response;
-            console.log(response);
+            const {data} = response;
+
             setLyrics(data);
             setShowLyricsModal(true);
-            console.log(showLyricsModal);
+
         } catch (error) {
-            console.error('Error fetching lyrics:', error);
+            alert("가사를 불러오는데 실패했습니다. 다시 시도해주세요. ");
         }
     };
     const fetchData = async (currentPage = page) => {
@@ -93,8 +88,7 @@ const LeaderBoard = () => {
                 }
             });
 
-            const { data } = response;
-            console.log(data);
+            const {data} = response;
 
             const updatedSongList = data.songPageList.content.map(song => {
                 const matchingLike = data.likeList.find(like => like.songId === song.id);
@@ -108,10 +102,8 @@ const LeaderBoard = () => {
             });
 
             setSongList(updatedSongList);
-            // console.log(songList);
             setLikeList(data.likeList);
-            const { songPageList ,startPage, endPage } = data;
-
+            const {songPageList, startPage, endPage} = data;
 
             setSongList(updatedSongList);
 
@@ -122,8 +114,8 @@ const LeaderBoard = () => {
             navigate(`/song/board?page=${page}`);
 
         } catch (error) {
-            // Handle errors
-            console.error('Error fetching data:', error);
+
+            alert("목록을 불러오는데 실패했습니다. ");
 
             setError(true);
         }
@@ -142,8 +134,7 @@ const LeaderBoard = () => {
                 }
             });
 
-            const { data } = response;
-            console.log(data);
+            const {data} = response;
 
             const updatedSongList = data.songPageList.content.map(song => {
                 const matchingLike = data.likeList.find(like => like.songId === song.id);
@@ -159,10 +150,8 @@ const LeaderBoard = () => {
             setSongList(updatedSongList);
 
             setLikeList(data.likeList);
-            const { songPageList ,startPage, endPage } = data;
+            const {songPageList, startPage, endPage} = data;
 
-
-            console.log(songPageList.content);
             setSongPageList(songPageList);
             setStartPage(startPage);
             setEndPage(endPage);
@@ -170,7 +159,7 @@ const LeaderBoard = () => {
 
         } catch (error) {
 
-            console.error('Error fetching data:', error);
+            alert("목록을 불러오는데 실패했습니다. ");
 
             setError(true);
         }
@@ -178,19 +167,31 @@ const LeaderBoard = () => {
     };
 
 
-
-
-
     useEffect(() => {
 
     }, [songList]);
 
-    function handlePageChange(page) {
-        fetchData(page);
+    const handlePageChange = async (page) => {
+        try {
+            await fetchData(page);
+        } catch (error) {
+            alert('페이지를 불러오는데 실패했습니다.');
+        }
     };
 
     useEffect(() => {
-        fetchData();
+        const fetchDataAndHandleErrors = async () => {
+            try {
+                await fetchData();
+            } catch (error) {
+                alert('데이터를 불러오는데 실패했습니다.');
+
+            }
+        };
+
+        fetchDataAndHandleErrors().catch((error) => {
+            alert('데이터를 불러오는데 실패했습니다.');
+        });
     }, []);
 
     return (
@@ -200,17 +201,19 @@ const LeaderBoard = () => {
             </h1>
             <div className='buttons'>
                 <ul className='bt-ul'>
-            {storedSession.loginName != null && (
-                <button className='predict-button' onClick={Posting}><div className='btn-info'><HiTrendingUp size='15'/>노래 예측하기</div> </button>
-            )}
-            <button className='whole-button' onClick={() => fetchData()}>전체보기</button>
+                    {storedSession.loginName != null && (
+                        <button className='predict-button' onClick={Posting}>
+                            <div className='btn-info'><HiTrendingUp size='15'/>노래 예측하기</div>
+                        </button>
+                    )}
+                    <button className='whole-button' onClick={() => fetchData()}>전체보기</button>
                     <br></br><br></br>
                     <div>
-            <button className='pop-button' onClick={() => handleGenreFilter('pop')}>Pop</button>
-            <button className='dance-button' onClick={() => handleGenreFilter('dance')}>Dance</button>
-            <button className='ballad-button' onClick={() => handleGenreFilter('ballad')}>Ballad</button>
-            </div>
-            </ul>
+                        <button className='pop-button' onClick={() => handleGenreFilter('pop')}>Pop</button>
+                        <button className='dance-button' onClick={() => handleGenreFilter('dance')}>Dance</button>
+                        <button className='ballad-button' onClick={() => handleGenreFilter('ballad')}>Ballad</button>
+                    </div>
+                </ul>
             </div>
             <div className="board-table-wrapper">
                 <table className='tbl'>
@@ -223,7 +226,8 @@ const LeaderBoard = () => {
                         <th className='ths'>닉네임</th>
                         <th className='ths'>예측결과</th>
                         <th className='ths'>좋아요</th>
-                        <th className='ths'>재생</th> {/* 재생 버튼 추가 */}
+                        <th className='ths'>재생</th>
+                        {/* 재생 버튼 추가 */}
                         <th className='ths'>가사</th>
                     </tr>
                     </thead>
@@ -245,17 +249,16 @@ const LeaderBoard = () => {
                                 <td className='tds'>{songPageList.number * songPageList.size + index + 1}</td>
 
                                 <td className='tds'>
-                                    <Link to={`/hit_ai_detail?id=` + song.id} >
+                                    <Link to={`/hit_ai_detail?id=` + song.id}>
                                         <div className='song-title'> {song.songTitle} </div>
                                     </Link>
                                 </td>
                                 <td className='tds'>{song.genre}</td>
                                 <td className='tds'>{song.memberNickName}</td>
                                 <td className='tds'>{song.prediction}</td>
-                                {/*<td>{song.songCreatedTime.replace("T", " ")}</td>*/}
                                 <td className='tds'>{song.songLike}</td>
                                 <td>
-                                    {/*<Link to={`/song/play/${song.id}`}>재생</Link> */}
+
                                     <div
                                         className="play-button"
                                         onClick={() => handleOpenPlayer(song.id)}
@@ -263,8 +266,6 @@ const LeaderBoard = () => {
                                         <BsPlayCircleFill size='20'/>
 
                                     </div>
-                                    {/* <SongPlayer songId={song.id} />{' '} */}
-                                    {/* SongPlayer 컴포넌트에 songId props 전달 */}
                                 </td>
                                 <td className='tds'>
                                     <button className='lr-btn' onClick={() => handleViewLyrics(song.id)}>
@@ -297,13 +298,14 @@ const LeaderBoard = () => {
 
                 {/* Previous page */}
                 {songPageList.number > 0 ? (
-                    <Link to={`/song/board?page=${songPageList.number}`} onClick={() => handlePageChange(songPageList.number)}>prev</Link>
+                    <Link to={`/song/board?page=${songPageList.number}`}
+                          onClick={() => handlePageChange(songPageList.number)}>prev</Link>
                 ) : (
                     <span className='prev'>{'<'}</span>
                 )}
 
                 {/* Page numbers */}
-                {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((page) => (
+                {Array.from({length: endPage - startPage + 1}, (_, i) => startPage + i).map((page) => (
                     <span className='cur-page' key={page}>
               {/* Current page */}
                         {page === songPageList.number + 1 ? (
@@ -318,13 +320,17 @@ const LeaderBoard = () => {
 
                 {/* Next page */}
                 {songPageList.number + 1 < songPageList.totalPages ? (
-                    <Link to={`/song/board?page=${songPageList.number + 2}` }  onClick={() => handlePageChange(songPageList.number + 2)}>next</Link>
+                    <Link to={`/song/board?page=${songPageList.number + 2}`}
+                          onClick={() => handlePageChange(songPageList.number + 2)}>next</Link>
                 ) : (
                     <span className='nxt-pg'>{'>'}</span>
                 )}
 
                 {/* Last page */}
-                <Link to={`/song/board?page=${songPageList.totalPages}`}  onClick={() => handlePageChange(songPageList.totalPages)}><div className='last-pg'>{'>>'}</div> </Link>
+                <Link to={`/song/board?page=${songPageList.totalPages}`}
+                      onClick={() => handlePageChange(songPageList.totalPages)}>
+                    <div className='last-pg'>{'>>'}</div>
+                </Link>
             </div>
         </div>
     );

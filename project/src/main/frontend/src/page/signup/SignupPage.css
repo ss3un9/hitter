@@ -80,6 +80,12 @@ ul>li{
 .form-group {
     margin-top: 20px;
     margin-bottom: 20px;
+
+}
+
+.select-control {
+    flex: 0.1;
+    margin-left: 10px;
 }
 
 #signup {
@@ -101,10 +107,14 @@ ul>li{
 .form-control{
     display: block;
     align-items: center;
+
 }
 
+.select-control {
+    flex: 0.5;
+}
 input[type="text"], input[type="password"] {
-    width: 40%;
+    width: 30%;
     margin: 0 auto;
     background-color: #ffffff;
     font-family: Suit;
@@ -134,4 +144,13 @@ input[type="text"], input[type="password"] {
     border: none;
     margin-left: 44%;
     cursor: pointer;
+}
+
+.mail-Check-Btn{
+    background-color: #252525;
+    color: white;border-radius: .6em;
+    border: none;
+    margin-left: 44%;
+    cursor: pointer;
+
 }
