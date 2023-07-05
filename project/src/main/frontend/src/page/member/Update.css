@@ -1,6 +1,6 @@
 .update-main{
     width: 100%;
-    height: 1000px;
+    height: 1500px;
     background-color: #252525;
     margin: 0 auto;
     padding-top: 150px;
@@ -20,10 +20,21 @@
     margin: 0 auto;
     text-align: center;
     font-family: Suit;
-    width: 1000px;
-    background-color: black;
-    color: white;
-    height: 400px;
+    width: 900px;
+    background-color: #d8deee;
+    color: #000000;
+    height: 700px;
+    border-radius: .4em;
+
+}
+.stars{
+    padding-right: 10px;
+}
+.mbn{
+    padding-right: 10px;
+}
+.nikkk{
+    padding-right: 10px;
 
 }
 
@@ -31,10 +42,28 @@
     padding-top: 100px;
     align-self: center;
     margin: 0 auto;
-    color: white;
+    color: #000000;
     font-family: Suit;
     border-radius: .4em;
+}
 
+.h2-lg-if{
+    font-family: Suit;
+    width: 200px;
+    margin: 0 auto;
+    border-bottom: 2px solid #000000;
+    font-size: 35px;
+}
+
+.pwd-chk-wrap{
+    margin: 0 auto;
+    align-items: center;
+}
+
+.alert-msg1{
 
 }
 
+.pwd-chk-wrap{
+
+}

@@ -1,5 +1,5 @@
 import {useLocation, useNavigate} from 'react-router-dom';
-import './HitAi.css'
+import './HitAiDetail.css'
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
@@ -21,7 +21,7 @@ const HitAiDetail = ({session}) => {
     const [nickName, setNickName] = useState('');
     const [songPrediction, setSongPrediction] = useState('');
     const [songCreatedTIme, setSongCreatedTime] = useState('');
-
+    const [songTag, setSongTag] = useState('');
     function reqList() {
         // navigate(`/board/paging?page=${page}`, { state: { page: page } });
         navigate(`/song/board`);
@@ -49,6 +49,9 @@ const HitAiDetail = ({session}) => {
                     const song_created = data.songDTO.songCreatedTime;
                     setSongCreatedTime(song_created);
 
+                    const song_tag = data.songDTO.songTag;
+                    setSongTag(song_tag);
+
 
                 } else {
                     alert('게시글 정보를 불러오는데 실패하였습니다');
@@ -67,16 +70,21 @@ const HitAiDetail = ({session}) => {
     return (
         <>
 
+            <div className='hit-det-wrapper'>
 
-            <div>
-                <p>닉네임: {nickName}</p>
-                <p>Title:{songTitle}</p>
-                <p>Prediction: {songPrediction}</p>
-                <p>CreatedTime: {songCreatedTIme.replace('T', ' ')}</p>
-                <p>genre: {songGenre}</p>
 
+                <div className='det-res'>
+                    <p>닉네임: {nickName}</p>
+                    <p>Title:{songTitle}</p>
+                    <p>Prediction: {songPrediction}</p>
+                    <p>CreatedTime: {songCreatedTIme.replace('T', ' ')}</p>
+                    <p>genre: {songGenre}</p>
+                    <p>Tag: {songTag}</p>
+
+                </div>
+                <button onClick={() => reqList()}>목록</button>
             </div>
-            <button onClick={() => reqList()}>목록</button>
+
         </>
     )
 }

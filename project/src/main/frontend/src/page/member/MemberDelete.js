@@ -3,6 +3,8 @@ import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import MypageBar from "../../component/MypageBar";
 import "./MemberDelete.css"
+import {FaRegFaceSadTear} from "react-icons/fa6";
+
 function Select() {
     return null;
 }
@@ -45,11 +47,14 @@ const MemberDelete = ({session}) => {
             <div className='delmenubar'>
                 <MypageBar /></div>
             <form className='del-form' onSubmit={handleSubmitDelete}>
-                <span> 회원 탈퇴 신청 </span> <br />
-                유의사항 1. 회원탈퇴하면 곡이 전부 삭제됨 <br/>
-                2. 게시글 삭제됨  <br/>
-                3. 123123123123  <br/>
-                <button type="submit">탈퇴</button>
+                <span className='main-del'> <FaRegFaceSadTear className='tearrr' size='30' style={{alignContent: "center", textAlign: "center"}}/>회원 탈퇴 신청<FaRegFaceSadTear className='tearrr' size='30' style={{alignContent: "center", textAlign: "center"}}/> </span> <br />
+                <div className='chkpoint'>
+                1. 회원 탈퇴 시 업로드한 파일이 전부 삭제됩니다. <br/>
+                2. 작성한 게시글이 모두 삭제됩니다. <br/>
+                </div>
+                <div className='btn-posi'>
+                <button className='byebtn' type="submit">탈퇴하기</button>
+                </div>
             </form>
 
         </div>

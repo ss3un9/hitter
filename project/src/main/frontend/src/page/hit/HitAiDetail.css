@@ -1,0 +1,11 @@
+.hit-det-wrapper{
+    width: 100%;
+    height: 1000px;
+    background-color: #252525;
+    align-items: center;
+}
+
+.det-res{
+    margin: 0 auto;
+}
+

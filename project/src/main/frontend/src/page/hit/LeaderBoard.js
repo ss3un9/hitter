@@ -306,7 +306,7 @@ const LeaderBoard = () => {
                 {/* Previous page */}
                 {songPageList.number > 0 ? (
                     <Link to={`/song/board?page=${songPageList.number}`}
-                          onClick={() => handlePageChange(songPageList.number)}>prev</Link>
+                          onClick={() => handlePageChange(songPageList.number)}><div className='prev'> {'<'}</div></Link>
                 ) : (
                     <span className='prev'>{'<'}</span>
                 )}
@@ -328,7 +328,7 @@ const LeaderBoard = () => {
                 {/* Next page */}
                 {songPageList.number + 1 < songPageList.totalPages ? (
                     <Link to={`/song/board?page=${songPageList.number + 2}`}
-                          onClick={() => handlePageChange(songPageList.number + 2)}>next</Link>
+                          onClick={() => handlePageChange(songPageList.number + 2)}><div className='nxt-pg'> {'>'}</div></Link>
                 ) : (
                     <span className='nxt-pg'>{'>'}</span>
                 )}
