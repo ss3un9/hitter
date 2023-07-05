@@ -1,5 +1,4 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import {useEffect} from "react";
 import axios from "axios";
 
 const BoardDelete = () => {
@@ -20,7 +19,7 @@ const BoardDelete = () => {
     };
 
     handleDelete().catch((error) => {
-        console.error('Error during fetch:', error);
+        alert("게시글이 삭제되지 않았습니다. 다시 시도해주세요. ");
     });
 };
 

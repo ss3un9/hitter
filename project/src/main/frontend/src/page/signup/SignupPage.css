@@ -113,10 +113,14 @@
 .form-group {
     margin-top: 20px;
     margin-bottom: 20px;
-    align-items: center;
-    align-content: center;
-    text-align: center;
-    align-self: center;
+
+
+}
+
+.select-control {
+    flex: 0.1;
+    margin-left: 10px;
+
 }
 
 #signup {
@@ -138,10 +142,14 @@
 .form-control{
     display: block;
     align-items: center;
+
 }
 
+.select-control {
+    flex: 0.5;
+}
 input[type="text"], input[type="password"] {
-    width: 40%;
+    width: 30%;
     margin: 0 auto;
     background-color: #ffffff;
     font-family: Suit;
@@ -172,6 +180,7 @@ input[type="text"], input[type="password"] {
     cursor: pointer;
 }
 
+
 .btn-btn-primary{
     width: 120px;
     height: 40px;
@@ -198,4 +207,5 @@ input[type="text"], input[type="password"] {
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
+
 }

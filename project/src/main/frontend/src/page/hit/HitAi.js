@@ -26,36 +26,56 @@ const HitAi = ({ session }) => {
     const [songTitle, setSongTitle] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
+
+    const isGenreSelected = selectedGenre !== "none";
+    const isTitleEmpty = songTitle.trim() === "";
     const navigate = useNavigate();
+
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            setIsLoading(true);
 
-            const formData = new FormData(event.target);
-            formData.append("genre", selectedGenre);
-            formData.append("title", songTitle);
+            if (isTitleEmpty) {
+                alert("노래 제목을 입력해주세요.");
+                return;
+            }
+            else if (!isGenreSelected) {
+                alert("장르를 선택해주세요.");
+                return;
+            }
+            else {
 
-            const response = await fetch("/api/upload", {
-                method: "POST",
 
-                body: formData,
-            });
-            console.log(response);
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data);
-                setUploadResponse(data);
-                setIsLoading(false);
+                setIsLoading(true);
 
-                alert("히트 분석 성공 ");
-            } else {
-                // 로그인 실패
+                const formData = new FormData(event.target);
+                formData.append("genre", selectedGenre);
+                formData.append("title", songTitle);
 
-                console.error('failed',error);
+                const response = await fetch("/api/upload", {
+                    method: "POST",
+
+                    body: formData,
+                });
+                console.log(response);
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(data);
+                    setUploadResponse(data);
+                    setIsLoading(false);
+
+                    alert("히트 분석 성공 ");
+                } else {
+                    // 로그인 실패
+
+                    console.error('failed',error);
+
+                }
+            }
 
             }
-        } catch (error) {
+
+           catch (error) {
             // 오류 처리
             alert("파일을 등록해주세요");
         }
