@@ -207,9 +207,9 @@ const SignupPage = () => {
                     <form className='agree-list'>
                         <ul className="join_box">
                             <li className="checkBox-check02">
-                                <br></br><br></br>
-                                    <li>이용약관 동의(필수)
-                                        <input type="checkbox" name="chk" checked={isTermsChecked} onChange={handleTermsCheckboxChange} />
+                                    <li className='agree-txt-first'><div className='agtf'> 이용약관 동의(필수)
+                                        <input className='chkbox1' type="checkbox" name="chk" checked={isTermsChecked} onChange={handleTermsCheckboxChange} />
+                                    </div>
                                     </li>
                                 <br></br>
                                 <textarea className='first' name="" id="">
@@ -220,8 +220,7 @@ const SignupPage = () => {
                             </li>
                             <li className="checkBox-check03">
                                 <br></br><br></br>
-                                    <li>개인정보 수집 및 이용에 대한 안내(필수)
-                                        <input type="checkbox" name="chk" checked={isPrivacyChecked} onChange={handlePrivacyCheckboxChange}/>
+                                    <li className='agtxsec'>개인정보 수집 및 이용에 대한 안내(필수)<input className='chkbox2' type="checkbox" name="chk" checked={isPrivacyChecked} onChange={handlePrivacyCheckboxChange}/>
                                     </li>
                                 <br></br>
                                 <textarea className='second' name="" id={""}>
@@ -265,13 +264,13 @@ const SignupPage = () => {
                     </form>
 
                     <div className="jumbotron">
-                        <div className="container text-center">
+                        <div className="container-text-center">
                             <form method="post" action="/member/save" onSubmit={handleFormSubmit}>
                                 <div className="form-group">
                                     <label className="label_text" htmlFor="memberEmail">Email</label>
                                     <div className="input-group">
                                         <input type="text" className="form-control" id="memberEmail" name="memberEmail" />
-                                        <button type="button" className="btn btn-primary" onClick={emailCheck}>Check Email</button>
+                                        <button type="button" className="btn-btn-primary" onClick={emailCheck}>중복 확인</button>
                                     </div>
                                     <p id="check-result"></p>
                                 </div>
@@ -292,10 +291,10 @@ const SignupPage = () => {
                                 <div className="form-group">
                                     <label className="label_text" htmlFor="name">닉네임</label>
                                     <input type="text" className="form-control" id="memberNickName" name="memberNickName" />
-                                    <button type="button" className="btn btn-primary" onClick={NickNameCheck}>Check NickName</button>
+                                    <button type="button" className="btn-btn-primary" onClick={NickNameCheck}>중복 확인</button>
                                 </div>
                                 <p id="checkNick-result"></p>
-                                <button className="btn btn-primary btn-block" id="signup" type="submit"
+                                <button className="btn-btn-primary-btn-block" id="signup" type="submit"
                                         disabled={!isValidForm || !isEmailForm || !isPwForm || !isNickForm}>Sign Up</button>
                             </form>
                         </div>
