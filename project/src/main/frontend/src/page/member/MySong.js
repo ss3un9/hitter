@@ -72,6 +72,7 @@ const MySong = () => {
     }, []);
 
     return (
+
         <div className='tbl-bar'>
             <div className='bar'>
                 <MypageBar/>
@@ -90,6 +91,7 @@ const MySong = () => {
                     </table>
                 ) : (
                     <table className='song-table'>
+
                         <thead className='table-head'>
                         <tr className='table-tr'>
                             <th className='th'>ID</th>

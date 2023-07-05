@@ -1,11 +1,12 @@
-.menubar{
+.menubar-login{
     font-family: "Iceland";
+    display: flex;
     width:95%;
     margin:30px;
     align-items: center;
     justify-content: space-between;
     background-color: #000000 ;
-    position: sticky;
+    position: absolute;
 }
 
 .logo{

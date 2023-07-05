@@ -108,8 +108,10 @@ const BoardUpdate = () => {
         }
     };
     const stripPTags = (content) => {
-        return content.replace(/<\/?p>/g, ''); // Use a regular expression to remove <p> and </p> tags
-    };
+
+        return content.replace(/<p>/g, '').replace(/<\/p>/g, ''); // Use a regular expression to remove <p> and </p> tags
+      };
+
     return (
         <>
 

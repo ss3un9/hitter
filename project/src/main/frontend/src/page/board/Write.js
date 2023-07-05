@@ -53,17 +53,15 @@ const Write = () => {
     }, [postResponse, navigate]);
     return (
         <>
-        <div className="write-page"></div>
+        <div className="write-page">
             <div className="write-container">
-                <form onSubmit={handleFormSubmit} method="post" encType="multipart/form-data">
+                <form className='write-form' onSubmit={handleFormSubmit} method="post" encType="multipart/form-data">
                     <div className="form-group">
-                        <label htmlFor="boardTitle">Title:</label>
-                        <input type="text" name="boardTitle" id="boardTitle" className="form-control" />
+                        <input type="text" name="boardTitle" id="boardTitle" className="form-control"placeholder='글 제목을 입력하세요.' />
                     </div>
                     <input type="hidden" name="boardWriterId" value={storedSession.loginId} />
                     <input type="hidden" name="boardWriter" value={storedSession.loginNickName} />
                     <div className="form-group">
-                        <label>Contents:</label>
                         <CKEditor
                             editor={ClassicEditor}
                             data={editorData}
@@ -71,13 +69,12 @@ const Write = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="boardFile">File:</label>
                         <input type="file" name="boardFile" id="boardFile" className="form-control" />
                     </div>
                     <button className="btn btn-list write-button">글작성</button>
                 </form>
             </div>
-    
+        </div>
 
         </>
     );

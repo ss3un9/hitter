@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import MypageBar from "../../component/MypageBar";
+import "./Update.css"
 
 const Update = () => {
 

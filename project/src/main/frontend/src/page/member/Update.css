@@ -2,7 +2,7 @@
     width: 100%;
     height: 1000px;
     background-color: #252525;
-    margin: auto;
+    margin: 0 auto;
     padding-top: 150px;
     align-items: center;
     align-self: center;
@@ -14,14 +14,27 @@
     background-color: transparent;
 }
 .upt-form{
-    background-color: #252525;
-    transform: translate(-50%, -50%);
     align-items: center;
-    position: absolute;
-    padding-bottom: 80%;
     overflow: visible;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    font-family: Suit;
+    width: 1000px;
+    background-color: black;
+    color: white;
+    height: 400px;
+
 }
 
 .info-login{
-    background-color: #252525;
+    padding-top: 100px;
+    align-self: center;
+    margin: 0 auto;
+    color: white;
+    font-family: Suit;
+    border-radius: .4em;
+
+
 }
+

@@ -3,6 +3,8 @@ import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import MypageBar from "../../component/MypageBar";
 
+
+
 const MemberDelete = ({}) => {
 
 
@@ -34,17 +36,19 @@ const MemberDelete = ({}) => {
     };
 
     return (
+
         <>
             <MypageBar/>
             <form onSubmit={handleSubmitDelete}>
                 <span> 회원 탈퇴 신청 </span> <br/>
+
                 유의사항 1. 회원탈퇴하면 곡이 전부 삭제됨 <br/>
                 2. 게시글 삭제됨 <br/>
                 3. 123123123123 <br/>
                 <button type="submit">탈퇴하기</button>
             </form>
 
-        </>
+        </div>
     );
 };
 
