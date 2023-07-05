@@ -28,13 +28,12 @@ const MyLikeSong = ({session}) => {
     const [songList, setSongList] = useState([]);
     const [likeList, setLikeList] = useState([]);
 
-    const [mySongList, setMySongList] = useState([]);
     const [lyrics, setLyrics] = useState('');
     const [showLyricsModal, setShowLyricsModal] = useState(false);
     const [showPlayerModal, setShowPlayerModal] = useState(false);
     const [selectedSongId, setSelectedSongId] = useState('');
 
-
+    const [Flag, setFlag] = useState(false);
     const handleCloseLyricsModal = () => {
         setShowLyricsModal(false);
     };
@@ -54,75 +53,67 @@ const MyLikeSong = ({session}) => {
         try {
             const response = await axios.get(`/song/txt/${songId}`);
             const {data} = response;
-            console.log(response);
+
             setLyrics(data);
             setShowLyricsModal(true);
-            console.log(showLyricsModal);
+
         } catch (error) {
             console.error('Error fetching lyrics:', error);
         }
     };
 
 
-    const fetchData = async () => {
-        try {
-
-            const response = await axios.get(`/member/getMyLikeSong/${id}`, {
-                params: {
-                    Id: id,
-                }
-            });
-
-
-            const {data} = response;
-            const updatedSongList = data.songList.map((song) => {
-                const matchingLike = data.likeList.find((like) => like.songId === song.id);
-                if (matchingLike) {
-                    return {
-                        ...song,
-                        isLiked: true,
-                        likeId: matchingLike.id,
-                    };
-                }
-                return song;
-            });
-
-            setSongList(updatedSongList);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
-
     useEffect(() => {
-        const fetchDataAsync = async () => {
+        const fetchData = async () => {
             try {
-                const response = await fetchData();
-            } catch (error) {
+                const response = await axios.get(`/member/getMyLikeSong/${id}`, {
+                    params: {
+                        Id: id,
+                    },
+                });
 
+                const { data } = response;
+                const updatedSongList = data.songList.map((song) => {
+                    const matchingLike = data.likeList.find((like) => like.songId === song.id);
+                    if (matchingLike) {
+                        return {
+                            ...song,
+                            isLiked: true,
+                            likeId: matchingLike.id,
+                        };
+                    }
+                    return song;
+                });
+
+                setSongList(updatedSongList);
+                setLikeList(data.likeList);
+
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
             }
         };
-        fetchDataAsync().then(() => {
-        }).catch((error) => {
-        });
-    }, []);
+
+        fetchData();
+    }, []); // 빈 배열을 넣어 최초 렌더링 시에만 실행하도록 설정
+    useEffect(() => {
+        console.log(likeList);
+        if (likeList.length === 0) {
+            setFlag(false);
+        } else {
+            setFlag(true);
+        }
+    }, [likeList, songList, setFlag]);
     return (
 
         <div className='tbl-bar'>
             <div className='bar'>
                 <MypageBar/></div>
             <div className='table'>
-                {songList.length === 0 ? (
-                    <table className='song-table'>
-                        <tbody className='tb-top-body'>
-                        <tr className='tr-info'>
-                            <td colSpan="5">
-                                좋아하는 곡이 없습니다.{" "}
-                                <Link to="/song/board">노래 보러 가기</Link>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                {Flag ===false ? (
+
+                    <Link to="/song/board">노래 보러 가기</Link>
+
                 ) : (
 
                     <table className='song-table'>
@@ -135,7 +126,7 @@ const MyLikeSong = ({session}) => {
                             <th className='th'>CreatedTime</th>
                             <th>좋아요</th>
                             <th>재생</th>
-                            {/* 재생 버튼 추가 */}
+                            {/* 재생 버튼 추가 */}s
                             <th>가사</th>
                             {/* Add more table headers for other properties */}
                         </tr>
