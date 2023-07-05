@@ -123,8 +123,6 @@ public class BoardController {
         boardService.delete(id);
 
     }
-
-    // /board/paging?page=1
     @GetMapping("board/paging")
     public ResponseEntity<Map<String, Object>> community(@PageableDefault(page = 1) Pageable pageable, Model model) {
 //        pageable.getPageNumber();
@@ -146,6 +144,60 @@ public class BoardController {
         return ResponseEntity.ok(responseData);
 
     }
+    @GetMapping("board/search")
+    public ResponseEntity<Map<String,Object>> community(@PageableDefault(page=1) Pageable pageable, Model model ,@RequestParam("keyword") String keyword){
+        Map<String, Object> responseData = new HashMap<>();
+        List<BoardDTO> boardDTOList = boardService.searchByTitle(keyword);
+        responseData.put("boardList", boardDTOList);
+        Page<BoardDTO> boardList = boardService.SearchPaging(keyword,pageable);
+
+        int blockLimit = 3;
+        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1;
+        int endPage = Math.min((startPage + blockLimit - 1), boardList.getTotalPages());
+
+        responseData.put("boardPageList", boardList);
+        responseData.put("startPage", startPage);
+        responseData.put("endPage", endPage);
+
+        return ResponseEntity.ok(responseData);
+
+    }
+
+
+
+
+//
+//    @GetMapping("board/paging1")
+//    public ResponseEntity<Map<String, Object>> community(
+//            @RequestParam(required = false) String keyword,
+//            @PageableDefault(page = 1) Pageable pageable,
+//            Model model) {
+//        Map<String, Object> responseData = new HashMap<>();
+//
+//        Page<BoardDTO> boardPage;
+//
+//        if (keyword != null && !keyword.isEmpty()) {
+//            // 검색어가 있을 경우, 검색 결과를 반환
+//            boardPage = boardService.SearchPaging(keyword, pageable);
+//            int blockLimit = 3;
+//            int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1;
+//            int endPage = Math.min((startPage + blockLimit - 1), boardPage.getTotalPages());
+//        } else {
+//            // 검색어가 없을 경우, 전체 게시글을 반환
+//            boardPage = boardService.paging(pageable);
+//            int blockLimit = 3;
+//            int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1;
+//            int endPage = Math.min((startPage + blockLimit - 1), boardPage.getTotalPages());
+//        }
+//
+//        responseData.put("boardPageList", boardPage.getContent());
+//        responseData.put("startPage", boardPage.getNumber() + 1);
+//        responseData.put("endPage", boardPage.getTotalPages());
+//
+//        return ResponseEntity.ok(responseData);
+//    }
+
+
 
     @GetMapping("/board/MyPosts/{writeId}")
     public ResponseEntity<Map<String, Object>> getMyPosts(Model model, HttpSession session, @PathVariable Long writeId) {

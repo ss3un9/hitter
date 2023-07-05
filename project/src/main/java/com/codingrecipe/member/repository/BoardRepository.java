@@ -18,5 +18,8 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
     void updateHits(@Param("id") Long id);
 
     List<BoardEntity> findByBoardWriterId(Long boardWriterId);
+    List<BoardEntity> findByBoardTitleContaining(String keyword);
+
+
 
 }

@@ -4,11 +4,9 @@ import com.codingrecipe.member.dto.BoardDTO;
 import com.codingrecipe.member.entity.BoardEntity;
 import com.codingrecipe.member.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -42,9 +40,8 @@ public class BoardService{
         }
         return boardDTOList;
 
-
-
     }
+
 
 
     @Transactional
@@ -90,6 +87,30 @@ public class BoardService{
         return boardDTOS;
     }
 
+
+// ...
+
+    public Page<BoardDTO> SearchPaging(String keyword, Pageable pageable) {
+        int page = pageable.getPageNumber();
+        int pageLimit = 10; // 한 페이지에 보여줄 글 갯수
+
+        List<BoardEntity> boardEntities;
+
+        if (keyword != null && !keyword.isEmpty()) {
+            boardEntities = boardRepository.findByBoardTitleContaining(keyword);
+        } else {
+            boardEntities = boardRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id"))).getContent();
+        }
+
+        // Convert the list to a Page
+        Page<BoardEntity> boardPage = new PageImpl<>(boardEntities, pageable, boardEntities.size());
+
+        // 목록: id, writer, title, hits, createdTime
+        Page<BoardDTO> boardDTOS = boardPage.map(board -> new BoardDTO(board.getId(), board.getBoardWriter(), board.getBoardWriterId(), board.getBoardTitle(), board.getBoardHits(), board.getCreatedTime()));
+        return PageableExecutionUtils.getPage(boardDTOS.getContent(), pageable, boardDTOS::getTotalElements);
+    }
+
+
     public List<BoardDTO> findBoardListByUserId(Long boardWriterId) {
         List<BoardEntity> boardEntities = boardRepository.findByBoardWriterId(boardWriterId);
         List<BoardDTO> boardDTOList = new ArrayList<>();
@@ -101,5 +122,17 @@ public class BoardService{
 
         return boardDTOList;
     }
+
+    public List<BoardDTO> searchByTitle(String keyword) {
+        List<BoardEntity> boardEntityList = boardRepository.findByBoardTitleContaining(keyword);
+        List<BoardDTO> boardDTOList = new ArrayList<>();
+
+        for (BoardEntity boardEntity : boardEntityList) {
+            boardDTOList.add(BoardDTO.toBoardDTO(boardEntity));
+        }
+
+        return boardDTOList;
+    }
+
 
 }

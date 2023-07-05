@@ -135,7 +135,7 @@ public class SongController {
     public ResponseEntity<Resource> PlaySong(@PathVariable Long id) throws IOException {
         SongDTO songDTO = songService.findById(id);
 
-        String songFilePath = "C:/bp_music/" + songDTO.getFileSysName();
+        String songFilePath = "/Users/ss3un9/Desktop/fastapi/song/" + songDTO.getFileSysName();
 
 //        String songFilePath = "/Users/ss3un9/Desktop/fastapi/song/" + songDTO.getFileSysName();
 
@@ -152,7 +152,7 @@ public class SongController {
         SongDTO songDTO = songService.findById(id);
 
 
-        String text = "C:/bp_music/" + songDTO.getLyrics();
+        String text = "/Users/ss3un9/Desktop/fastapi/txt/" + songDTO.getLyrics();
 
 //        String text = "/Users/ss3un9/Desktop/fastapi/txt/" + songDTO.getLyrics();
 
