@@ -13,11 +13,12 @@ const MyBar = () => {
 
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
     const id = storedSession.loginId;
+    const NickName = storedSession.loginNickName;
     return(
         <div className='wrap'>
             <div className="wrapping-design">
                 <img className='profile-photo' alt= 'photo' src={photo}/>
-                <div className='nickname'>Nickname</div>
+                <div className='nickname'>{NickName}</div>
                 <div className='menu'>
                     <nav className='menu-bar'>
                         <ul className='all-texts'>

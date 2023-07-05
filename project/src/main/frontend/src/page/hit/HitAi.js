@@ -109,16 +109,14 @@ const HitAi = ({ session }) => {
                 </div>
                 <br></br>
                 <div className='mp3-container'>
-                    <label className='choose' htmlFor="music">Choose a music(.mp3) file</label>
-                    <br></br><br></br>
-                    <input className='file' type="file" id="music" name="file" accept="audio/*" />
+                    <label className='choose' htmlFor="music">음원(.mp3) 파일을 업로드해주세요.</label>
+                    <input className='file-upload-mp3' type="file" id="music" name="file" accept="audio/*" />
                 </div>
                 <div className='txt-container'>
-                    <label className='choose-txt' htmlFor="txt">Choose a lyric(.txt) file</label>
-                    <br></br><br></br>
+                    <label className='choose-txt' htmlFor="txt">가사(.txt) 파일을 업로드해주세요.</label>
                     <input className='txt' type="file" id="text" name="file1" accept="text/*" />
                 </div>
-                <input className='title'
+                <input className='songtitle'
                     type="text"
                     id="title"
                     name="songTitle"
@@ -140,7 +138,6 @@ const HitAi = ({ session }) => {
 
             </form>
 
-            <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
         </div>
     )
 }

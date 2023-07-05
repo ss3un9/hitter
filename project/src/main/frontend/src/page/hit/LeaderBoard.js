@@ -9,6 +9,7 @@ import {HiOutlineTrophy} from "react-icons/hi2";
 import {HiTrendingUp} from "react-icons/hi"
 import {BsPlayCircleFill} from "react-icons/bs";
 import {MdOutlineLyrics} from "react-icons/md";
+import {PiCrownSimpleBold} from "react-icons/pi";
 
 const LeaderBoard = () => {
     const [session, setSession] = useState({});
@@ -42,7 +43,6 @@ const LeaderBoard = () => {
     const [showLyricsModal, setShowLyricsModal] = useState(false);
     const [showPlayerModal, setShowPlayerModal] = useState(false);
     const [selectedSongId, setSelectedSongId] = useState('');
-
     const Posting = () => {
         navigate("/hit")
     };
@@ -195,7 +195,7 @@ const LeaderBoard = () => {
     }, []);
 
     return (
-        <div className='container'>
+        <div className='lead-container'>
             <h1 className='leaderboard-txt'>
                 <HiOutlineTrophy className={'HiOutlineTrophy'} size='55'/>LEADERBOARD
             </h1>
@@ -203,12 +203,12 @@ const LeaderBoard = () => {
                 <ul className='bt-ul'>
                     {storedSession.loginName != null && (
                         <button className='predict-button' onClick={Posting}>
-                            <div className='btn-info'><HiTrendingUp size='15'/>노래 예측하기</div>
+                            <div className='btn-info'><HiTrendingUp size='18'/>노래 예측하기</div>
                         </button>
                     )}
                     <button className='whole-button' onClick={() => fetchData()}>전체보기</button>
                     <br></br><br></br>
-                    <div>
+                    <div className='btns-group'>
                         <button className='pop-button' onClick={() => handleGenreFilter('pop')}>Pop</button>
                         <button className='dance-button' onClick={() => handleGenreFilter('dance')}>Dance</button>
                         <button className='ballad-button' onClick={() => handleGenreFilter('ballad')}>Ballad</button>
@@ -216,19 +216,21 @@ const LeaderBoard = () => {
                 </ul>
             </div>
             <div className="board-table-wrapper">
-                <table className='tbl'>
+                <table className='leader-tbl'>
                     <thead className='tbl-head'>
-                    <tr className='trs'>
-                        <th className='ths'>liked</th>
-                        <th className='ths'>순위</th>
-                        <th className='ths'>노래제목</th>
-                        <th className='ths'>장르</th>
-                        <th className='ths'>닉네임</th>
-                        <th className='ths'>예측결과</th>
-                        <th className='ths'>좋아요</th>
-                        <th className='ths'>재생</th>
+                    <tr className='lead-trs'>
+
+                        <th className='lead-ths'>순위</th>
+                        <th className='lead-ths-title'>노래제목</th>
+                        <th className='lead-ths'>장르</th>
+                        <th className='lead-ths'>닉네임</th>
+                        <th className='lead-ths'>예측결과</th>
+                        <th className='lead-ths'>좋아요</th>
+                        <th className='lead-ths'>재생</th>
                         {/* 재생 버튼 추가 */}
-                        <th className='ths'>가사</th>
+                        <th className='lead-ths'>가사</th>
+                        <th className='lead-ths'>liked</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -237,7 +239,40 @@ const LeaderBoard = () => {
 
                             <tr key={song.id}>
 
-                                <td className='tds'>
+
+                                {songPageList.number * songPageList.size + index + 1 < 4 ?
+                                    <td className='tds-winner'>
+                                        <PiCrownSimpleBold size='30'/>{songPageList.number * songPageList.size + index + 1} </td>
+                                    :
+                                    <td className='tds-nams'>
+                                        {songPageList.number * songPageList.size + index + 1} </td>
+                                }
+
+                                <td className='title-tds'>
+                                    <Link to={`/hit_ai_detail?id=` + song.id} style={{textDecoration: "none"}}>
+                                        <div className='song-title'> {song.songTitle} </div>
+                                    </Link>
+                                </td>
+                                <td className='lead-tds'>{song.genre}</td>
+                                <td className='lead-tds'>{song.memberNickName}</td>
+                                <td className='lead-tds'>{song.prediction}</td>
+                                <td className='lead-tds'>{song.songLike}</td>
+                                <td>
+
+                                    <div
+                                        className="play-button"
+                                        onClick={() => handleOpenPlayer(song.id)}
+                                    >
+                                        <BsPlayCircleFill className='BsPlayCircleFill' size='20'/>
+
+                                    </div>
+                                </td>
+                                <td className='lead-tds'>
+                                    <button className='lr-btn' onClick={() => handleViewLyrics(song.id)}>
+                                        <MdOutlineLyrics className='MdOutlineLyrics' size={'20'}/>
+                                    </button>
+                                </td>
+                                <td className='lead-tds'>
                                     <LikeButton
                                         memberId={memberId}
                                         songId={song.id}
@@ -245,34 +280,6 @@ const LeaderBoard = () => {
                                         isLiked={song.isLiked}
                                     />
                                 </td>
-
-                                <td className='tds'>{songPageList.number * songPageList.size + index + 1}</td>
-
-                                <td className='tds'>
-                                    <Link to={`/hit_ai_detail?id=` + song.id}>
-                                        <div className='song-title'> {song.songTitle} </div>
-                                    </Link>
-                                </td>
-                                <td className='tds'>{song.genre}</td>
-                                <td className='tds'>{song.memberNickName}</td>
-                                <td className='tds'>{song.prediction}</td>
-                                <td className='tds'>{song.songLike}</td>
-                                <td>
-
-                                    <div
-                                        className="play-button"
-                                        onClick={() => handleOpenPlayer(song.id)}
-                                    >
-                                        <BsPlayCircleFill size='20'/>
-
-                                    </div>
-                                </td>
-                                <td className='tds'>
-                                    <button className='lr-btn' onClick={() => handleViewLyrics(song.id)}>
-                                        <MdOutlineLyrics size={'30'}/>
-                                    </button>
-                                </td>
-
                             </tr>
                         ))}
                     </tbody>

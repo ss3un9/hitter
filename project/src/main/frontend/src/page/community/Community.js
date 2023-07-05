@@ -85,11 +85,11 @@ const Community =  () => {
                 <table className='cmtbl'>
                     <thead className='cmtbl-head'>
                         <tr className='trs'>
-                            <th className='cmths'>id</th>
-                            <th className='cmths'>title</th>
-                            <th className='cmths'>writer</th>
-                            <th className='cmths'>date</th>
-                            <th className='cmths'>hits</th>
+                            <th className='cmths'>Number</th>
+                            <th className='cmths-title'>Title</th>
+                            <th className='cmths'>Writer</th>
+                            <th className='cmths'>Date</th>
+                            <th className='cmths'>Hits</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,8 +98,8 @@ const Community =  () => {
                         <tr key={board.id}>
                             <td className='idtd'>{board.id}</td>
                             <td>
-                                <Link to={`/board/detail?id=` + board.id + `&page=` + page} >
-                                    <div className='board-title'>{board.boardTitle}</div>
+                                <Link to={`/board/detail?id=` + board.id + `&page=` + page} style={{textDecoration: "none"}} >
+                                    <div className='board-title' >{board.boardTitle}</div>
                                 </Link>
                             </td>
                             <td className='cmtds'>{board.boardWriter}</td>

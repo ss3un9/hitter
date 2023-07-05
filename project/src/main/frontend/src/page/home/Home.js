@@ -51,7 +51,7 @@ const Home = () => {
                         <img className='person' src={SingSong} alt='pes'/>
                     </div>
                     <div className='exp-txt'>
-                        <h1 className='behitter'>BE HITTER</h1>
+                        <h1 className='behitter'>Be HITTER</h1>
                         <p className='be-exp'>
                             HITTER의 AI는 수많은 히트곡을 분석합니다.
                             <br></br>

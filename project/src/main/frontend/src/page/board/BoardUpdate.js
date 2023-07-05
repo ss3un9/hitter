@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate} from 'react-router-dom';
 import axios from "axios";
-import "../community/Write.css"
+import "./BoardUpdate.css"
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 
@@ -113,10 +113,10 @@ const BoardUpdate = () => {
       };
 
     return (
-        <>
+        <div className='wr-up-ctr'>
 
-            <div>
-                <form method="post" encType="multipart/form-data" onSubmit={PostUpdate}>
+            <div className='ckedictor-udt'>
+                <form className='edit-form' method="post" encType="multipart/form-data" onSubmit={PostUpdate}>
                     <label>
                         title: <input type="text" name="boardTitle" value={boardTitle}
                                       onChange={(e) => setBoardTitle(e.target.value)}/>
@@ -132,15 +132,16 @@ const BoardUpdate = () => {
                     />
                     </label>
                     <label>
-                        file: <input type="file" name="boardFile"/>
+                        file: <input className='fileinputedit' type="file" name="boardFile"/>
                     </label>
-                    <button>수정</button>
+                    <button className='udt-edit-btn'>수정</button>
                 </form>
 
-            </div>
+
             <button onClick={() => reqList()}>목록</button>
             <button onClick={() => deleteList(id)}>삭제</button>
-        </>
+            </div>
+        </div>
     )
 }
 
