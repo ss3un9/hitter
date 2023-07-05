@@ -1,16 +1,19 @@
-.like-wrapper{
+.liketbl-bar{
     background-color: #252525;
     width: 100%;
     height: 1000px;
 }
 
-.likesongbar{
+.lkbar{
     display: contents;
 }
 
-.likesong-table{
+.liketable{
     display: table;
     margin: 0 auto;
 }
 
-
+.kksong-table{
+    display: table;
+    margin: 0 auto;
+}

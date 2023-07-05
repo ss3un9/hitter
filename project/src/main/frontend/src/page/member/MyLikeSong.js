@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import "./MyPage.css"
+import "./MyLikeSong.css"
 import {Link, useNavigate} from "react-router-dom";
 import {BsPencilSquare} from "react-icons/bs";
 import {Button, Container} from "react-bootstrap";
@@ -14,6 +14,7 @@ import playIcon from "../../assets/play_icon.png";
 import LyricsModal from "../hit/LyricsModal";
 import PlayerModal from "../../component/PlayerModal";
 import LikeButton from "../hit/LikeButton";
+
 
 function Select() {
     return null;
@@ -108,39 +109,37 @@ const MyLikeSong = ({session}) => {
     }, []);
     return (
 
-        <div className='tbl-bar'>
-            <div className='bar'>
+        <div className='liketbl-bar'>
+            <div className='lkbar'>
                 <MypageBar/></div>
-            <div className='table'>
+            <div className='liketable'>
                 {songList.length === 0 ? (
-                    <table className='song-table'>
-                        <tbody className='tb-top-body'>
-                        <tr className='tr-info'>
+                    <table className='kksong-table'>
+                        <thead className='ththththt'>
+                        <tr className='dddddd'>
                             <td colSpan="5">
                                 좋아하는 곡이 없습니다.{" "}
                                 <Link to="/song/board">노래 보러 가기</Link>
                             </td>
                         </tr>
-                        </tbody>
+                        </thead>
                     </table>
                 ) : (
-
-                    <table className='song-table'>
-                        <thead className='table-head'>
-                        <tr className='table-tr'>
-                            <th className='th'></th>
-                            <th className='th'>ID</th>
-                            <th className='th'>Song Title</th>
-                            <th className='th'>Genre</th>
-                            <th className='th'>CreatedTime</th>
-                            <th>좋아요</th>
-                            <th>재생</th>
+                    <table className='lk-info-tbl'>
+                        <thead className='lk-info-tb-head'>
+                        <tr className='lk-info-table-tr'>
+                            <th className='inth'>ID</th>
+                            <th className='inth'>Song Title</th>
+                            <th className='inth'>Genre</th>
+                            <th className='inth'>CreatedTime</th>
+                            <th className='inth'>좋아요</th>
+                            <th className='inth'>재생</th>
                             {/* 재생 버튼 추가 */}
-                            <th>가사</th>
+                            <th className='inth'>가사</th>
                             {/* Add more table headers for other properties */}
                         </tr>
                         </thead>
-                        <tbody className='table-body'>
+                        <tbody className='lk-info-table-body'>
                         {songList
                             .filter((song) => song.isLiked)
                             .map((song) => (
@@ -153,15 +152,15 @@ const MyLikeSong = ({session}) => {
                                             isLiked={"true"}
                                         />
                                     </td>
-                                    <td className='td'>{song.id}</td>
-                                    <td className='td'>{song.songTitle}</td>
-                                    <td className='td'>{song.genre}</td>
-                                    <td className='td'>{song.songCreatedTime.replace("T", " ")}</td>
+                                    <td className='intd'>{song.id}</td>
+                                    <td className='intd'>{song.songTitle}</td>
+                                    <td className='intd'>{song.genre}</td>
+                                    <td className='intd'>{song.songCreatedTime.replace("T", " ")}</td>
                                     <td>{song.songLike}</td>
                                     <td>
                                         {/*<Link to={`/song/play/${song.id}`}>재생</Link> */}
                                         <div
-                                            className="play-button"
+                                            className="plb"
                                             onClick={() => handleOpenPlayer(song.id)}
                                         >
                                             <img
