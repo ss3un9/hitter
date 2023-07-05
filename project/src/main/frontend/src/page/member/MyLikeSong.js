@@ -15,7 +15,6 @@ import LyricsModal from "../hit/LyricsModal";
 import PlayerModal from "../../component/PlayerModal";
 import LikeButton from "../hit/LikeButton";
 
-
 function Select() {
     return null;
 }
@@ -29,13 +28,12 @@ const MyLikeSong = ({session}) => {
     const [songList, setSongList] = useState([]);
     const [likeList, setLikeList] = useState([]);
 
-    const [mySongList, setMySongList] = useState([]);
     const [lyrics, setLyrics] = useState('');
     const [showLyricsModal, setShowLyricsModal] = useState(false);
     const [showPlayerModal, setShowPlayerModal] = useState(false);
     const [selectedSongId, setSelectedSongId] = useState('');
 
-
+    const [Flag, setFlag] = useState(false);
     const handleCloseLyricsModal = () => {
         setShowLyricsModal(false);
     };
@@ -55,91 +53,85 @@ const MyLikeSong = ({session}) => {
         try {
             const response = await axios.get(`/song/txt/${songId}`);
             const {data} = response;
-            console.log(response);
+
             setLyrics(data);
             setShowLyricsModal(true);
-            console.log(showLyricsModal);
+
         } catch (error) {
             console.error('Error fetching lyrics:', error);
         }
     };
 
 
-    const fetchData = async () => {
-        try {
-
-            const response = await axios.get(`/member/getMyLikeSong/${id}`, {
-                params: {
-                    Id: id,
-                }
-            });
-
-
-            const {data} = response;
-            const updatedSongList = data.songList.map((song) => {
-                const matchingLike = data.likeList.find((like) => like.songId === song.id);
-                if (matchingLike) {
-                    return {
-                        ...song,
-                        isLiked: true,
-                        likeId: matchingLike.id,
-                    };
-                }
-                return song;
-            });
-
-            setSongList(updatedSongList);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
-
     useEffect(() => {
-        const fetchDataAsync = async () => {
+        const fetchData = async () => {
             try {
-                const response = await fetchData();
-            } catch (error) {
+                const response = await axios.get(`/member/getMyLikeSong/${id}`, {
+                    params: {
+                        Id: id,
+                    },
+                });
 
+                const { data } = response;
+                const updatedSongList = data.songList.map((song) => {
+                    const matchingLike = data.likeList.find((like) => like.songId === song.id);
+                    if (matchingLike) {
+                        return {
+                            ...song,
+                            isLiked: true,
+                            likeId: matchingLike.id,
+                        };
+                    }
+                    return song;
+                });
+
+                setSongList(updatedSongList);
+                setLikeList(data.likeList);
+
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
             }
         };
-        fetchDataAsync().then(() => {
-        }).catch((error) => {
-        });
-    }, []);
+
+        fetchData();
+    }, []); // 빈 배열을 넣어 최초 렌더링 시에만 실행하도록 설정
+    useEffect(() => {
+        console.log(likeList);
+        if (likeList.length === 0) {
+            setFlag(false);
+        } else {
+            setFlag(true);
+        }
+    }, [likeList, songList, setFlag]);
     return (
 
         <div className='liketbl-bar'>
             <div className='lkbar'>
                 <MypageBar/></div>
             <div className='liketable'>
-                {songList.length === 0 ? (
-                    <table className='kksong-table'>
-                        <thead className='ththththt'>
-                        <tr className='dddddd'>
-                            <td colSpan="5">
-                                좋아하는 곡이 없습니다.{" "}
-                                <Link to="/song/board">노래 보러 가기</Link>
-                            </td>
-                        </tr>
-                        </thead>
-                    </table>
+                {Flag ===false ? (
+
+                    <Link to="/song/board">노래 보러 가기</Link>
+
                 ) : (
-                    <table className='lk-info-tbl'>
-                        <thead className='lk-info-tb-head'>
-                        <tr className='lk-info-table-tr'>
-                            <th className='inth'>ID</th>
-                            <th className='inth'>Song Title</th>
-                            <th className='inth'>Genre</th>
-                            <th className='inth'>CreatedTime</th>
-                            <th className='inth'>좋아요</th>
-                            <th className='inth'>재생</th>
+
+                    <table className='kksong-table'>
+                        <thead className='table-head'>
+                        <tr className='table-tr'>
+                            <th className='th'></th>
+                            <th className='th'>ID</th>
+                            <th className='th'>Song Title</th>
+                            <th className='th'>Genre</th>
+                            <th className='th'>CreatedTime</th>
+                            <th>좋아요</th>
+                            <th>재생</th>
                             {/* 재생 버튼 추가 */}
-                            <th className='inth'>가사</th>
+                            <th>가사</th>
                             {/* Add more table headers for other properties */}
                         </tr>
                         </thead>
-                        <tbody className='lk-info-table-body'>
+                        <tbody className='table-body'>
                         {songList
                             .filter((song) => song.isLiked)
                             .map((song) => (
@@ -152,15 +144,15 @@ const MyLikeSong = ({session}) => {
                                             isLiked={"true"}
                                         />
                                     </td>
-                                    <td className='intd'>{song.id}</td>
-                                    <td className='intd'>{song.songTitle}</td>
-                                    <td className='intd'>{song.genre}</td>
-                                    <td className='intd'>{song.songCreatedTime.replace("T", " ")}</td>
+                                    <td className='td'>{song.id}</td>
+                                    <td className='td'>{song.songTitle}</td>
+                                    <td className='td'>{song.genre}</td>
+                                    <td className='td'>{song.songCreatedTime.replace("T", " ")}</td>
                                     <td>{song.songLike}</td>
                                     <td>
                                         {/*<Link to={`/song/play/${song.id}`}>재생</Link> */}
                                         <div
-                                            className="plb"
+                                            className="play-button"
                                             onClick={() => handleOpenPlayer(song.id)}
                                         >
                                             <img
