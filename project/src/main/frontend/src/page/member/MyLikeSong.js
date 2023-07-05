@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import "./MyPage.css"
+import "./MyLikeSong.css"
 import {Link, useNavigate} from "react-router-dom";
 import {BsPencilSquare} from "react-icons/bs";
 import {Button, Container} from "react-bootstrap";
@@ -99,11 +99,11 @@ const MyLikeSong = ({session}) => {
 
     return (
 
-        <div className='tbl-bar'>
-            <div className='bar'>
+        <div className='like-wrapper'>
+            <div className='likesongbar'>
                 <MypageBar /></div>
             <div className='table'>
-                <table className='song-table'>
+                <table className='likesong-table'>
                     <thead className='table-head'>
                     <tr className='table-tr'>
                         <th className='th'></th>

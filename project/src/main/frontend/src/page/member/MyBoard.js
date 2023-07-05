@@ -59,10 +59,10 @@ const MyBoard = ()  => {
     return (
         <>
             (
-            <div className='bar-tbl'>
+            <div className='myboardWrap'>
                 <MypageBar/>
-                <div className='table'>
-                    <table className='table'>
+                <div className='Btable'>
+                    <table className='myBtable'>
                         {myBoardList.length === 0 ? (
                             <tbody className='tb-top-body'>
                             <tr className='tr-info'>

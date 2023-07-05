@@ -5,6 +5,7 @@ import {Button} from "react-bootstrap";
 import {BsPencilSquare} from "react-icons/bs";
 import {GiMusicalNotes} from "react-icons/gi";
 import {FaChalkboardUser, FaRegFaceSadTear} from "react-icons/fa6";
+import {RiStarSmileFill} from "react-icons/ri";
 import "./MypageBar.css"
 
 
@@ -39,7 +40,7 @@ const MyBar = () => {
                             <Link to="/member/mylikesong" className="nav-link">
                                 <Button className='hover-button5'>
                                     <div className='byebye'>
-                                        <FaRegFaceSadTear className="FaRegFaceSadTear"/>
+                                        <RiStarSmileFill className="FaRegFaceSadTear"/>
                                         내가 좋아요 한 곡
                                     </div>
                                 </Button>

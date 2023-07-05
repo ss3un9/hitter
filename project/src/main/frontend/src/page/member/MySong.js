@@ -78,8 +78,8 @@ const MySong = () => {
             <div className='tbl-bar'>
                 <div className='bar'>
                     <MypageBar /></div>
-                <div className='table'>
-                    <table className='song-table'>
+                <div className='my-song-table'>
+                    <table className='mysong-table'>
                         <thead className='table-head'>
                             <tr className='table-tr'>
                                 <th className='th'>ID</th>

@@ -163,7 +163,7 @@ const BoardDetail = () => {
     };
 
     return (
-        <>
+        <div className='detail-wrapper'>
 
             <div className='board-detail-all'>
                 <p>board_id: {id}</p>
@@ -242,7 +242,7 @@ const BoardDetail = () => {
                 </table>
 
             </div>
-        </>
+        </div>
     )
 }
 
