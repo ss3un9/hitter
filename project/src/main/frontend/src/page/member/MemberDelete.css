@@ -1,12 +1,12 @@
-.myboardWrap{
+.del-wrapper{
     background-color: #252525;
     width: 100%;
     height: 1000px;
 }
 
-.Btable{
-    margin: 0 auto;
-    align-items: center;
-    text-align: center;
+
+
+.del-form{
     display: table;
+    margin: 0 auto;
 }

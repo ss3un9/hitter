@@ -1,0 +1,16 @@
+.like-wrapper{
+    background-color: #252525;
+    width: 100%;
+    height: 1000px;
+}
+
+.likesongbar{
+    display: contents;
+}
+
+.likesong-table{
+    display: table;
+    margin: 0 auto;
+}
+
+

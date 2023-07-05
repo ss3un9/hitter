@@ -1,8 +1,6 @@
+import React, {useState} from "react";
 
-
-import React, {useRef, useState} from "react";
-
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import './SignupPage.css';
 import axios from "axios";
@@ -10,20 +8,27 @@ import axios from "axios";
 
 const SignupPage = () => {
 
-    const [emailState, setEmailState] = useState('');
-
-    const [pwdState, setPwdState] = useState('');
-
-    const [repwdState, setRepwdState] = useState('');
-
-    const [isValidForm, setIsValidForm] = useState(false); // 비번
-    const [isEmailForm, setIsEmailForm] = useState(false); //이메일
-    const [isPwForm, setPwForm] = useState(false); //비번
-    const [isNickForm, setIsNickForm] = useState(false);  //닉네임
-    const [isTermsChecked, setIsTermsChecked] = useState(false); //약관
-    const [isPrivacyChecked, setIsPrivacyChecked] = useState(false); //개인정보
     const navigate = useNavigate();
 
+    const [pwdState, setPwdState] = useState('');                                     //비밀번호
+    const [rePwdState, setRePwdState] = useState('');                                 //비밀번호 확인
+
+    const [isValidForm, setIsValidForm] = useState(false);                          //비번조건 만족
+    const [isEmailForm, setIsEmailForm] = useState(false);                          //이메일
+    const [isPwForm, setPwForm] = useState(false);                                  //비번
+    const [isNickForm, setIsNickForm] = useState(false);                            //닉네임
+    const [isTermsChecked, setIsTermsChecked] = useState(false);                    //약관
+    const [isPrivacyChecked, setIsPrivacyChecked] = useState(false);                //개인정보
+    const [isEmailChecked, setIsEmailChecked] = useState(false);                    // 메일체크
+
+    const [verifyButtonVisible, setVerifyButtonVisible] = useState(true);           //일치하면 확인버튼 지움
+    const [inputDisabled, setInputDisabled] = useState(false);                      //일치하면 인풋 비활성화
+
+    const [inputCode, setInputCode] = useState('');                                   //인증번호 6자리
+    const [resultMsg, setResultMsg] = useState('');                                   //인증번호 일치불일치 메세지
+    const [resultColor, setResultColor] = useState('');                               //인증번호 일치불일치 색깔
+
+    const [isMailBox, setIsMailBox] = useState(false);                              //인증하기 누르면 input창 띄우기
     const handleTermsCheckboxChange = (event) => {
         setIsTermsChecked(event.target.checked);
     };
@@ -32,61 +37,52 @@ const SignupPage = () => {
         setIsPrivacyChecked(event.target.checked);
     };
 
-    const handleEmailBlur = () => {
-        const email = document.getElementById('memberEmail').value;
-        const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
-        if (email.match(regExp) != null) {
-            setEmailState('올바른 이메일 형식입니다!');
-            setIsValidForm(true);
-        } else {
-            setEmailState('이메일 형식이 올바르지 않습니다!');
-            setIsValidForm(false);
-        }
-    };
-
     const handlePwdInput = () => {
         const pwd = document.getElementById('pwd').value;
         const regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
         const missingConditions = [];
 
-        if (!regExp.test(pwd)) {
-            if (!/(?=.*[A-Za-z])/.test(pwd)) {
-                missingConditions.push('영문자');
-            }
-            if (!/(?=.*\d)/.test(pwd)) {
-                missingConditions.push('숫자');
-            }
-            if (!/(?=.*[@$!%*#?&])/.test(pwd)) {
-                missingConditions.push('특수문자');
-            }
-            if (pwd.length < 8 || pwd.length > 16) {
-                if (pwd.length < 8) {
-                    missingConditions.push(`비밀번호 자릿수(${pwd.length}/8)`);
-                } else if (pwd.length > 16) {
-                    missingConditions.push(`비밀번호 자릿수가 16보다 작아야 합니다`);
+        try {
+            if (!regExp.test(pwd)) {
+                if (!/(?=.*[A-Za-z])/.test(pwd)) {
+                    missingConditions.push('영문자');
                 }
+                if (!/(?=.*\d)/.test(pwd)) {
+                    missingConditions.push('숫자');
+                }
+                if (!/(?=.*[@$!%*#?&])/.test(pwd)) {
+                    missingConditions.push('특수문자');
+                }
+                if (pwd.length < 8 || pwd.length > 16) {
+                    if (pwd.length < 8) {
+                        missingConditions.push(`비밀번호 자릿수(${pwd.length}/8)`);
+                    } else if (pwd.length > 16) {
+                        missingConditions.push(`비밀번호 자릿수가 16보다 작아야 합니다`);
+                    }
+                }
+                setPwdState(`비밀번호는 ${missingConditions.join(', ')} 조건을 포함해야 합니다!`);
+                setPwForm(false);
+            } else {
+                setPwdState('');
+                setPwForm(true);
             }
-            setPwdState(`비밀번호는 ${missingConditions.join(', ')} 조건을 포함해야 합니다!`);
-            setPwForm(false);
-        } else {
-            setPwdState('');
-            setPwForm(true);
+            handleRePwdInput();
+        } catch {
+            alert('비밀번호를 입력해주세요.');
         }
-        handleRepwdInput();
+
     };
 
 
-
-    const handleRepwdInput = () => {
+    const handleRePwdInput = () => {
         const pwd = document.getElementById('pwd').value;
-        const repwd = document.getElementById('re_pwd').value;
+        const rePwd = document.getElementById('re_pwd').value;
 
-        if (repwd !== '' && repwd !== pwd) {
-            setRepwdState('비밀번호가 다릅니다');
+        if (rePwd !== '' && rePwd !== pwd) {
+            setRePwdState('비밀번호가 다릅니다');
             setIsValidForm(false);
         } else {
-            setRepwdState('');
+            setRePwdState('');
             setIsValidForm(true);
         }
     };
@@ -103,13 +99,6 @@ const SignupPage = () => {
 
                 if (response.ok) {
                     alert('회원가입이 완료되었습니다.');
-
-                    // const scrollPosition = window.scrollY; // 현재 스크롤 위치
-                    // const url = `login.js?scrollPosition=${scrollPosition}`;
-                    //
-                    // window.location.href = url;
-
-
                     navigate('/login');
                 } else {
                     alert('회원가입에 실패했습니다. 다시 시도해주세요.');
@@ -118,17 +107,17 @@ const SignupPage = () => {
                 console.error('Error occurred:', error);
                 alert('오류가 발생했습니다. 다시 시도해주세요.');
             }
-        }else{
+        } else {
             alert("필수약관에 동의해야 합니다.")
         }
-
-
 
 
     };
 
     const emailCheck = () => {
-        const email = document.getElementById("memberEmail").value;
+        const email1 = document.getElementById("memberEmail").value;                            //이메일
+        const email2 = document.getElementById("userEmail2").value;                             //이메일 도메인
+        const email = email1 + "@" + email2
         const checkResult = document.getElementById("check-result");
         console.log("입력값: ", email);
 
@@ -138,15 +127,14 @@ const SignupPage = () => {
             }
         })
             .then(response => {
-                console.log("요청성공", response.data);
+
                 if (response.data === "ok") {
-                    console.log("사용가능한 이메일");
                     checkResult.style.color = "green";
                     checkResult.innerHTML = "사용가능한 이메일";
                     alert("사용가능한 이메일입니다");
+                    setIsMailBox(true);
                     setIsEmailForm(true);
                 } else {
-                    console.log("이미 사용중인 이메일");
                     checkResult.style.color = "red";
                     checkResult.innerHTML = "이미 사용중인 이메일";
                     alert("이미 사용중인 이메일입니다");
@@ -154,14 +142,13 @@ const SignupPage = () => {
                 }
             })
             .catch(error => {
-                console.log("에러발생", error);
+                alert("에러가 발생했습니다. 다시 시도해주세요");
             });
     };
 
     const NickNameCheck = () => {
         const nickname = document.getElementById("memberNickName").value;
         const checkNickResult = document.getElementById("checkNick-result");
-        console.log("입력값: ", nickname);
 
         axios.post("/member/nick-check", null, {
             params: {
@@ -169,15 +156,12 @@ const SignupPage = () => {
             }
         })
             .then(response => {
-                console.log("요청성공", response.data);
                 if (response.data === "ok") {
-                    console.log("사용가능한 닉네임");
                     checkNickResult.style.color = "green";
                     checkNickResult.innerHTML = "사용가능한 닉네임";
                     alert("사용가능한 닉네임입니다");
                     setIsNickForm(true);
                 } else {
-                    console.log("이미 사용중인 닉네임");
                     checkNickResult.style.color = "red";
                     checkNickResult.innerHTML = "이미 사용중인 닉네임";
                     alert("이미 사용중인 닉네임입니다");
@@ -185,32 +169,69 @@ const SignupPage = () => {
                 }
             })
             .catch(error => {
-                console.log("에러발생", error);
+                alert("에러가 발생했습니다. 다시 시도해주세요");
             });
     };
+    const [code, setCode] = useState('');
+    const handleMailCheck = () => {
+        const email1 = document.getElementById("memberEmail").value;
+        const email2 = document.getElementById("userEmail2").value;
+        const email = email1 + "@" + email2
+
+        axios.get(`/mailCheck?email=${email}`)
+            .then(response => {
+                console.log('data: ' + response.data);
+                setCode(response.data);
+                alert('인증번호가 전송되었습니다.');
+
+            })
+            .catch(error => {
+                alert("에러가 발생했습니다. 다시 시도해주세요");
+            });
+    };
+
+    const handleNumberCheck = () => {
+        const inputCode = parseInt(document.getElementById("inputcode").value, 10);
+
+        try {
+            if (inputCode == code) {
+                setResultMsg('인증번호가 일치합니다.');
+                alert("인증번호가 일치합니다")
+                setResultColor('green');
+                setIsEmailChecked(true);
+                setVerifyButtonVisible(false);
+                setInputDisabled(true);
+            } else {
+                setResultMsg('인증번호가 불일치합니다. 다시 확인해주세요!');
+                alert("인증번호가 불일치합니다. 다시 확인해주세요!")
+                setResultColor('red');
+                setIsEmailChecked(false);
+            }
+        } catch {
+            alert("인증번호 6글자를 입력 해주세요.");
+        }
+    };
+
     return (
 
         <>
 
-            {/* <!-- Header--> */}
-
             <div className="signup-box">
-
                 <div className='form-box'>
-
-                <h1 className="signup-txt">SIGN UP</h1>
-
-            <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-
-                    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+                    <h1 className="signup-txt">SIGN UP</h1>
+                    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+                            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+                            crossorigin="anonymous">
+                    </script>
 
                     <form className='agree-list'>
                         <ul className="join_box">
                             <li className="checkBox-check02">
                                 <br></br><br></br>
-                                    <li>이용약관 동의(필수)
-                                        <input type="checkbox" name="chk" checked={isTermsChecked} onChange={handleTermsCheckboxChange} />
-                                    </li>
+                                <li>이용약관 동의(필수)
+                                    <input type="checkbox" name="chk" checked={isTermsChecked}
+                                           onChange={handleTermsCheckboxChange}/>
+                                </li>
                                 <br></br>
                                 <textarea className='first' name="" id="">
                                     여러분을 환영합니다.
@@ -220,9 +241,10 @@ const SignupPage = () => {
                             </li>
                             <li className="checkBox-check03">
                                 <br></br><br></br>
-                                    <li>개인정보 수집 및 이용에 대한 안내(필수)
-                                        <input type="checkbox" name="chk" checked={isPrivacyChecked} onChange={handlePrivacyCheckboxChange}/>
-                                    </li>
+                                <li>개인정보 수집 및 이용에 대한 안내(필수)
+                                    <input type="checkbox" name="chk" checked={isPrivacyChecked}
+                                           onChange={handlePrivacyCheckboxChange}/>
+                                </li>
                                 <br></br>
                                 <textarea className='second' name="" id={""}>
                                     개인정보보호법에 따라 히터(HITTER)에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
@@ -270,33 +292,74 @@ const SignupPage = () => {
                                 <div className="form-group">
                                     <label className="label_text" htmlFor="memberEmail">Email</label>
                                     <div className="input-group">
-                                        <input type="text" className="form-control" id="memberEmail" name="memberEmail" />
-                                        <button type="button" className="btn btn-primary" onClick={emailCheck}>Check Email</button>
+                                        <input type="text" className="form-control" id="memberEmail"
+                                               name="memberEmail"/>
+                                        <select className="select-control" name="userEmail2" id="userEmail2">
+                                            <option>naver.com</option>
+                                            <option>daum.net</option>
+                                            <option>gmail.com</option>
+                                            <option>hanmail.com</option>
+                                            <option>yahoo.co.kr</option>
+                                        </select>
+                                        <button type="button" className="btn btn-primary" onClick={emailCheck}>Check
+                                            Email
+                                        </button>
+                                        <p id="check-result"></p>
                                     </div>
-                                    <p id="check-result"></p>
+                                </div>
+                                <div className="input-group">
+
+
+                                    {isMailBox && (
+
+                                        <div className="input-group">
+                                            <button type="button" className="label_text" id="mail-Check-Btn"
+                                                    onClick={handleMailCheck}>본인 인증
+                                            </button>
+                                            <input className="form-control" id="inputcode"
+                                                   placeholder="인증번호 6자리를 입력해주세요!"
+                                                   onChange={(e) => setInputCode(e.target.value)} maxLength="6"
+                                                   disabled={inputDisabled}/>
+                                            {verifyButtonVisible && ( // 인증번호가 일치하지 않을 때만 확인 버튼을 보여줌
+                                                <button type="button" id="number-Check-Btn"
+                                                        onClick={handleNumberCheck}>확인</button>
+                                            )}
+                                            <span id="mail-check-warn" style={{color: resultColor}}>{resultMsg}</span>
+                                        </div>
+
+                                    )}
                                 </div>
                                 <div className="form-group">
                                     <label className="label_text" htmlFor="pwd">비밀번호</label>
-                                    <input type="password" className="form-control" id="pwd" name="memberPassword" onInput={handlePwdInput} />
+                                    <input type="password" className="form-control" id="pwd" name="memberPassword"
+                                           onInput={handlePwdInput}/>
                                     <div id="pwdstate">{pwdState}</div>
                                 </div>
                                 <div className="form-group">
                                     <label className="label_text" htmlFor="re_pwd">비밀번호 재확인</label>
-                                    <input type="password" className="form-control" id="re_pwd" name="re_pwd" onInput={handleRepwdInput} />
-                                    <div id="repwdstate">{repwdState}</div>
+                                    <input type="password" className="form-control" id="re_pwd" name="re_pwd"
+                                           onInput={handleRePwdInput}/>
+                                    <div id="repwdstate">{rePwdState}</div>
                                 </div>
                                 <div className="form-group">
                                     <label className="label_text" htmlFor="name">이름</label>
-                                    <input type="text" className="form-control" id="name" name="memberName" />
+                                    <input type="text" className="form-control" id="name" name="memberName"/>
                                 </div>
                                 <div className="form-group">
                                     <label className="label_text" htmlFor="name">닉네임</label>
-                                    <input type="text" className="form-control" id="memberNickName" name="memberNickName" />
-                                    <button type="button" className="btn btn-primary" onClick={NickNameCheck}>Check NickName</button>
+                                    <input type="text" className="form-control" id="memberNickName"
+                                           name="memberNickName"/>
+                                    <button type="button" className="btn btn-primary" onClick={NickNameCheck}>Check
+                                        NickName
+                                    </button>
                                 </div>
+
+
                                 <p id="checkNick-result"></p>
                                 <button className="btn btn-primary btn-block" id="signup" type="submit"
-                                        disabled={!isValidForm || !isEmailForm || !isPwForm || !isNickForm}>Sign Up</button>
+                                        disabled={!isValidForm || !isEmailForm || !isPwForm || !isNickForm || !isEmailChecked}>Sign
+                                    Up
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -308,7 +371,6 @@ const SignupPage = () => {
     )
 
 }
-
 
 
 export default SignupPage;

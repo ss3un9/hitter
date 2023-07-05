@@ -1,8 +1,6 @@
 /* Write.css */
 
-.write-page {
-    height: 60px; /* Adjust the height as needed */
-  }
+
   
   /* Style the write-container */
   .write-container {
@@ -15,6 +13,28 @@
   .form-group {
     margin-bottom: 20px;
   }
+.write-page{
+  width: 100%;
+  height: 1000px;
+  background-color: #252525;
+  padding-top: 200px;
+}
+
+.write-container {
+    bottom: 50%;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  display: block;
+
+  }
+
+.write-form{
+
+}
+
+
   
   label {
     display: block;
@@ -29,6 +49,10 @@
     border-radius: 4px;
     
   }
+
+  .form-control{
+    border: none;
+  }
   
   /* Adjust content (CKEditor) height */
   .ck-editor__editable {
@@ -37,7 +61,6 @@
   .write-button {
     display: block;
     margin: 0 auto; /* Center the button horizontally */
-    margin-top: 20px; /* Add some space between the content and the button */
     padding: 10px;
     background-color: #007bff;
     color: #fff;

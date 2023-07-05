@@ -1,16 +1,19 @@
 .tbl-bar{
     background-color: #252525;
+    width: 100%;
+    height: 1000px;
 }
 
 .bar{
     display: contents;
 }
-.table{
+.my-song-table{
     width: 800px;
     background-color: #fab5d7;
+    margin: 0 auto;
 }
 
-.song-table{
+.mysong-table{
     white-space: nowrap;
     background: #1e1d1e;
     font-family: Suit;

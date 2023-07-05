@@ -1,5 +1,11 @@
+.detail-wrapper{
+    width: 100%;
+    height: 1000px;
+    background-color: #252525;
+    padding-top: 300px;
+}
+
 .board-detail-all{
-    padding-top: 200px;
     align-items: center;
     text-align: center;
 }

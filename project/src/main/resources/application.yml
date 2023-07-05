@@ -34,3 +34,18 @@ spring:
     hibernate:
       ddl-auto: update
 
+  mail:
+    host: smtp.gmail.com # 1
+    port: 587 # 2
+    username: aivle0622 # 3
+    password: wxwvctmfkmbfuckq # 4
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth: true
+          starttls.enable: true
+          timeout: 5000
+          ssl.protocols: TLSv1.2
+
+

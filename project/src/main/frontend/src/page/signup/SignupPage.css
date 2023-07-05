@@ -12,8 +12,11 @@
     width: 800px;
     height: 100%;
     box-shadow: 0 5px 10px 5px rgba(0,0,0,0.2);
-    margin: auto;
+    margin: 0 auto;
     color: white;
+    align-content: center;
+    align-items: center;
+    text-align: center;
 
 }
 
@@ -28,6 +31,8 @@
     width: 500px;
     margin: 0 auto;
     font-family: suit;
+    text-align: center;
+    align-items: center;
 }
 
 .join-box{
@@ -37,24 +42,41 @@
 }
 
 
-ul>li{
-    list-style: none;
-    text-align: center;
-}
-
-
 .checkBox-check02{
     align-items: center;
     align-content: center;
     align-self: center;
     text-align: center;
+    list-style: none;
+    position: relative;
 }
+.agtf{
+    display: inline-block;
+}
+.agree-txt-first{
+    display: inline;
+}
+.chkbox1{
+    display: inline;
+}
+
 .checkBox-check03{
     align-items: center;
     align-content: center;
     align-self: center;
     text-align: center;
+    list-style: none;
+    position: relative;
+
 }
+.agtxsec{
+    display: inline;
+}
+.chkbox2{
+    display: inline;
+}
+
+
 
 
 .first{
@@ -63,9 +85,14 @@ ul>li{
     margin: 0 auto;
     background-color: #f7f7f7;
     color: #888;
-    border: none;
+    border: 1px solid antiquewhite;
     font-family: Suit;
+    list-style: none;
+
 }
+
+
+
 
 .second{
     width: 100%;
@@ -77,9 +104,23 @@ ul>li{
     font-family: Suit;
 }
 
+.jumbotron{
+    background-color: black;
+    font-family: Suit;
+}
+
+
 .form-group {
     margin-top: 20px;
     margin-bottom: 20px;
+
+
+}
+
+.select-control {
+    flex: 0.1;
+    margin-left: 10px;
+
 }
 
 #signup {
@@ -101,10 +142,14 @@ ul>li{
 .form-control{
     display: block;
     align-items: center;
+
 }
 
+.select-control {
+    flex: 0.5;
+}
 input[type="text"], input[type="password"] {
-    width: 40%;
+    width: 30%;
     margin: 0 auto;
     background-color: #ffffff;
     font-family: Suit;
@@ -132,6 +177,35 @@ input[type="text"], input[type="password"] {
     background-color: #252525;
     color: white;border-radius: .6em;
     border: none;
-    margin-left: 44%;
     cursor: pointer;
+}
+
+
+.btn-btn-primary{
+    width: 120px;
+    height: 40px;
+
+    border: 2px solid #ecdfdf;
+    font-family: 'Suit';
+    font-weight: 500;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: compact;
+}
+
+.btn-btn-primary-btn-block{
+    width: 120px;
+    height: 40px;
+    padding-bottom: 5px;
+    border: 2px solid #ecdfdf;
+    font-family: Suit;
+    font-weight: 500;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+
 }

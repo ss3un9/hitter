@@ -4,8 +4,13 @@ import { PiChatsCircleLight } from "react-icons/pi";
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import "./Community.css"
+
 import { HiOutlineTrophy } from "react-icons/hi2";
-const Community = () => {
+
+
+
+const Community =  () => {
+
     const storedSession = JSON.parse(localStorage.getItem('session')) || {};
     const location = useLocation();
 
@@ -88,19 +93,21 @@ const Community = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {boardList.map(board => (
-                            <tr key={board.id}>
-                                <td className='idtd'>{board.id}</td>
-                                <td>
-                                    <Link to={`/board/detail?id=` + board.id + `&page=` + page} >
-                                        <div className='board-title'>{board.boardTitle}</div>
-                                    </Link>
-                                </td>
-                                <td className='cmtds'>{board.boardWriter}</td>
-                                <td className='cmtds'>{board.boardCreatedTime}</td>
-                                <td className='cmtds'>{board.boardHits}</td>
-                            </tr>
-                        ))}
+
+                    {boardList.map(board => (
+                        <tr key={board.id}>
+                            <td className='idtd'>{board.id}</td>
+                            <td>
+                                <Link to={`/board/detail?id=` + board.id + `&page=` + page} >
+                                    <div className='board-title'>{board.boardTitle}</div>
+                                </Link>
+                            </td>
+                            <td className='cmtds'>{board.boardWriter}</td>
+                            <td className='cmtds'>{board.boardCreatedTime.replace('T', ' ')}</td>
+                            <td className='cmtds'>{board.boardHits}</td>
+                        </tr>
+                    ))}
+
                     </tbody>
                 </table>
             </div>
