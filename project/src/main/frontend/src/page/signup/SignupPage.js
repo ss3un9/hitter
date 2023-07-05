@@ -138,7 +138,9 @@ const SignupPage = () => {
     };
 
     const emailCheck = () => {
-        const email = document.getElementById("memberEmail").value;
+        const email1 = document.getElementById("memberEmail").value;
+        const email2 = document.getElementById("userEmail2").value;
+        const email =  email1 +"@"+ email2
         const checkResult = document.getElementById("check-result");
         console.log("입력값: ", email);
 
@@ -200,7 +202,9 @@ const SignupPage = () => {
     };
     const [code, setCode] = useState('');
     const handleMailCheck = () => {
-        const email = document.getElementById("memberEmail").value;
+        const email1 = document.getElementById("memberEmail").value;
+        const email2 = document.getElementById("userEmail2").value;
+        const email = email1 +"@"+ email2
         console.log('완성된 이메일: ' + email);
         const checkInput = document.querySelector('.mail-check-input');
 
@@ -320,6 +324,13 @@ const SignupPage = () => {
                                     <label className="label_text" htmlFor="memberEmail">Email</label>
                                     <div className="input-group">
                                         <input type="text" className="form-control" id="memberEmail" name="memberEmail" />
+                                        <select className="form-control" name="userEmail2" id="userEmail2">
+                                            <option>naver.com</option>
+                                            <option>daum.net</option>
+                                            <option>gmail.com</option>
+                                            <option>hanmail.com</option>
+                                            <option>yahoo.co.kr</option>
+                                        </select>
                                         <button type="button" className="btn btn-primary" onClick={emailCheck}>Check Email</button>
                                     </div>
                                     <p id="check-result"></p>

@@ -1,12 +1,8 @@
 package com.codingrecipe.member.controller;
 
-import com.codingrecipe.member.dto.EmailPostDto;
-import com.codingrecipe.member.dto.EmailResponseDto;
-import com.codingrecipe.member.entity.EmailMessage;
 import com.codingrecipe.member.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
