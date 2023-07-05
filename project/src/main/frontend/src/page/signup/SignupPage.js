@@ -227,13 +227,11 @@ const SignupPage = () => {
                     <form className='agree-list'>
                         <ul className="join_box">
                             <li className="checkBox-check02">
-
                                 <br></br><br></br>
                                 <li>이용약관 동의(필수)
                                     <input type="checkbox" name="chk" checked={isTermsChecked}
                                            onChange={handleTermsCheckboxChange}/>
                                 </li>
-
                                 <br></br>
                                 <textarea className='first' name="" id="">
                                     여러분을 환영합니다.
@@ -243,13 +241,10 @@ const SignupPage = () => {
                             </li>
                             <li className="checkBox-check03">
                                 <br></br><br></br>
-
                                 <li>개인정보 수집 및 이용에 대한 안내(필수)
                                     <input type="checkbox" name="chk" checked={isPrivacyChecked}
                                            onChange={handlePrivacyCheckboxChange}/>
                                 </li>
-
-
                                 <br></br>
                                 <textarea className='second' name="" id={""}>
                                     개인정보보호법에 따라 히터(HITTER)에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
@@ -292,12 +287,11 @@ const SignupPage = () => {
                     </form>
 
                     <div className="jumbotron">
-                        <div className="container-text-center">
+                        <div className="container text-center">
                             <form method="post" action="/member/save" onSubmit={handleFormSubmit}>
                                 <div className="form-group">
                                     <label className="label_text" htmlFor="memberEmail">Email</label>
                                     <div className="input-group">
-
                                         <input type="text" className="form-control" id="memberEmail"
                                                name="memberEmail"/>
                                         <select className="select-control" name="userEmail2" id="userEmail2">
@@ -311,7 +305,6 @@ const SignupPage = () => {
                                             Email
                                         </button>
                                         <p id="check-result"></p>
-
                                     </div>
                                 </div>
                                 <div className="input-group">
@@ -354,24 +347,19 @@ const SignupPage = () => {
                                 </div>
                                 <div className="form-group">
                                     <label className="label_text" htmlFor="name">닉네임</label>
-
                                     <input type="text" className="form-control" id="memberNickName"
                                            name="memberNickName"/>
                                     <button type="button" className="btn btn-primary" onClick={NickNameCheck}>Check
                                         NickName
                                     </button>
-
                                 </div>
 
 
                                 <p id="checkNick-result"></p>
-
                                 <button className="btn btn-primary btn-block" id="signup" type="submit"
                                         disabled={!isValidForm || !isEmailForm || !isPwForm || !isNickForm || !isEmailChecked}>Sign
                                     Up
                                 </button>
-
-
                             </form>
                         </div>
                     </div>
