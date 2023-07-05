@@ -66,11 +66,12 @@ const Login = () => {
                     </label>
                     <button className='login-button' id="signin" type="submit">Login</button>
                     <p className='text-bottom'>
-                        <Link to='/signup'>
-                            Want to be HITTER?
+                        <Link to='/signup' style={{textDecoration: "none"}}>
+                            Want to be HITTER?&nbsp;
                         </Link>
-                        <Link to='/findIdPw'>
-                            Lost your ID PW?
+                        <div className='tmptmp'></div>
+                        <Link to='/findIdPw' style={{textDecoration: "none"}}>
+                            &nbsp;Lost your ID/PW?
                         </Link>
                     </p>
 

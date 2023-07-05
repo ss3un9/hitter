@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import "./MyPage.css"
+import "./MyLikeSong.css"
 import {Link, useNavigate} from "react-router-dom";
 import {BsPencilSquare} from "react-icons/bs";
 import {Button, Container} from "react-bootstrap";
@@ -72,7 +72,7 @@ const MyLikeSong = ({session}) => {
                     },
                 });
 
-                const { data } = response;
+                const {data} = response;
                 const updatedSongList = data.songList.map((song) => {
                     const matchingLike = data.likeList.find((like) => like.songId === song.id);
                     if (matchingLike) {
@@ -106,87 +106,92 @@ const MyLikeSong = ({session}) => {
     }, [likeList, songList, setFlag]);
     return (
 
-        <div className='tbl-bar'>
-            <div className='bar'>
+        <div className='liketbl-bar'>
+            <div className='lkbar'>
                 <MypageBar/></div>
+
             <div className='table'>
-                {Flag ===false ? (
 
-                    <Link to="/song/board">노래 보러 가기</Link>
+                <div className='liketable'>
 
-                ) : (
+                    {Flag === false ? (
 
-                    <table className='song-table'>
-                        <thead className='table-head'>
-                        <tr className='table-tr'>
-                            <th className='th'></th>
-                            <th className='th'>ID</th>
-                            <th className='th'>Song Title</th>
-                            <th className='th'>Genre</th>
-                            <th className='th'>CreatedTime</th>
-                            <th>좋아요</th>
-                            <th>재생</th>
-                            {/* 재생 버튼 추가 */}s
-                            <th>가사</th>
-                            {/* Add more table headers for other properties */}
-                        </tr>
-                        </thead>
-                        <tbody className='table-body'>
-                        {songList
-                            .filter((song) => song.isLiked)
-                            .map((song) => (
-                                <tr key={song.id}>
-                                    <td>
-                                        <LikeButton
-                                            memberId={id}
-                                            songId={song.id}
-                                            likeId={song.likeId}
-                                            isLiked={"true"}
-                                        />
-                                    </td>
-                                    <td className='td'>{song.id}</td>
-                                    <td className='td'>{song.songTitle}</td>
-                                    <td className='td'>{song.genre}</td>
-                                    <td className='td'>{song.songCreatedTime.replace("T", " ")}</td>
-                                    <td>{song.songLike}</td>
-                                    <td>
-                                        {/*<Link to={`/song/play/${song.id}`}>재생</Link> */}
-                                        <div
-                                            className="play-button"
-                                            onClick={() => handleOpenPlayer(song.id)}
-                                        >
-                                            <img
-                                                width={30}
-                                                height={30}
-                                                src={playIcon}
-                                                alt="play-icon"
+                        <Link to="/song/board">노래 보러 가기</Link>
+
+                    ) : (
+
+                        <table className='kksong-table'>
+                            <thead className='table-head'>
+                            <tr className='table-tr'>
+                                <th className='th'></th>
+                                <th className='th'>ID</th>
+                                <th className='th'>Song Title</th>
+                                <th className='th'>Genre</th>
+                                <th className='th'>CreatedTime</th>
+                                <th>좋아요</th>
+                                <th>재생</th>
+                                {/* 재생 버튼 추가 */}s
+                                <th>가사</th>
+                                {/* Add more table headers for other properties */}
+                            </tr>
+                            </thead>
+                            <tbody className='table-body'>
+                            {songList
+                                .filter((song) => song.isLiked)
+                                .map((song) => (
+                                    <tr key={song.id}>
+                                        <td>
+                                            <LikeButton
+                                                memberId={id}
+                                                songId={song.id}
+                                                likeId={song.likeId}
+                                                isLiked={"true"}
                                             />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button onClick={() => handleViewLyrics(song.id)}>
-                                            가사보기
-                                        </button>
-                                    </td>
-                                    {/* Render additional table cells for other properties */}
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                )}
+                                        </td>
+                                        <td className='td'>{song.id}</td>
+                                        <td className='td'>{song.songTitle}</td>
+                                        <td className='td'>{song.genre}</td>
+                                        <td className='td'>{song.songCreatedTime.replace("T", " ")}</td>
+                                        <td>{song.songLike}</td>
+                                        <td>
+                                            {/*<Link to={`/song/play/${song.id}`}>재생</Link> */}
+                                            <div
+                                                className="play-button"
+                                                onClick={() => handleOpenPlayer(song.id)}
+                                            >
+                                                <img
+                                                    width={30}
+                                                    height={30}
+                                                    src={playIcon}
+                                                    alt="play-icon"
+                                                />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button onClick={() => handleViewLyrics(song.id)}>
+                                                가사보기
+                                            </button>
+                                        </td>
+                                        {/* Render additional table cells for other properties */}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    )}
+                </div>
+                <LyricsModal
+                    show={showLyricsModal}
+                    handleClose={handleCloseLyricsModal}
+                    lyrics={lyrics}
+                />
+                <PlayerModal
+                    key={selectedSongId}
+                    show={showPlayerModal}
+                    handleClose={handleClosePlayerModal}
+                    songId={selectedSongId}
+                />
             </div>
-            <LyricsModal
-                show={showLyricsModal}
-                handleClose={handleCloseLyricsModal}
-                lyrics={lyrics}
-            />
-            <PlayerModal
-                key={selectedSongId}
-                show={showPlayerModal}
-                handleClose={handleClosePlayerModal}
-                songId={selectedSongId}
-            />
         </div>
     )
-}
+};
 export default MyLikeSong;

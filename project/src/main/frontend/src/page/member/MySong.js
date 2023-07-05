@@ -72,11 +72,11 @@ const MySong = () => {
     }, []);
 
     return (
-        <div className='tbl-bar'>
+        <div className='mysongtbl-bar'>
             <div className='bar'>
                 <MypageBar/>
             </div>
-            <div className='table'>
+            <div className='myswrapper'>
                 {mySongList.length === 0 ? (
                     <table className='song-table'>
                         <tbody className='tb-top-body'>

@@ -4,12 +4,12 @@
 }
 
 
-.login-page{
+.login-page-resetpw{
     padding-bottom: 80px;
     background-color: #252525;
 }
 
-.login-form{
+.login-form-resetpw{
     background: #000000;
     border: 1px solid #191919;
     border-radius: .4em;
@@ -45,12 +45,12 @@
     margin-bottom: 20px;
     display: table;
 }
-.login-button{
+.send-btn{
     height: 0%;
     background-color: #2c3034;
-    font-family: Iceland;
+    font-family: Suit;
     color: #ffffff;
-    font-size: 15px;
+    font-size: 12px;
     border-radius: 5px;
     padding: 10px 25px;
     cursor: pointer;

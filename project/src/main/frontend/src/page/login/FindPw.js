@@ -68,9 +68,9 @@ const FindPw = () => {
 
 
     return (
-        <div className='login-page'>
+        <div className='login-page-resetpw'>
             <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-            <form className='login-form'>
+            <form className='login-form-resetpw'>
                 <h1 className="header-id">HITTER</h1>
                 <p>비밀번호를 찾고자하는 아이디를 입력해주세요.</p>
                 <div className="id-pwd-input">
@@ -87,7 +87,7 @@ const FindPw = () => {
                             확인
                         </button>
                     ) : (
-                        <button className="login-button" id="signin" onClick={handleMailCheck}>
+                        <button className="send-btn" id="signin" onClick={handleMailCheck}>
                             인증번호 전송
                         </button>
                     )}

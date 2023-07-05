@@ -171,82 +171,78 @@ const BoardDetail = () => {
         <div className='detail-wrapper'>
 
             <div className='board-detail-all'>
-                <p>board_id: {id}</p>
-                <p>board_title: {boardTitle}</p>
-                <p>board_content: {boardContents}</p>
-                <p> board_writer: {boardWrite}</p>
-                <p> board_hits: {boardHits}</p>
-                <p> board_created: {boardCreatedTIme.replace('T', ' ')}</p>
-            </div>
+                <div className='for-contents'>
+                <div className='board-tops'>
+                    <p className='board-title' style={{color:'black', fontSize: 25}}>{boardTitle}</p>
+                    <p className='board-writer'> 작성자: {boardWrite}</p>
+                    <p className='board-create'> {boardCreatedTIme.replace('T', ' ')}  조회수: {boardHits}</p>
+
+                </div>
+                <div className='real-content'>
+                    <p style={{fontFamily:"Suit", fontSize: 20}}>{boardContents}</p>
+
+                </div>
             <div className='btns-board'>
-                <button onClick={() => reqList()}>목록</button>
+                <button className='btns-for-content' onClick={() => reqList()}>목록</button>
 
-                <button onClick={() => UpdateList()}>수정</button>
-                <button onClick={() => deleteList(id)}>삭제</button>
+                <button className='btns-for-content' onClick={() => UpdateList()}>수정</button>
+                <button className='btns-for-content' onClick={() => deleteList(id)}>삭제</button>
             </div>
-
-
+                </div>
+                <div className='for-comment'>
             <div className='comment-box'>
                 <input type="hidden" id="commentNickName" value={storedSession.loginNickName}/>
-
                 <input type="hidden" id="commentWriterId" value={storedSession.loginId}/>
-                <input type="text" id="commentContents" placeholder="내용"/>
-                <button id="comment-write-btn" onClick={() => commentWrite()}>댓글작성</button>
+                <div className='numcos'>
+                    <p className='coms-txt'>댓글</p>
+                <input className='txt-put-box' type="text" id="commentContents" placeholder="댓글을 남겨주세요."/>
+                <div className='tmp-blank'></div>
+                <button className='cm-wr-box' id="comment-write-btn" onClick={() => commentWrite()}>댓글작성</button>
+            </div>
             </div>
 
             <div className='comm-list' id="commentList">
-                <table className='cmtable'>
-                    <thead>
-                    <tr>
-                        <th>댓글번호</th>
-                        <th>댓글 작성자</th>
-                        <th>댓글 내용</th>
-                        <th>댓글 작성 시간</th>
-                    </tr>
-                    </thead>
-                    <tbody>
                     {comments && comments.map((comment) => (
                         <tr key={comment.id}>
-                            <td>{comment.id}</td>
-                            <td>{comment.commentNickName}</td>
-                            <td>
+                            <ul className='content-comment'>{comment.commentNickName}  </ul>
+                            <li className='cm-content-real'>
                                 {editingCommentId === comment.id ? (
                                     <textarea
                                         value={editedComment}
                                         onChange={(e) => setEditedComment(e.target.value)}
                                         style={{
                                             width: "100%",
-                                            height: "100px"
+                                            height: "18px",
+                                            fontFamily: "Suit"
                                         }} // Adjust the size as per your requirements
                                     />
                                 ) : (
                                     comment.commentContents
                                 )}
-                            </td>
-                            <td>{comment.commentCreatedTime.replace('T', ' ')}</td>
-                            <td>
+                            </li>
+                            <p className='comment-cr-t'>{comment.commentCreatedTime.replace('T', ' ')}</p>
+                            <p className='edit-btn'>
                                 {storedSession.loginId === comment.commentWriterId && (
                                     <>
                                         {editingCommentId === comment.id ? (
-                                            <button onClick={() => saveEditedComment(comment.id)}>
+                                            <button className='btn-writers' onClick={() => saveEditedComment(comment.id)}>
                                                 저장
                                             </button>
                                         ) : (
-                                            <button onClick={() => updateComment(comment.id)}>수정</button>
+                                            <button className='btn-writers' onClick={() => updateComment(comment.id)}>수정</button>
                                         )}
                                     </>
                                 )}
-                            </td>
-                            <td>
+                            </p>
+                            <p className='edit-btn'>
                                 {storedSession.loginId === comment.commentWriterId && (
-                                    <button onClick={() => deleteComment(comment.id)}>삭제</button>
+                                    <button className='btn-writers' onClick={() => deleteComment(comment.id)}>삭제</button>
                                 )}
-                            </td>
+                            </p>
                         </tr>
                     ))}
-                    </tbody>
-                </table>
-
+            </div>
+            </div>
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link, useLocation, useNavigate} from 'react-router-dom';
-
+import "./SetPw.css"
 import axios from "axios";
 
 const SetPw = () => {
@@ -118,11 +118,11 @@ const SetPw = () => {
         }
     }, [newPassword, confirmPassword]);
     return (
-        <div className='login-page'>
+        <div className='setpw-login-page'>
             <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-            <form className='login-form'>
+            <form className='setlogin-form'>
                 <h1 className="header-id">HITTER</h1>
-                <p>비밀번호를 재설정 해주세요.</p>
+                <p className='reset-pw-txt'>비밀번호를 재설정 해주세요.</p>
                 <div className="id-pwd-input">
                     <div>
                         <div className="form-group">
@@ -130,7 +130,7 @@ const SetPw = () => {
                                 비밀번호
                             </label>
 
-                            <input
+                            <input className='newPw'
                                 type="password"
                                 value={newPassword}
                                 id="pwd"
@@ -141,8 +141,10 @@ const SetPw = () => {
                                 placeholder="새로운 비밀번호"
 
                             />
-                            {pwdState && <span style={{color: "red"}}>{pwdState}</span>}
-                            <input
+                            <div className='chkpwcom'>
+                            {pwdState && <span style={{fontFamily: "Suit", color: "white",fontSize: 10}}>{pwdState}</span>}
+                            </div>
+                                <input className='chkPw'
                                 type="password"
                                 value={confirmPassword}
                                 id="re_pwd"
@@ -153,21 +155,15 @@ const SetPw = () => {
                                 placeholder="비밀번호 확인"
 
                             />
+                            <div className='not-pw'>
                             {passwordMatchError && (
-                                <span style={{color: "red"}}>비밀번호가 일치하지 않습니다.</span>
+                                <span style={{color: "white", fontFamily: "Suit", fontSize: 10}}>비밀번호가 일치하지 않습니다.</span>
                             )}
+                            </div>
                         </div>
-                        <button type="button" onClick={handleSubmit} disabled={!isValidForm} >수정</button>
+                        <button className='new-bbb' type="button" onClick={handleSubmit} disabled={!isValidForm} >수정</button>
                     </div>
 
-                    <p className='text-bottom'>
-                        <Link to='/signup'>
-                            Want to be HITTER?
-                        </Link>
-                        <Link to='/login'>
-                            Login
-                        </Link>
-                    </p>
 
                 </div>
             </form>

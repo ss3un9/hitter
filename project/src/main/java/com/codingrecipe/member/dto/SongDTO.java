@@ -24,8 +24,8 @@ public class SongDTO {
 
     private LocalDateTime songCreatedTime;
     private Integer songLike;
-
-    public SongDTO(Long id, String memberNickName, Float prediction, String songTitle, String genre, Integer songLike, LocalDateTime songCreatedTime) {
+    private String songTag;
+    public SongDTO(Long id, String memberNickName, Float prediction, String songTitle, String genre, Integer songLike, LocalDateTime songCreatedTime, String songTag) {
         this.id = id;
         this.memberNickName = memberNickName;
         this.prediction = prediction;
@@ -33,6 +33,7 @@ public class SongDTO {
         this.genre = genre;
         this.songLike = songLike;
         this.songCreatedTime = songCreatedTime;
+        this.songTag = songTag;
 
     }
 
@@ -48,6 +49,7 @@ public class SongDTO {
         songDTO.setGenre(songEntity.getGenre());
         songDTO.setSongCreatedTime(songEntity.getCreatedTime());
         songDTO.setSongLike(songEntity.getSongLike());
+        songDTO.setSongTag(songEntity.getSongTag());
         return songDTO;
     }
 

@@ -1,5 +1,5 @@
 import {useLocation, useNavigate} from 'react-router-dom';
-import './HitAi.css'
+import './HitAiDetail.css'
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
@@ -67,8 +67,10 @@ const HitAiDetail = ({session}) => {
     return (
         <>
 
+        <div className='hit-det-wrapper'>
 
-            <div>
+
+            <div className='det-res'>
                 <p>닉네임: {nickName}</p>
                 <p>Title:{songTitle}</p>
                 <p>Prediction: {songPrediction}</p>
@@ -77,6 +79,8 @@ const HitAiDetail = ({session}) => {
 
             </div>
             <button onClick={() => reqList()}>목록</button>
+        </div>
+
         </>
     )
 }
