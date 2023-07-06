@@ -88,6 +88,7 @@ public class SongController {
         int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1;
         int endPage = Math.min((startPage + blockLimit - 1), songList.getTotalPages());
         System.out.println(songList);
+        System.out.println(songDTOList);
         if (songDTOList  != null ) {
             responseData.put("songList", songDTOList);
             responseData.put("likeList", likeDTOList);
