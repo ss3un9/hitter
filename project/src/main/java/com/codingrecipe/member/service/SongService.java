@@ -55,6 +55,22 @@ public class SongService {
 
 
     }
+
+
+    public List<SongDTO> findAll2(float minPrediction, float maxPrediction) {
+        List<SongEntity> songEntityList = songRepository.findAllSongsAdmin(minPrediction, maxPrediction);
+        List<SongDTO> songDTOList = new ArrayList<>();
+
+        for (SongEntity songEntity : songEntityList) {
+            songDTOList.add(SongDTO.toSongDTO(songEntity));
+        }
+
+        System.out.println(songDTOList);
+        return songDTOList;
+    }
+
+
+
     public Page<SongDTO> paging(Pageable pageable) {
         int page = pageable.getPageNumber() - 1;
         int pageLimit = 10; // 한 페이지에 보여줄 글 갯수

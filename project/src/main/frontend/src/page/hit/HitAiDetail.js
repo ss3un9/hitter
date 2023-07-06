@@ -1,4 +1,4 @@
-import {useLocation, useNavigate} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import './HitAiDetail.css'
 import React, {useEffect, useState} from "react";
 import axios from "axios";
@@ -10,11 +10,12 @@ const HitAiDetail = ({session}) => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const songsInRange = location.state.songsInRange;
+    console.log(songsInRange);
+
     let id;
     const searchParams = new URLSearchParams(location.search);
-
     id = parseInt(searchParams.get('id'));
-    console.log(id);
 
     const [songTitle, setSongTitle] = useState('');
     const [songGenre, setSongGenre] = useState('');
@@ -22,6 +23,7 @@ const HitAiDetail = ({session}) => {
     const [songPrediction, setSongPrediction] = useState('');
     const [songCreatedTIme, setSongCreatedTime] = useState('');
     const [songTag, setSongTag] = useState('');
+
     function reqList() {
         // navigate(`/board/paging?page=${page}`, { state: { page: page } });
         navigate(`/song/board`);
@@ -74,18 +76,42 @@ const HitAiDetail = ({session}) => {
             <div className='hit-det-wrapper'>
 
                 <div className='content-wrap'>
-                <div className='det-res'>
-                    <p>닉네임: {nickName}</p>
-                    <p>Title:{songTitle}</p>
-                    <p>Prediction: {songPrediction}</p>
-                    <p>CreatedTime: {songCreatedTIme.replace('T', ' ')}</p>
-                    <p>genre: {songGenre}</p>
-                    <p>Tag: {songTag}</p>
+                    <div className='det-res'>
+                        <p>닉네임: {nickName}</p>
+                        <p>Title:{songTitle}</p>
+                        <p>Prediction: {songPrediction}</p>
+                        <p>CreatedTime: {songCreatedTIme.replace('T', ' ')}</p>
+                        <p>genre: {songGenre}</p>
+                        <p>Tag: {songTag}</p>
 
+                    </div>
+                    <button onClick={() => reqList()}>목록</button>
                 </div>
-                <button onClick={() => reqList()}>목록</button>
+
             </div>
 
+            <div className="community-table-wrapper">
+                <table className='cmtbl'>
+                    <thead className='cmtbl-head'>
+                    <tr className='trs'>
+                        <th className='cmths'>songTitle</th>
+                        <th className='cmths-title'>prediction</th>
+                        <th className='cmths-title'>genre</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {songsInRange.slice(0, 5).map(board => (
+                        <tr key={board.id}>
+
+                            <td className='cmtds'>{board.songTitle}</td>
+                            <td className='cmtds'>{board.gere}</td>
+                            <td className='cmtds'>{board.prediction}</td>
+                        </tr>
+                    ))}
+
+                    </tbody>
+                </table>
             </div>
 
         </>

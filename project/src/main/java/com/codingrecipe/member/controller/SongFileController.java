@@ -108,12 +108,13 @@ public class SongFileController {
         songDTO.setLyrics(sysFileName1);
         songDTO.setSongTag(joinedTags);
         songService.save(songDTO);
+        List<SongDTO> songsInRange = songService.findAll2(prediction - 10, prediction + 10);
 
         Map<String, Object> ResponseSong = new HashMap<>();
 
 
         ResponseSong.put("songDTO",songDTO );
-
+        ResponseSong.put("songsInRange",  songsInRange);
         ResponseSong.put("success", true);
         ResponseSong.put("message", "File uploaded successfully!");
 
