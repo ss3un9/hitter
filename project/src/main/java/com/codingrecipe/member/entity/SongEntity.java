@@ -44,6 +44,9 @@ public class SongEntity extends BaseEntity{
     @Column(name="song_like")
     private Integer songLike;
 
+    @Column(name="song_tag")
+    private  String songTag;
+
     @OneToMany(mappedBy = "song", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<LikeEntity> likes = new ArrayList<>();
 
@@ -63,7 +66,7 @@ public class SongEntity extends BaseEntity{
         songEntity.setLyrics(songDTO.getLyrics());
         songEntity.setGenre(songDTO.getGenre());
         songEntity.setSongLike(0);
-
+        songEntity.setSongTag(songDTO.getSongTag());
         return songEntity;
     }
 }

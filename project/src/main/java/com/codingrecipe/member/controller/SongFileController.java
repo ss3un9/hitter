@@ -21,9 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 
 @RestController
@@ -64,7 +62,7 @@ public class SongFileController {
 
 
         System.out.println("reqEntity : "+requestEntity);
-        ResponseEntity<String> response = restTemplate.postForEntity("http://3.36.204.155:8000/api/upload", requestEntity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8000/api/upload", requestEntity, String.class);
 
         String responseBody = response.getBody();
         System.out.println(responseBody);
@@ -75,11 +73,20 @@ public class SongFileController {
         predictionsStr = predictionsStr.replace("[[", "").replace("]]", "");
         float prediction = Float.parseFloat(predictionsStr);
 
+        JsonNode answerTagsNode = jsonNode.get("answer_tags");
+        List<String> answerTags = new ArrayList<>();
+        if (answerTagsNode.isArray()) {
+            for (JsonNode tagNode : answerTagsNode) {
+                answerTags.add(tagNode.asText());
+            }
+        }
+        String joinedTags = String.join(",", answerTags);
+        System.out.println(joinedTags);
 
         String fileName = file.getOriginalFilename();
         String sysFileName = System.currentTimeMillis() +  "_" +  fileName;
 
-        String filePath = "/Users/ss3un9/Desktop/fastapi/song/" + sysFileName;
+        String filePath = "C:/bp_music/music/" + sysFileName;
         byte[] fileBytes = file.getBytes();
         Path path = Paths.get(filePath);
         Files.write(path, fileBytes);
@@ -87,7 +94,7 @@ public class SongFileController {
         String fileName1 = file1.getOriginalFilename();
 
         String sysFileName1 = System.currentTimeMillis() +  "_" +fileName1;
-        String filePath1 = "/Users/ss3un9/Desktop/fastapi/txt/"+sysFileName1;
+        String filePath1 = "C:/bp_music/txt/"+sysFileName1;
 
         byte[] fileBytes1 = file1.getBytes();
         Path path1 = Paths.get(filePath1);
@@ -99,6 +106,7 @@ public class SongFileController {
         songDTO.setMemberNickName(loginNickName);
         songDTO.setFileSysName(sysFileName);
         songDTO.setLyrics(sysFileName1);
+        songDTO.setSongTag(joinedTags);
         songService.save(songDTO);
 
         Map<String, Object> ResponseSong = new HashMap<>();
