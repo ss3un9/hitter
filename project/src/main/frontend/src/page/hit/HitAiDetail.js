@@ -2,6 +2,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import './HitAiDetail.css'
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {IoMdMusicalNotes} from "react-icons/io";
 
 const HitAiDetail = ({session}) => {
 
@@ -21,7 +22,10 @@ const HitAiDetail = ({session}) => {
     const [nickName, setNickName] = useState('');
     const [songPrediction, setSongPrediction] = useState('');
     const [songCreatedTIme, setSongCreatedTime] = useState('');
+    const result1 = songPrediction.toString().slice(0,2);
+    const degree = Number(result1) * 3.6;
     const [songTag, setSongTag] = useState('');
+
     function reqList() {
         // navigate(`/board/paging?page=${page}`, { state: { page: page } });
         navigate(`/song/board`);
@@ -74,16 +78,23 @@ const HitAiDetail = ({session}) => {
             <div className='hit-det-wrapper'>
 
                 <div className='content-wrap'>
+                    <h1 className='an-res'>분석 결과 보고서</h1>
                 <div className='det-res'>
-                    <p>닉네임: {nickName}</p>
-                    <p>Title:{songTitle}</p>
-                    <p>Prediction: {songPrediction}</p>
-                    <p>CreatedTime: {songCreatedTIme.replace('T', ' ')}</p>
-                    <p>genre: {songGenre}</p>
-                    <p>Tag: {songTag}</p>
+                    <div className='sc-ti'>
+                    <div className='score-wrapper'>
+                        <div className='score'>{result1}점</div>
+                    </div>
+                        <br></br>
+                        <div className='an-gen'>[{songGenre.toUpperCase()}]</div>
+                        <p className='nick'><IoMdMusicalNotes size='30' style={{alignContent:'center', textAlign: 'center'}}/>{songTitle} - {nickName}</p>
+                    </div>
+                    <p className='createdT'>Date: {songCreatedTIme.replace('T', ' ')}</p>
+                    <p className='taags'>Tags: {songTag}</p>
 
                 </div>
-                <button onClick={() => reqList()}>목록</button>
+                    <br/><br/><br/>
+
+                <button className='list-btn' onClick={() => reqList()}>목록</button>
             </div>
 
             </div>
@@ -91,6 +102,7 @@ const HitAiDetail = ({session}) => {
         </>
     )
 }
+
 
 
 export default HitAiDetail;
