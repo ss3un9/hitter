@@ -10,6 +10,11 @@
 }
 
 /* 폰트들 */
+@font-face {
+    font-family: "Jalnan";
+    src: url('./fonts/jalnan.ttf')
+}
+
 
 @font-face {
     font-family: "Game";
