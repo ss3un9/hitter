@@ -74,6 +74,7 @@ const HitAiDetail = ({session}) => {
     return (
         <>
 
+
             <div className='hit-det-wrapper'>
 
                 <div className='content-wrap'>
@@ -95,6 +96,7 @@ const HitAiDetail = ({session}) => {
 
                 <button className='list-btn' onClick={() => reqList()}>목록</button>
             </div>
+
             </div>
 
         </>

@@ -7,6 +7,14 @@
     padding-top: 200px;
 }
 
+.det-res{
+    margin: 0 auto;
+    text-align: center;
+    align-self: center;
+    padding-top: 200px;
+    color: white;
+}
+
 .content-wrap{
     margin: 0 auto;
     background-color: #d8deee;
@@ -101,3 +109,4 @@
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
 }
+
