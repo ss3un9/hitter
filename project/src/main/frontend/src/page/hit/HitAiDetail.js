@@ -70,20 +70,23 @@ const HitAiDetail = ({session}) => {
     return (
         <>
 
-        <div className='hit-det-wrapper'>
 
+            <div className='hit-det-wrapper'>
 
-            <div className='det-res'>
-                <p>닉네임: {nickName}</p>
-                <p>Title:{songTitle}</p>
-                <p>Prediction: {songPrediction}</p>
-                <p>CreatedTime: {songCreatedTIme.replace('T', ' ')}</p>
-                <p>genre: {songGenre}</p>
-                <p>Tag: {songTag}</p>
+                <div className='content-wrap'>
+                <div className='det-res'>
+                    <p>닉네임: {nickName}</p>
+                    <p>Title:{songTitle}</p>
+                    <p>Prediction: {songPrediction}</p>
+                    <p>CreatedTime: {songCreatedTIme.replace('T', ' ')}</p>
+                    <p>genre: {songGenre}</p>
+                    <p>Tag: {songTag}</p>
+
+                </div>
+                <button onClick={() => reqList()}>목록</button>
+            </div>
 
             </div>
-            <button onClick={() => reqList()}>목록</button>
-        </div>
 
         </>
     )

@@ -11,8 +11,22 @@
 
 .myswrapper{
     width: 800px;
-    background-color: #fab5d7;
+    background-color: #d8deee;
     margin: 0 auto;
+    height: 450px;
+    overflow: auto;
+    border-radius: .4em;
+    justify-content: center;
+}
+.mysong-table{
+    display: table;
+    margin: 0 auto;
+    font-family: Suit;
+    text-align: center;
+}
+.mystd{
+    font-size: 16px;
+    padding-bottom: 10px;
 }
 
 
@@ -56,8 +70,8 @@
 }
 
 tr:hover td {
-    background:#4E5066;
+    background: #816db7;
     color:#FFFFFF;
-    
+
     border-top: 1px solid #22262e;
 }
