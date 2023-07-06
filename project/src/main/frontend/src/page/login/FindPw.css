@@ -4,18 +4,18 @@
 }
 
 
-.login-page{
-    padding-bottom: 400px;
+.login-page-resetpw{
+    padding-bottom: 80px;
     background-color: #252525;
 }
 
-.login-form{
+.login-form-resetpw{
     background: #000000;
     border: 1px solid #191919;
     border-radius: .4em;
     bottom: 0;
     box-shadow: 0 5px 10px 5px rgba(0,0,0,0.2);
-    height: 400px;
+    height: 600px;
     margin: auto;
     position: relative;
     width:500px;
@@ -45,12 +45,12 @@
     margin-bottom: 20px;
     display: table;
 }
-.login-button{
+.send-btn{
     height: 0%;
     background-color: #2c3034;
-    font-family: Iceland;
+    font-family: Suit;
     color: #ffffff;
-    font-size: 15px;
+    font-size: 12px;
     border-radius: 5px;
     padding: 10px 25px;
     cursor: pointer;
@@ -61,8 +61,4 @@
     font-family: Iceland;
     font-size: 15px;
 
-}
-
-.tmptmp{
-    display: inline;
 }

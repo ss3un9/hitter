@@ -4,18 +4,18 @@
 }
 
 
-.login-page{
+.setpw-login-page{
     padding-bottom: 400px;
     background-color: #252525;
 }
 
-.login-form{
+.setlogin-form{
     background: #000000;
     border: 1px solid #191919;
     border-radius: .4em;
     bottom: 0;
     box-shadow: 0 5px 10px 5px rgba(0,0,0,0.2);
-    height: 400px;
+    height: 600px;
     margin: auto;
     position: relative;
     width:500px;
@@ -28,6 +28,14 @@
     text-align: center;
 
 }
+
+.reset-pw-txt{
+    color: white;
+    font-family: Suit;
+    text-align: center;
+}
+
+
 .text-bottom{
     text-align: center;
 }
@@ -63,6 +71,33 @@
 
 }
 
+.chkpwcom{
+    text-align: center;
+    padding-bottom: 5px;
+}
+.not-pw{
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+
 .tmptmp{
     display: inline;
+}
+
+.newPw{
+    display: block;
+}
+
+.chkPw{
+    display: block;
+}
+
+.new-bbb{
+    margin: 0 auto;
+    display: block;
+    background-color: black;
+    color: white;
+    border: 2px solid #ffffff;
+    cursor: pointer;
 }

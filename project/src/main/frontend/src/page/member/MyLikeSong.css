@@ -1,16 +1,50 @@
-.like-wrapper{
+.liketbl-bar{
     background-color: #252525;
     width: 100%;
     height: 1000px;
 }
 
-.likesongbar{
+.lkbar{
     display: contents;
 }
 
-.likesong-table{
+.liketable{
+    width: 800px;
+    background: #d8deee;
+    align-items: center;
+    font-family: Suit;
+    margin: 0 auto;
+    align-content: center;
+    text-align: center;
+    align-self: center;
+    color:white;
+    overflow: auto;
+    height: 450px;
+    border-radius: .4em;
+    justify-content: center;
+}
+
+.kksong-table{
     display: table;
     margin: 0 auto;
 }
 
 
+.mlth{
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 20px;
+}
+
+.mlth-title{
+    color:black;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-size: 20px;
+}
+
+.mltd{
+    color: black;
+    font-size: 16px;
+}

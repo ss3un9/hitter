@@ -11,25 +11,20 @@
 }
 
 .write-ar-btn {
-    position: sticky;
-    left: 57%;
-    background: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
-    background-size: 300% 100%;
-    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
-    width: 65px;
+    position: absolute;
+    left: 80%;
+    background-color: white;
+    box-shadow: 0 4px 15px 0 rgba(69, 64, 77, 0.75);
+    width: 80px;
     height: 30px;
-    border: none;
+    border: 4px solid black;
     font-family: Suit;
-    color: #ffffff;
+    color: #000000;
     font-size: 15px;
     font-weight: 500;
     cursor: pointer;
-    display: inline-block;
+    display: block;
     border-radius: 50px;
-    -moz-transition: all .4s ease-in-out;
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
     align-self: center;
 }
 
@@ -47,7 +42,7 @@
 
 
 .community-table-wrapper {
-    width: 600px;
+    width: 1300px;
     background: #fffbfb;
     align-items: center;
     font-family: Suit;
@@ -74,13 +69,21 @@
 
 .cmths {
     text-decoration-line: none;
-
-    margin: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
     text-align: center;
     letter-spacing: .1em;
     border-bottom: 3px solid black;
 
 }
+.cmths-title{
+    padding-left: 200px;
+    padding-right: 200px;
+    border-bottom: 3px solid black;
+
+}
+
+
 
 .idtd {
     font-size: 18px;
@@ -116,8 +119,10 @@
     padding: 8px 16px;
     margin-left: 8px;
     font-size: 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+    background-color: #ffffff;
+    color: #000000;
+    border: 3px solid black;
     cursor: pointer;
+    font-family: Suit;
+    border-radius: .7em;
 }

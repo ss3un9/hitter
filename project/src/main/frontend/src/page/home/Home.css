@@ -170,6 +170,7 @@
 .person{
     height: 300px;
     width: 500px;
+    align-items: center;
 }
 
 .exp-txt{
@@ -205,6 +206,7 @@
     height: 300px;
     width: 500px;
     -webkit-filter: opacity(80%);
+    align-items: center;
 }
 
 .exp-txt2{

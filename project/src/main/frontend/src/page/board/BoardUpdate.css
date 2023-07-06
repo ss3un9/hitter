@@ -1,0 +1,24 @@
+.wr-up-ctr{
+    height: 1000px;
+    width: 100%;
+    background-color: #252525;
+    padding-top:200px;
+}
+.ckedictor-udt{
+    padding: 20px; /* Add padding to create space around the container */
+    background-color: #f7f7f7; /* Add a background color to distinguish the container */
+    border-radius: 5px; /* Optional: Add border radius for a rounded look */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for a subtle effect */
+    width: 1000px;
+    margin: 0 auto;
+}
+.edit-form{
+    align-items: center;
+}
+.fileinputedit{
+    width: 500px;
+}
+
+.udt-edit-btn{
+    margin: 0 auto;
+}

@@ -99,22 +99,32 @@ public class MemberController {
         model.addAttribute("member", memberDTO);
         return "detail";
     }
+    @GetMapping("/member/find/{memberEmail}")
+    public ResponseEntity<Map<String, Object>> findByEmail(@PathVariable String memberEmail) {
+        MemberDTO memberDTO = memberService.findByEmail(memberEmail);
+        Map<String, Object> response = new HashMap<>();
+        if(memberDTO!=null){
+            response.put("memberDTO", memberDTO);
+            return ResponseEntity.status(HttpStatus.OK).body( response);
+
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
 
     @GetMapping("/member/update")
     public ResponseEntity<Map<String, Object>> updateForm(HttpSession session) {
         String myEmail = (String) session.getAttribute("loginEmail");
-        System.out.println("1111");
         MemberDTO memberDTO = memberService.updateForm(myEmail);
         System.out.println(memberDTO);
         Map<String, Object> response = new HashMap<>();
-        System.out.println("1111");
+
         if (memberDTO != null) {
             response.put("updateMember", memberDTO);
-            System.out.println("1111");
+
             return ResponseEntity.status(HttpStatus.OK).body( response);
         }
         else{
-            System.out.println("1222");
+
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }

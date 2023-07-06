@@ -187,7 +187,7 @@ const Update = () => {
                 <MypageBar/></div>
             <div className='upt-form'>
                 <form className='info-login' method="post" onSubmit={handleSubmit}>
-                    로그인 정보
+                    <h2 className='h2-lg-if'>로그인 정보</h2>
                     <input type="hidden" value={memberId} name="id"/>
                     <input type="hidden" value={memberEmail} name="memberEmail"/>
                     <input type="hidden" value={memberName} name="memberName"/>
@@ -197,12 +197,11 @@ const Update = () => {
                     )}
 
                     <br/>
-                    이메일: <span>{memberEmail}</span>
-                    <br/>
-                    비밀번호:{" "}
+                    <p className='emailcan'> Email: <span>{memberEmail}</span> </p>
+                    <p className='pwdcan'>비밀번호:{" "}
                     {editingPassword ? (
-                        <>
-                            <input
+                        <div className='pwd-chk-wrap'>
+                            <input className='newpwdd'
                                 type="password"
                                 value={newPassword}
                                 id="pwd"
@@ -213,8 +212,10 @@ const Update = () => {
                                 placeholder="새로운 비밀번호"
 
                             />
-                            {pwdState && <span style={{color: "red"}}>{pwdState}</span>}
-                            <input
+                            <br/>
+                            {pwdState && <span className='alert-msg1' style={{color: "black", fontSize: 12, fontFamily:"Suit"}}>{pwdState}</span>}
+                            <br/>
+                            <input className='chkpwd'
                                 type="password"
                                 value={confirmPassword}
                                 id="re_pwd"
@@ -224,22 +225,22 @@ const Update = () => {
                                 }}
                                 placeholder="비밀번호 확인"
 
-                            />
+                            /><br/>
                             {passwordMatchError && (
-                                <span style={{color: "red"}}>비밀번호가 일치하지 않습니다.</span>
+                                <span style={{color: "red", fontSize: 12, fontFamily:"Suit"}}> 비밀번호가 일치하지 않습니다.</span>
                             )}
-
-                            <button type="submit" disabled={!isValidForm}>
+                            <br/>
+                            <button className='btn-pwdd' type="submit" disabled={!isValidForm}>
                                 수정하기
                             </button>
-                            <button type="button" onClick={handleCancelEdit}>변경취소</button>
-                        </>
+                            <button className='btn-pwdd' type="button" onClick={handleCancelEdit}>변경취소</button>
+                        </div>
                     ) : (
                         <>
-                            <span>********</span>
+                            <span className='stars'>********</span>
                             <button type="button" onClick={handlePasswordEdit}>수정</button>
                         </>
-                    )}
+                    )}</p>
                 </form>
 
                 <form method="post" onSubmit={handleSubmitName}>
@@ -248,24 +249,24 @@ const Update = () => {
                     <input type="hidden" value={memberNickName} name="memberNickName"/>
                     <input type="hidden" value={memberPassword} name="memberPassword"/>
 
-                    사용자 정보 <br/>
                     이름:{" "}
                     {editingName ? (
-                        <>
-                            <input
+                        <div className='chgname-wrapper'>
+                            <input className=''
                                 type="text"
                                 value={memberName}
                                 name="memberName"
                                 onChange={(e) => setMemberName(e.target.value)}
                             />
-
-                            <button type="button" onClick={() => setEditingName(false)}>변경취소</button>
+                            <br/><br/>
                             <button type="submit">수정하기</button>
+                            <button type="button" onClick={() => setEditingName(false)}>변경취소</button>
 
-                        </>
+
+                        </div>
                     ) : (
                         <>
-                            <span>{memberName}</span>
+                            <span className='mbn'>{memberName}</span>
                             <button type="button" onClick={() => setEditingName(true)}>변경하기</button>
 
                         </>
@@ -281,22 +282,23 @@ const Update = () => {
                     <br/>
                     닉네임:{" "}
                     {editingNickName ? (
-                        <>
+                        <div className='nick-chg'>
                             <input
                                 type="text"
                                 value={memberNickName}
                                 name="memberNickName"
                                 onChange={(e) => setMemberNickName(e.target.value)}
                             />
+            <br/><br/>
 
-                            <button type="button" onClick={() => setEditingNickName(false)}>취소</button>
                             <button type="submit" disabled={!isNickForm}>수정하기</button>
                             <button type="button" onClick={() => NickNameCheck(memberNickName)}>Check</button>
+                            <button type="button" onClick={() => setEditingNickName(false)}>취소</button>
                             <p id="checkNick-result"></p>
-                        </>
+                        </div>
                     ) : (
                         <>
-                            <span>{memberNickName}</span>
+                            <span className='nikkk'>{memberNickName}</span>
                             <button type="button" onClick={() => setEditingNickName(true)}>수정</button>
 
                         </>
