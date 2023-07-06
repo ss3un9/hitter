@@ -64,7 +64,7 @@ public class SongService {
                 songRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "prediction")));
 
         // 목록: id, writer, title, hits, createdTime
-        Page<SongDTO> songDTOS = songEntities.map(song -> new SongDTO(song.getId(), song.getMemberNickName(),song.getPrediction(), song.getSongTitle(), song.getGenre(), song.getSongLike(), song.getCreatedTime()));
+        Page<SongDTO> songDTOS = songEntities.map(song -> new SongDTO(song.getId(), song.getMemberNickName(),song.getPrediction(), song.getSongTitle(), song.getGenre(), song.getSongLike(), song.getCreatedTime(), song.getSongTag()));
         return songDTOS;
     }
 
@@ -75,7 +75,7 @@ public class SongService {
         int pageLimit = 10;
 
         Page<SongEntity> songEntities = songRepository.findByGenre(genre, PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "prediction")));
-        Page<SongDTO> songDTOS = songEntities.map(song -> new SongDTO(song.getId(), song.getMemberNickName(), song.getPrediction(), song.getSongTitle(), song.getGenre(), song.getSongLike(), song.getCreatedTime()));
+        Page<SongDTO> songDTOS = songEntities.map(song -> new SongDTO(song.getId(), song.getMemberNickName(), song.getPrediction(), song.getSongTitle(), song.getGenre(), song.getSongLike(), song.getCreatedTime(), song.getSongTag()));
 
         return songDTOS;
     }

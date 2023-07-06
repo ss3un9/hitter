@@ -2,10 +2,12 @@ import React, {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import "./MySong.css"
+import {BsPlayCircleFill} from "react-icons/bs";
 import MypageBar from "../../component/MypageBar";
 import LyricsModal from '../hit/LyricsModal.js';
 import playIcon from '../../assets/play_icon.png';
 import PlayerModal from '../../component/PlayerModal.js';
+import {MdOutlineLyrics} from "react-icons/md";
 
 const MySong = () => {
 
@@ -78,10 +80,10 @@ const MySong = () => {
             </div>
             <div className='myswrapper'>
                 {mySongList.length === 0 ? (
-                    <table className='song-table'>
+                    <table className='nonot'>
                         <tbody className='tb-top-body'>
                         <tr className='tr-info'>
-                            <td colSpan="5">
+                            <td className='nono' colSpan="5">
                                 업로드된 곡이 없습니다.{" "}
                                 <Link to="/hit">노래 예측하러 가기</Link>
                             </td>
@@ -89,42 +91,38 @@ const MySong = () => {
                         </tbody>
                     </table>
                 ) : (
-                    <table className='song-table'>
-                        <thead className='table-head'>
-                        <tr className='table-tr'>
-                            <th className='th'>ID</th>
-                            <th className='th'>Song Title</th>
-                            <th className='th'>Genre</th>
-                            <th className='th'>CreatedTime</th>
-                            <th>좋아요</th>
-                            <th>재생</th>
-                            <th>가사</th>
+                    <table className='mysong-table'>
+                        <thead>
+                        <tr>
+                            <th className='mlth'>ID</th>
+                            <th className='mlth-title'>Song Title</th>
+                            <th className='mlth'>Genre</th>
+                            <th className='mlth'>CreatedTime</th>
+                            <th className='mlth'>좋아요</th>
+                            <th className='mlth'>재생</th>
+                            <th className='mlth'>가사</th>
                         </tr>
                         </thead>
-                        <tbody className='table-body'>
+                        <tbody>
                         {mySongList.map((song) => (
                             <tr key={song.id}>
-                                <td className='td'>{song.id}</td>
-                                <td className='td'>{song.songTitle}</td>
-                                <td className='td'>{song.genre}</td>
-                                <td className='td'>{song.songCreatedTime.replace("T", " ")}</td>
-                                <td>{song.songLike}</td>
-                                <td>
+                                <td className='mystd'>{song.id}</td>
+                                <td className='mystd'>{song.songTitle}</td>
+                                <td className='mystd'>{song.genre}</td>
+                                <td className='mystd'>{song.songCreatedTime.replace("T", " ")}</td>
+                                <td className='mystd'>{song.songLike}</td>
+                                <td className='mystd'>
                                     <div
                                         className="play-button"
                                         onClick={() => handleOpenPlayer(song.id)}
                                     >
-                                        <img
-                                            width={30}
-                                            height={30}
-                                            src={playIcon}
-                                            alt="play-icon"
-                                        />
+                                        <BsPlayCircleFill className='BsPlayCircleFill' size='20'/>
+
                                     </div>
                                 </td>
-                                <td>
-                                    <button onClick={() => handleViewLyrics(song.id)}>
-                                        가사보기
+                                <td className='mystd'>
+                                    <button className='lr-btn' onClick={() => handleViewLyrics(song.id)}>
+                                        <MdOutlineLyrics className='MdOutlineLyrics' size={'20'}/>
                                     </button>
                                 </td>
                             </tr>
