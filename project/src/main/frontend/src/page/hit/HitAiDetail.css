@@ -5,7 +5,13 @@
     align-items: center;
 }
 
-.det-res{
+.content-wrap{
     margin: 0 auto;
+    padding-top: 200px;
+    text-align: center;
+    align-items: center;
 }
 
+.det-res{
+    color: white;
+}

@@ -72,7 +72,7 @@ const HitAiDetail = ({session}) => {
 
             <div className='hit-det-wrapper'>
 
-
+                <div className='content-wrap'>
                 <div className='det-res'>
                     <p>닉네임: {nickName}</p>
                     <p>Title:{songTitle}</p>
@@ -83,6 +83,7 @@ const HitAiDetail = ({session}) => {
 
                 </div>
                 <button onClick={() => reqList()}>목록</button>
+            </div>
             </div>
 
         </>
