@@ -7,6 +7,38 @@
 
 
 .del-form{
+    padding-top: 20px;
     display: table;
     margin: 0 auto;
+    background: #d8deee;
+    width: 600px;
+    height: 400px;
+    border-radius: .4em;
+    justify-content: center;
+    text-align: center;
+    font-family: Suit;
+}
+.chkpoint{
+    padding-top: 10px;
+}
+.main-del{
+    font-size: 27px;
+}
+.tearrr{
+    color: #3961ff;
+}
+
+.btn-posi{
+    padding-top: 50px;
+    margin: 0 auto;
+    align-items: center;
+}
+.byebtn{
+    margin: 0 auto;
+    align-self: center;
+    width: 80px;
+    height: 30px;
+    font-family: Suit;
+    border: 2px solid #339dff;
+    background-color: #FFFFFF;
 }

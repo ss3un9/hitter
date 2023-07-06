@@ -44,7 +44,6 @@
     align-content: center;
     text-align: center;
     align-self: center;
-    color:white;
     overflow: auto;
     height: 450px;
     border-radius: .4em;
@@ -268,6 +267,7 @@
 .lead-tds{
     color: black;
     font-size: 16px;
+    padding-bottom: 10px;
 }
 .song-title{
     color: black;
@@ -335,6 +335,14 @@
     color: #FFFFFF;
     font-family: Suit;
 
+}
+
+.pages{
+    display: inline-block;
+    padding: 10px;
+    background: transparent no-repeat center center;
+    color: #FFFFFF;
+    font-family: Suit;
 }
 
 .nxt-pg{

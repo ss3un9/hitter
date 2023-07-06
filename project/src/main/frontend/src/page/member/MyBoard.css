@@ -9,4 +9,27 @@
     align-items: center;
     text-align: center;
     display: table;
+    background: #d8deee;
+    width: 700px;
+    height: 450px;
+    border-radius: .4em;
+    overflow: auto;
+    justify-content: center;
+    font-family: Suit;
+    align-self: center;
+}
+.myBtable{
+    display: table;
+    margin: 0 auto;
+}
+
+.tr-info{
+    font-family: Suit;
+    color: black;
+
+}
+.nono{
+    margin: 0 auto;
+    text-align: center;
+    align-self: center;
 }

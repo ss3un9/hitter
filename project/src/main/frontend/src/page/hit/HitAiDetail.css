@@ -10,4 +10,13 @@
     text-align: center;
     align-self: center;
     padding-top: 200px;
+    color: white;
 }
+
+.content-wrap{
+    margin: 0 auto;
+    padding-top: 200px;
+    text-align: center;
+    align-items: center;
+}
+

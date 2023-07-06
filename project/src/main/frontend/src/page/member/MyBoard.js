@@ -74,7 +74,7 @@ const MyBoard = () => {
                         {myBoardList.length === 0 ? (
                             <tbody className='tb-top-body'>
                             <tr className='tr-info'>
-                                <td colSpan="5">
+                                <td className='nono' colSpan="5">
                                     작성된 글이 없습니다.{" "}
                                     <Link to="/board/write">새글 쓰러가기</Link>
                                 </td>
@@ -84,23 +84,23 @@ const MyBoard = () => {
                             <>
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>제목</th>
-                                    <th>작성자</th>
-                                    <th>올린시각</th>
-                                    <th>동작</th>
+                                    <th className='mlth'>ID</th>
+                                    <th className='mlth-title'>제목</th>
+                                    <th className='mlth'>작성자</th>
+                                    <th className='mlth'>올린시각</th>
+                                    <th className='mlth'>동작</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {myBoardList.map((board) => (
                                     <tr key={board.id}>
-                                        <td>{board.id}</td>
-                                        <td onClick={() => handleBoardClick(board.id)}>
+                                        <td className='mltd'>{board.id}</td>
+                                        <td className='mltd' onClick={() => handleBoardClick(board.id)}>
                                             {board.boardTitle}
                                         </td>
-                                        <td>{board.boardWriter}</td>
-                                        <td>{board.boardCreatedTime.replace("T", " ")}</td>
-                                        <td>
+                                        <td className='mltd'>{board.boardWriter}</td>
+                                        <td className='mltd'>{board.boardCreatedTime.replace("T", " ")}</td>
+                                        <td className='mltd'>
                                             <button onClick={() => UpdateList(board.id)}>수정</button>
                                             <button onClick={() => deleteList(board.id)}>삭제</button>
                                         </td>

@@ -87,11 +87,11 @@ const Home = () => {
                             <h2 className='connect'>CONTACT</h2>
                             <ul className='connect-list'>
                                 <li className='contact'>Yewon Kim - feb_ye@naver.com</li>
-                                <li className='contact'>이름메일</li>
-                                <li className='contact'>이름메일</li>
-                                <li className='contact'>이름메일</li>
-                                <li className='contact'>이름메일</li>
-                                <li className='contact'>이름메일</li>
+                                <li className='contact'>Youngjun Jo - j00jun924@gmail.com </li>
+                                <li className='contact'>Hyun Kim - hyunonblue@naver.com</li>
+                                <li className='contact'>Nuri Kim - nu_r_i@naver.com </li>
+                                <li className='contact'>Seokwon Kim - ksw5994@naver.com</li>
+                                <li className='contact'>Seunghyeon Park - ss3un9@gmail.com</li>
                             </ul>
                         </div>
                     </div>
