@@ -25,7 +25,7 @@ const LeaderBoard = () => {
     const location = useLocation();
 
     const memberId = storedSession.loginId;
-    console.log(memberId);
+
 
     const searchParams = new URLSearchParams(location.search);
 
@@ -56,7 +56,7 @@ const LeaderBoard = () => {
     };
 
     const handleOpenPlayer = (songId) => {
-        console.log('플레이어 실행');
+
         setSelectedSongId(songId);
         setShowPlayerModal(true);
     };
@@ -89,7 +89,7 @@ const LeaderBoard = () => {
             });
 
             const {data} = response;
-
+            const {songPageList, startPage, endPage} = data;
             const updatedSongList = data.songPageList.content.map(song => {
                 const matchingLike = data.likeList.find(like => like.songId === song.id);
 
@@ -103,8 +103,6 @@ const LeaderBoard = () => {
 
             setSongList(updatedSongList);
             setLikeList(data.likeList);
-            const {songPageList, startPage, endPage} = data;
-
             setSongList(updatedSongList);
 
             setSongPageList(songPageList);
@@ -123,7 +121,7 @@ const LeaderBoard = () => {
 
     };
 
-    const handleGenreFilter = async (genre, currentPage = page) => {
+    const handleGenreFilter = async (genre, currentPage = searchParams.get('genre') === genre ? parseInt(searchParams.get('page')) || 1 : 1) => {
         try {
 
             const response = await axios.get(`/song/leader_board/genre/${memberId}`, {
@@ -156,6 +154,11 @@ const LeaderBoard = () => {
             setStartPage(startPage);
             setEndPage(endPage);
 
+            const searchParams = new URLSearchParams(location.search);
+            searchParams.set('genre', genre);
+            searchParams.delete('page'); // Remove existing page parameters
+            navigate(`/song/board?page=${currentPage}&${searchParams.toString()}`);
+
 
         } catch (error) {
 
@@ -173,9 +176,14 @@ const LeaderBoard = () => {
 
     const handlePageChange = async (page) => {
         try {
-            await fetchData(page);
+            const genre = searchParams.get("genre");
+            if (genre) {
+                await handleGenreFilter(genre, page);
+            } else {
+                await fetchData(page);
+            }
         } catch (error) {
-            alert('페이지를 불러오는데 실패했습니다.');
+            alert("페이지를 불러오는데 실패했습니다.");
         }
     };
 
@@ -305,8 +313,8 @@ const LeaderBoard = () => {
 
                 {/* Previous page */}
                 {songPageList.number > 0 ? (
-                    <Link to={`/song/board?page=${songPageList.number}`}
-                          onClick={() => handlePageChange(songPageList.number)}><div className='prev'> {'<'}</div></Link>
+                    <Link to={`${songPageList.number}`}
+                          onClick={() => handlePageChange(songPageList.number)}>prev</Link>
                 ) : (
                     <span className='prev'>{'<'}</span>
                 )}
@@ -318,7 +326,7 @@ const LeaderBoard = () => {
                         {page === songPageList.number + 1 ? (
                             <span>{page}</span>
                         ) : (
-                            <Link to={`/song/board?page=${page}`} onClick={() => handlePageChange(page)}>
+                            <Link to={`${page}`} onClick={() => handlePageChange(page)}>
                                 <div className='pages'> {page} </div>
                             </Link>
                         )}
@@ -327,14 +335,14 @@ const LeaderBoard = () => {
 
                 {/* Next page */}
                 {songPageList.number + 1 < songPageList.totalPages ? (
-                    <Link to={`/song/board?page=${songPageList.number + 2}`}
-                          onClick={() => handlePageChange(songPageList.number + 2)}><div className='nxt-pg'> {'>'}</div></Link>
+                    <Link to={`${songPageList.number + 2}`}
+                          onClick={() => handlePageChange(songPageList.number + 2)}>next</Link>
                 ) : (
                     <span className='nxt-pg'>{'>'}</span>
                 )}
 
                 {/* Last page */}
-                <Link to={`/song/board?page=${songPageList.totalPages}`}
+                <Link to={`${songPageList.totalPages}`}
                       onClick={() => handlePageChange(songPageList.totalPages)}>
                     <div className='last-pg'>{'>>'}</div>
                 </Link>

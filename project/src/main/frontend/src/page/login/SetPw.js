@@ -77,7 +77,7 @@ const SetPw = () => {
         try {
             const findResponse = await axios.get(`/member/find/${memberEmail}`);
             const { data } = findResponse;
-            console.log(data)
+
             if (data !=null) {
 
                 const formData = new FormData();

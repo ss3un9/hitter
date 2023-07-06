@@ -99,6 +99,7 @@ const BoardDetail = () => {
             try {
                 const response = await axios.get('/board/detail/' + id);
                 const {data} = response;
+                console.log(data);
                 if (response.status === 200) {
                     const board_title = data.board.boardTitle;
                     setBoardTitle(board_title);
