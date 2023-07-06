@@ -21,7 +21,7 @@ const HitAiDetail = ({session}) => {
     const [nickName, setNickName] = useState('');
     const [songPrediction, setSongPrediction] = useState('');
     const [songCreatedTIme, setSongCreatedTime] = useState('');
-
+    const [songTag, setSongTag] = useState('');
     function reqList() {
         // navigate(`/board/paging?page=${page}`, { state: { page: page } });
         navigate(`/song/board`);
@@ -48,6 +48,9 @@ const HitAiDetail = ({session}) => {
 
                     const song_created = data.songDTO.songCreatedTime;
                     setSongCreatedTime(song_created);
+
+                    const song_tag = data.songDTO.songTag;
+                    setSongTag(song_tag);
 
 
                 } else {
@@ -76,6 +79,7 @@ const HitAiDetail = ({session}) => {
                 <p>Prediction: {songPrediction}</p>
                 <p>CreatedTime: {songCreatedTIme.replace('T', ' ')}</p>
                 <p>genre: {songGenre}</p>
+                <p>Tag: {songTag}</p>
 
             </div>
             <button onClick={() => reqList()}>목록</button>

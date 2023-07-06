@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
+import ch.qos.logback.core.net.SyslogOutputStream;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +60,7 @@ public class SongService {
         int pageLimit = 10; // 한 페이지에 보여줄 글 갯수
         // 한페이지당 3개씩 글을 보여주고 정렬 기준은 id 기준으로 내림차순 정렬
         // page 위치에 있는 값은 0부터 시작
-        Page<SongEntity> songEntities =
-                songRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "prediction")));
+        Page<SongEntity> songEntities = songRepository.findAllSongsExceptAdmin(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "prediction")));
 
         // 목록: id, writer, title, hits, createdTime
         Page<SongDTO> songDTOS = songEntities.map(song -> new SongDTO(song.getId(), song.getMemberNickName(),song.getPrediction(), song.getSongTitle(), song.getGenre(), song.getSongLike(), song.getCreatedTime(), song.getSongTag()));
