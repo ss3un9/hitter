@@ -80,16 +80,12 @@ const MySong = () => {
             </div>
             <div className='myswrapper'>
                 {mySongList.length === 0 ? (
-                    <table className='nonot'>
-                        <tbody className='tb-top-body'>
-                        <tr className='tr-info'>
-                            <td className='nono' colSpan="5">
+                    <div className='nonot'>
+                        <div className='nono'>
                                 업로드된 곡이 없습니다.{" "}
                                 <Link to="/hit">노래 예측하러 가기</Link>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
                 ) : (
                     <table className='mysong-table'>
                         <thead>

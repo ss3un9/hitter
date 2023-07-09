@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./MyLikeSong.css"
 import {Link, useNavigate} from "react-router-dom";
-import {BsPencilSquare} from "react-icons/bs";
+import {BsPencilSquare, BsPlayCircleFill} from "react-icons/bs";
 import {Button, Container} from "react-bootstrap";
 import {GiMusicalNotes} from "react-icons/gi";
 import photo from "../../imgs/profile.png";
@@ -14,6 +14,7 @@ import playIcon from "../../assets/play_icon.png";
 import LyricsModal from "../hit/LyricsModal";
 import PlayerModal from "../../component/PlayerModal";
 import LikeButton from "../hit/LikeButton";
+import {MdOutlineLyrics} from "react-icons/md";
 
 function Select() {
     return null;
@@ -115,23 +116,24 @@ const MyLikeSong = ({session}) => {
                 <div className='liketable'>
 
                     {Flag === false ? (
-
+                        <div className='gotosong'>
+                            좋아요 한 곡이 없습니다.&nbsp;
                         <Link to="/song/board">노래 보러 가기</Link>
-
+                        </div>
                     ) : (
 
                         <table className='kksong-table'>
-                            <thead className='table-head'>
-                            <tr className='table-tr'>
-                                <th className='th'></th>
-                                <th className='th'>ID</th>
-                                <th className='th'>Song Title</th>
-                                <th className='th'>Genre</th>
-                                <th className='th'>CreatedTime</th>
-                                <th>좋아요</th>
-                                <th>재생</th>
-                                {/* 재생 버튼 추가 */}s
-                                <th>가사</th>
+                            <thead className='mltable-head'>
+                            <tr className='mltable-tr'>
+                                <th className='mlsth'></th>
+                                <th className='mlsth'>ID</th>
+                                <th className='mlsth-title'>Song Title</th>
+                                <th className='mlsth'>Genre</th>
+                                <th className='mlsth'>CreatedTime</th>
+                                <th className='mlsth'>좋아요</th>
+                                <th className='mlsth'>재생</th>
+                                {/* 재생 버튼 추가 */}
+                                <th className='mlsth'>가사</th>
                                 {/* Add more table headers for other properties */}
                             </tr>
                             </thead>
@@ -148,28 +150,23 @@ const MyLikeSong = ({session}) => {
                                                 isLiked={"true"}
                                             />
                                         </td>
-                                        <td className='td'>{song.id}</td>
-                                        <td className='td'>{song.songTitle}</td>
-                                        <td className='td'>{song.genre}</td>
-                                        <td className='td'>{song.songCreatedTime.replace("T", " ")}</td>
-                                        <td>{song.songLike}</td>
-                                        <td>
+                                        <td className='mlmltd'>{song.id}</td>
+                                        <td className='mlmltd'>{song.songTitle}</td>
+                                        <td className='mlmltd'>{song.genre}</td>
+                                        <td className='mlmltd'>{song.songCreatedTime.replace("T", " ")}</td>
+                                        <td className='mlmltd'>{song.songLike}</td>
+                                        <td className='mlmltd'>
                                             {/*<Link to={`/song/play/${song.id}`}>재생</Link> */}
                                             <div
                                                 className="play-button"
                                                 onClick={() => handleOpenPlayer(song.id)}
                                             >
-                                                <img
-                                                    width={30}
-                                                    height={30}
-                                                    src={playIcon}
-                                                    alt="play-icon"
-                                                />
+                                                <BsPlayCircleFill className='BsPlayCircleFill' size='20'/>
                                             </div>
                                         </td>
-                                        <td>
-                                            <button onClick={() => handleViewLyrics(song.id)}>
-                                                가사보기
+                                        <td className='mlmltd'>
+                                            <button className='lr-btn' onClick={() => handleViewLyrics(song.id)}>
+                                                <MdOutlineLyrics className='MdOutlineLyrics' size={'20'}/>
                                             </button>
                                         </td>
                                         {/* Render additional table cells for other properties */}
