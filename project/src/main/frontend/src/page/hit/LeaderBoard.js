@@ -172,16 +172,23 @@ const LeaderBoard = () => {
 
     useEffect(() => {
 
-    }, [songList]);
+    }, [songList, page]);
 
     const handlePageChange = async (page) => {
         try {
             const genre = searchParams.get("genre");
+            const updatedSearchParams = new URLSearchParams(location.search);
             if (genre) {
                 await handleGenreFilter(genre, page);
             } else {
                 await fetchData(page);
             }
+
+            updatedSearchParams.set("page", page.toString());
+            navigate({
+                pathname: "/song/board",
+                search: updatedSearchParams.toString()
+            });
         } catch (error) {
             alert("페이지를 불러오는데 실패했습니다.");
         }

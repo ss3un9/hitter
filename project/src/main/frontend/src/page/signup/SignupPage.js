@@ -92,12 +92,12 @@ const SignupPage = () => {
         if (isTermsChecked && isPrivacyChecked) {
             try {
                 const formData = new FormData(event.target);
-                const response = await fetch('/member/save', {
-                    method: 'POST',
-                    body: formData,
-                });
+                const memberEmail = formData.get('memberEmail');
+                const userEmail2 = formData.get('userEmail2');
+                formData.set('memberEmail', `${memberEmail}${userEmail2}`);
+                const response = await axios.post('/member/save', formData);
 
-                if (response.ok) {
+                if (response.status === 200) {
                     alert('회원가입이 완료되었습니다.');
                     navigate('/login');
                 } else {
@@ -108,10 +108,8 @@ const SignupPage = () => {
                 alert('오류가 발생했습니다. 다시 시도해주세요.');
             }
         } else {
-            alert("필수약관에 동의해야 합니다.")
+            alert('필수약관에 동의해야 합니다.');
         }
-
-
     };
 
     const emailCheck = () => {

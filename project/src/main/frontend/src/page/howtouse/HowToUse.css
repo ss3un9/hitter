@@ -1,0 +1,41 @@
+.how-wrapper{
+    font-family: Suit;
+    text-align: center;
+    align-items: center;
+    background-color: #252525;
+}
+
+.neyong{
+    color: white;
+    font-size: 25px;
+}
+
+.service-info{
+    color: white;
+    font-size: 19px;
+}
+
+.lineee{
+    border-bottom: 2px solid #7a66ff;
+    width: 200px;
+
+    margin: 0 auto;
+}
+
+.service-ne{
+    font-size: 15px;
+    color: white;
+}
+.info-use{
+    color: white;
+    font-size: 19px;
+}
+
+.use-pg{
+    font-size: 15px;
+    color: white;
+}
+
+.h3h3{
+    color: #7a66ff;
+}
