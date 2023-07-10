@@ -70,36 +70,68 @@ const BoardDetail = () => {
         const writerNickName = document.getElementById("commentNickName").value;
         const contents = document.getElementById("commentContents").value;
         const board_id = id;
-
+      
         try {
-
-            const response = await axios.post(`/comment/save`, {
-                commentWriterId: writerId,
-                commentNickName: writerNickName,
-                commentContents: contents,
-                boardId: id,
+          const response = await axios.post(`/comment/save`, {
+            commentWriterId: writerId,
+            commentNickName: writerNickName,
+            commentContents: contents,
+            boardId: id,
+          });
+      
+          if (response.status === 200) {
+            // 댓글 작성 후 데이터 다시 가져오기
+            const fetchData = async () => {
+              try {
+                const response = await axios.get('/board/detail/' + id);
+                const { data } = response;
+                if (response.status === 200) {
+                  const board_title = data.board.boardTitle;
+                  setBoardTitle(board_title);
+      
+                  const board_writer = data.board.boardWriter;
+                  setBoardWrite(board_writer);
+      
+                  const board_hits = data.board.boardHits;
+                  setBoardHits(board_hits);
+      
+                  const board_contents = data.board.boardContents;
+                  setBoardContents(board_contents);
+      
+                  const board_created = data.board.boardCreatedTime;
+                  setBoardCreatedTime(board_created);
+      
+                  const commentDTOList = data.commentList;
+                  setComments(commentDTOList);
+                } else {
+                  alert('게시글 정보를 불러오는데 실패하였습니다');
+                }
+              } catch (error) {
+                alert('오류가 발생했습니다. 다시 시도해주세요');
+              }
+            };
+      
+            fetchData().catch((error) => {
+              alert('오류가 발생했습니다. 다시 시도해주세요');
             });
-            if (response.status === 200) {
-                window.location.reload();
-
-            } else {
-                alert('게시글 정보가 없습니다.');
-            }
-
-
-        } catch (e) {
-            alert('댓글 작성에 실패하였습니다');
+      
+            // 입력 필드 초기화
+            document.getElementById("commentContents").value = '';
+          } else {
+            alert('게시글 정보가 없습니다.');
+          }
+        } catch (error) {
+          alert('댓글 작성에 실패하였습니다');
         }
-
-
-    }
+      };
+      
+      
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('/board/detail/' + id);
                 const {data} = response;
-                console.log(data);
                 if (response.status === 200) {
                     const board_title = data.board.boardTitle;
                     setBoardTitle(board_title);
@@ -135,38 +167,82 @@ const BoardDetail = () => {
 
     const deleteComment = async (commentId) => {
         const confirmDelete = window.confirm('댓글을 정말 삭제하시겠습니까?');
-
+      
         if (confirmDelete) {
-            try {
-                await axios.delete(`/comment/delete/${commentId}`);
-                alert("성공적으로 삭제 되었습니다.")
-                window.location.reload();
-            } catch (error) {
-                console.error('Error deleting comment:', error);
-            }
+          try {
+            await axios.delete(`/comment/delete/${commentId}`);
+            alert("성공적으로 삭제되었습니다.");
+      
+            // 댓글 삭제 후 데이터 다시 가져오기
+            const fetchData = async () => {
+              try {
+                const response = await axios.get('/board/detail/' + id);
+                const { data } = response;
+                if (response.status === 200) {
+                  const commentDTOList = data.commentList;
+                  setComments(commentDTOList);
+                } else {
+                  alert('게시글 정보를 불러오는데 실패하였습니다');
+                }
+              } catch (error) {
+                alert('오류가 발생했습니다. 다시 시도해주세요');
+              }
+            };
+      
+            fetchData().catch((error) => {
+              alert('오류가 발생했습니다. 다시 시도해주세요');
+            });
+          } catch (error) {
+            console.error('Error deleting comment:', error);
+          }
         }
-    }
-
-    const updateComment = (commentId) => {
+      };
+      
+      const updateComment = (commentId) => {
         setEditingCommentId(commentId);
         const comment = comments.find((comment) => comment.id === commentId);
         setEditedComment(comment.commentContents);
-    };
-    const saveEditedComment = async (commentId) => {
+      };
+      
+      const saveEditedComment = async (commentId) => {
         try {
-
-            const response = await axios.put(`/comment/update/${commentId}`, {
-                commentContents: editedComment,
-                commentWriterId: storedSession.loginId,
-                commentNickName: storedSession.loginNickName,
-                boardId: id,
-            });
+          const response = await axios.put(`/comment/update/${commentId}`, {
+            commentContents: editedComment,
+            commentWriterId: storedSession.loginId,
+            commentNickName: storedSession.loginNickName,
+            boardId: id,
+          });
+      
+          if (response.status === 200) {
             alert("댓글이 성공적으로 수정되었습니다.");
-            window.location.reload();
-        } catch (error) {
+      
+            // 댓글 수정 후 데이터 다시 가져오기
+            const fetchData = async () => {
+              try {
+                const response = await axios.get('/board/detail/' + id);
+                const { data } = response;
+                if (response.status === 200) {
+                  const commentDTOList = data.commentList;
+                  setComments(commentDTOList);
+                } else {
+                  alert('게시글 정보를 불러오는데 실패하였습니다');
+                }
+              } catch (error) {
+                alert('오류가 발생했습니다. 다시 시도해주세요');
+              }
+            };
+      
+            fetchData().catch((error) => {
+              alert('오류가 발생했습니다. 다시 시도해주세요');
+            });
+          } else {
             alert("댓글 수정 실패. 다시 시도해주세요");
+          }
+        } catch (error) {
+          alert("댓글 수정 실패. 다시 시도해주세요");
         }
-    };
+      };
+      
 
     return (
         <div className='detail-wrapper'>
