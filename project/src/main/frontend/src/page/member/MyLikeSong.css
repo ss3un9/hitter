@@ -9,6 +9,12 @@
     display: contents;
 }
 
+.gotosong{
+    font-family: Suit;
+    margin: 0 auto;
+    padding-top: 200px;
+}
+
 .liketable{
     width: 800px;
     background: #d8deee;
@@ -18,7 +24,6 @@
     align-content: center;
     text-align: center;
     align-self: center;
-    color:white;
     overflow: auto;
     height: 450px;
     border-radius: .4em;
@@ -45,7 +50,33 @@
     font-size: 20px;
 }
 
-.mltd{
+
+
+.kksong-table{
+    display: table;
+    margin: 0 auto;
+    font-family: Suit;
+    text-align: center;
+}
+
+.mlsth{
+    font-size: 17px;
+    letter-spacing: 1px;
+    background-color: transparent;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: black
+}
+
+.mlsth-title{
+    font-size: 17px;
+
+    width: 200px;
     color: black;
-    font-size: 16px;
+}
+
+.mlmltd{
+    text-align: center;
+    padding-bottom: 5px;
+    color: black;
 }

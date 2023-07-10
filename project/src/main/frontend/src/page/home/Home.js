@@ -98,7 +98,7 @@ const Home = () => {
                 </div>
                 <div className='copyright'>
                     <p className='copp'>
-                        저작권 어쩌고저쩌고
+                        Copyright 2023. HITTER inc. All rights reserved.
                     </p>
                 </div>
             </footer>
