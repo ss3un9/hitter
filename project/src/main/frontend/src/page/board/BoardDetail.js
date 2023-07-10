@@ -69,7 +69,7 @@ const BoardDetail = () => {
         const writerId = document.getElementById("commentWriterId").value;
         const writerNickName = document.getElementById("commentNickName").value;
         const contents = document.getElementById("commentContents").value;
-        const board_id = id;
+
 
         try {
 
@@ -80,7 +80,7 @@ const BoardDetail = () => {
                 boardId: id,
             });
             if (response.status === 200) {
-                window.location.reload();
+                navigate(`/board/detail?id=${id}&page=${page}`);
 
             } else {
                 alert('게시글 정보가 없습니다.');
@@ -140,7 +140,7 @@ const BoardDetail = () => {
             try {
                 await axios.delete(`/comment/delete/${commentId}`);
                 alert("성공적으로 삭제 되었습니다.")
-                window.location.reload();
+                navigate(`/board/detail?id=${id}&page=${page}`);
             } catch (error) {
                 console.error('Error deleting comment:', error);
             }
@@ -162,7 +162,7 @@ const BoardDetail = () => {
                 boardId: id,
             });
             alert("댓글이 성공적으로 수정되었습니다.");
-            window.location.reload();
+            navigate(`/board/detail?id=${id}&page=${page}`);
         } catch (error) {
             alert("댓글 수정 실패. 다시 시도해주세요");
         }
