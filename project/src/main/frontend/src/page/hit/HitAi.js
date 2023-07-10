@@ -57,10 +57,9 @@ const HitAi = ({ session }) => {
 
                     body: formData,
                 });
-                console.log(response);
+
                 if (response.ok) {
                     const data = await response.json();
-                    console.log(data);
                     setUploadResponse(data);
                     setIsLoading(false);
 
@@ -77,17 +76,22 @@ const HitAi = ({ session }) => {
 
            catch (error) {
             // 오류 처리
-            alert("파일을 등록해주세요");
+            alert("서버에서 오류가 발생했습니다.");
         }
     };
 
     useEffect(() => {
         if (uploadResponse && uploadResponse.songDTO) {
             const id = uploadResponse.songDTO.id;
-            console.log(uploadResponse);
-            // 폼을 제출한 후에 분석 결과를 받은 뒤에 hitdetail로 이동
-            navigate(`/hit_ai_detail?id=${id}`);
+            const songsInRange = uploadResponse.songsInRange;
 
+            navigate(`/hit_ai_detail?id=${id}`,
+                {
+                    state: {
+                        songsInRange: songsInRange
+                    }
+                }
+            ); // Pass songsInRange as a query parameter
         }
     }, [uploadResponse, navigate]);
 

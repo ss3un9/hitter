@@ -86,7 +86,7 @@ public class SongFileController {
         String fileName = file.getOriginalFilename();
         String sysFileName = System.currentTimeMillis() +  "_" +  fileName;
 
-        String filePath = "C:/bp_music/music/" + sysFileName;
+        String filePath = "/home/ubuntu/song/" + sysFileName;
         byte[] fileBytes = file.getBytes();
         Path path = Paths.get(filePath);
         Files.write(path, fileBytes);
@@ -94,7 +94,7 @@ public class SongFileController {
         String fileName1 = file1.getOriginalFilename();
 
         String sysFileName1 = System.currentTimeMillis() +  "_" +fileName1;
-        String filePath1 = "C:/bp_music/txt/"+sysFileName1;
+        String filePath1 = "/home/ubuntu/txt/"+sysFileName1;
 
         byte[] fileBytes1 = file1.getBytes();
         Path path1 = Paths.get(filePath1);
@@ -108,12 +108,13 @@ public class SongFileController {
         songDTO.setLyrics(sysFileName1);
         songDTO.setSongTag(joinedTags);
         songService.save(songDTO);
+        List<SongDTO> songsInRange = songService.findAll2(prediction - 10, prediction + 10);
 
         Map<String, Object> ResponseSong = new HashMap<>();
 
 
         ResponseSong.put("songDTO",songDTO );
-
+        ResponseSong.put("songsInRange",  songsInRange);
         ResponseSong.put("success", true);
         ResponseSong.put("message", "File uploaded successfully!");
 

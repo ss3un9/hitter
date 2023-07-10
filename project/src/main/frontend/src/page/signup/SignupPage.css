@@ -133,6 +133,8 @@
 .form-control{
     display: block;
     align-items: center;
+    width: 240px;
+    margin: 0 auto;
 
 }
 

@@ -20,4 +20,8 @@ public interface SongRepository extends JpaRepository<SongEntity, Long> {
     Page<SongEntity> findByGenre(@Param("genre") String genre, Pageable pageable);
 
 
+    @Query("SELECT s FROM SongEntity s WHERE s.memberNickName = '관리자' AND s.prediction BETWEEN :minPrediction AND :maxPrediction")
+    List<SongEntity> findAllSongsAdmin(@Param("minPrediction") float minPrediction, @Param("maxPrediction") float maxPrediction);
+
+
 }
