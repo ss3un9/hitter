@@ -1,4 +1,4 @@
-##  HITTER: 음원산업관계자를 위한 히트곡 예측 웹 서비스
+#  HITTER: 음원산업관계자를 위한 히트곡 예측 웹 서비스
 ![logo](https://user-images.githubusercontent.com/101931446/250477260-1fb0d678-ca39-4ecb-8ae5-91b4df1e7411.png)   
 
 전 세계 디지털 음악 시장의 가치는 약 213달러에 달합니다. 
